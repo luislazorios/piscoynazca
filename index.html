@@ -1,1 +1,837 @@
-<h1>Banquetería entre pisco y nazca</h1>
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maison Événements | Banquetería para matrimonios y eventos</title>
+  <meta name="description" content="Banquetería elegante para matrimonios y eventos inspirada en una estética boutique, romántica y premium." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --text-3xl: clamp(2.5rem, 1rem + 4vw, 5rem);
+
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+
+      --color-bg: #f7f2ee;
+      --color-surface: #fcf8f4;
+      --color-surface-2: #fffdfb;
+      --color-surface-offset: #efe4dc;
+      --color-border: rgba(58, 42, 35, 0.12);
+      --color-text: #2f241f;
+      --color-text-muted: #7f6d65;
+      --color-text-faint: #b7a7a0;
+      --color-primary: #8c5f52;
+      --color-primary-hover: #74493d;
+      --color-highlight: #e9d8cf;
+      --color-text-inverse: #fffaf6;
+      --shadow-sm: 0 8px 25px rgba(67, 42, 31, 0.07);
+      --shadow-lg: 0 20px 50px rgba(67, 42, 31, 0.12);
+      --radius-sm: 0.5rem;
+      --radius-md: 0.9rem;
+      --radius-lg: 1.4rem;
+      --radius-xl: 2rem;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Manrope', Arial, sans-serif;
+      --content: 1180px;
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #191514;
+      --color-surface: #201b19;
+      --color-surface-2: #26211f;
+      --color-surface-offset: #2d2522;
+      --color-border: rgba(255, 240, 230, 0.12);
+      --color-text: #f3e7df;
+      --color-text-muted: #c4b2a8;
+      --color-text-faint: #8b7a73;
+      --color-primary: #d3a796;
+      --color-primary-hover: #e4bbac;
+      --color-highlight: #342a26;
+      --color-text-inverse: #1d1614;
+      --shadow-sm: 0 8px 25px rgba(0,0,0,0.22);
+      --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    * , *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.65;
+      color: var(--color-text);
+      background: var(--color-bg);
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+    .container {
+      width: min(calc(100% - 2rem), var(--content));
+      margin-inline: auto;
+    }
+    .eyebrow {
+      font-size: var(--text-xs);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-3);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      line-height: 1.05;
+      margin: 0 0 var(--space-4);
+    }
+    .section-copy {
+      color: var(--color-text-muted);
+      max-width: 62ch;
+    }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+      background: color-mix(in srgb, var(--color-bg) 84%, transparent);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      min-height: 78px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--color-border);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--color-surface-2);
+    }
+    .brand-mark svg { width: 22px; height: 22px; }
+    .brand-name {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
+    .brand-name strong {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+    }
+    .brand-name span {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: var(--color-text-muted);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      font-size: var(--text-sm);
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .theme-toggle,
+    .btn {
+      border-radius: 999px;
+      border: 1px solid var(--color-border);
+      transition: 180ms ease;
+    }
+    .theme-toggle {
+      width: 44px;
+      height: 44px;
+      background: var(--color-surface);
+      color: var(--color-text);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.9rem 1.35rem;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      min-height: 44px;
+    }
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      border-color: transparent;
+    }
+    .btn-primary:hover { background: var(--color-primary-hover); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--color-text);
+    }
+    .btn-secondary:hover,
+    .theme-toggle:hover {
+      background: var(--color-surface-offset);
+    }
+
+    .hero {
+      padding: clamp(4rem, 8vw, 7rem) 0 clamp(3rem, 7vw, 6rem);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: var(--space-10);
+      align-items: center;
+    }
+    .hero-copy h1 {
+      margin: 0 0 var(--space-4);
+      font-family: var(--font-display);
+      font-size: clamp(3.25rem, 5vw, 5.5rem);
+      line-height: 0.95;
+      font-weight: 600;
+    }
+    .hero-copy p {
+      color: var(--color-text-muted);
+      max-width: 58ch;
+      margin-bottom: var(--space-6);
+    }
+    .hero-actions {
+      display: flex;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-8);
+    }
+    .hero-notes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-4);
+    }
+    .hero-note {
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--color-border);
+    }
+    .hero-note strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      margin-bottom: 0.2rem;
+    }
+    .hero-visual {
+      position: relative;
+      min-height: 620px;
+    }
+    .frame-main,
+    .frame-accent {
+      position: absolute;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      background: var(--color-surface-offset);
+    }
+    .frame-main {
+      inset: 0 0 4rem 4rem;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05)),
+        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80') center/cover;
+    }
+    .frame-accent {
+      width: 240px;
+      height: 300px;
+      left: 0;
+      bottom: 0;
+      border: 10px solid var(--color-bg);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.02)),
+        url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80') center/cover;
+    }
+    .hero-card {
+      position: absolute;
+      right: 1.5rem;
+      bottom: 0;
+      width: min(320px, 100% - 2rem);
+      padding: var(--space-6);
+      background: color-mix(in srgb, var(--color-surface-2) 88%, transparent);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(12px);
+    }
+    .hero-card h3 {
+      margin: 0 0 var(--space-2);
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 600;
+    }
+    .hero-card p {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    section { padding: clamp(3.5rem, 7vw, 6rem) 0; }
+    .story,
+    .services,
+    .gallery,
+    .contact {
+      border-top: 1px solid var(--color-border);
+    }
+    .story-grid,
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-10);
+      align-items: start;
+    }
+    .story-panel,
+    .contact-card,
+    .service-card,
+    .gallery-card,
+    .testimonial {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+    .story-panel {
+      padding: var(--space-8);
+    }
+    .story-panel blockquote {
+      margin: 0 0 var(--space-4);
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.05;
+    }
+    .story-list {
+      display: grid;
+      gap: var(--space-4);
+    }
+    .story-list div {
+      padding: var(--space-5);
+      border-radius: var(--radius-md);
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+    }
+
+    .services-header,
+    .gallery-header,
+    .testimonials-header,
+    .contact-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: var(--space-6);
+      margin-bottom: var(--space-8);
+    }
+    .services-grid,
+    .gallery-grid,
+    .testimonials-grid {
+      display: grid;
+      gap: var(--space-6);
+    }
+    .services-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .service-card {
+      padding: var(--space-8);
+      min-height: 100%;
+    }
+    .service-card h3 {
+      margin: 0 0 var(--space-3);
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    .service-card p {
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-5);
+    }
+    .service-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: var(--space-3);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+    .service-card li::before {
+      content: '—';
+      margin-right: 0.5rem;
+      color: var(--color-primary);
+    }
+
+    .gallery-grid {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+    .gallery-card { overflow: hidden; }
+    .gallery-photo-large {
+      min-height: 540px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.1), rgba(0,0,0,0.08)),
+        url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1400&q=80') center/cover;
+    }
+    .gallery-stack {
+      display: grid;
+      gap: var(--space-6);
+    }
+    .gallery-photo-small,
+    .gallery-copy {
+      min-height: 257px;
+    }
+    .gallery-photo-small {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.1), rgba(0,0,0,0.08)),
+        url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1200&q=80') center/cover;
+    }
+    .gallery-copy {
+      padding: var(--space-8);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--color-surface);
+    }
+    .gallery-copy h3 {
+      margin: 0 0 var(--space-3);
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    .gallery-copy p { color: var(--color-text-muted); }
+
+    .testimonials-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .testimonial {
+      padding: var(--space-7);
+    }
+    .testimonial p {
+      margin: 0 0 var(--space-4);
+      color: var(--color-text-muted);
+    }
+    .testimonial strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .contact-card {
+      padding: var(--space-8);
+    }
+    .contact-info {
+      display: grid;
+      gap: var(--space-5);
+    }
+    .contact-item {
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .contact-item:last-child { border-bottom: 0; padding-bottom: 0; }
+    .contact-item span {
+      display: block;
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--color-text-muted);
+      margin-bottom: 0.35rem;
+    }
+    form {
+      display: grid;
+      gap: var(--space-4);
+    }
+    label {
+      display: grid;
+      gap: 0.45rem;
+      font-size: var(--text-sm);
+      font-weight: 600;
+    }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--color-border);
+      border-radius: 1rem;
+      padding: 0.95rem 1rem;
+      background: var(--color-surface-2);
+      color: var(--color-text);
+      font: inherit;
+    }
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: 2px solid color-mix(in srgb, var(--color-primary) 55%, white);
+      outline-offset: 2px;
+    }
+    .footer {
+      padding: var(--space-8) 0 var(--space-10);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-4);
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--space-6);
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .story-grid,
+      .contact-grid,
+      .gallery-grid,
+      .services-grid,
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-visual {
+        min-height: 520px;
+      }
+      .frame-main {
+        inset: 0 0 3rem 2rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .services-header,
+      .gallery-header,
+      .testimonials-header,
+      .contact-header {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav { min-height: 72px; }
+      .nav-actions .btn-secondary { display: none; }
+      .hero-copy h1 { font-size: clamp(2.7rem, 13vw, 4rem); }
+      .hero-notes { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 440px; }
+      .frame-main {
+        inset: 0 0 4.5rem 0;
+      }
+      .frame-accent {
+        width: 180px;
+        height: 210px;
+        border-width: 6px;
+      }
+      .hero-card {
+        right: 0.5rem;
+        left: 0.5rem;
+        width: auto;
+      }
+      .story-panel,
+      .contact-card,
+      .service-card,
+      .gallery-copy,
+      .testimonial { padding: var(--space-6); }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#inicio" class="brand" aria-label="Ir al inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M12 3c2.6 2.9 4.4 5.1 4.4 8a4.4 4.4 0 1 1-8.8 0c0-2.9 1.8-5.1 4.4-8Z" />
+            <path d="M6 18c1.4-1.7 3.4-2.5 6-2.5s4.6.8 6 2.5" />
+          </svg>
+        </span>
+        <span class="brand-name">
+          <strong>Maison Événements</strong>
+          <span>Banquetería boutique</span>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Principal">
+        <a href="#historia">Nosotros</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#galeria">Montajes</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" aria-label="Cambiar tema" data-theme-toggle>☾</button>
+        <a class="btn btn-secondary" href="#servicios">Ver propuestas</a>
+        <a class="btn btn-primary" href="#contacto">Solicitar cotización</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Matrimonios y celebraciones</div>
+          <h1>Creamos mesas, sabores y momentos que se recuerdan.</h1>
+          <p>
+            Una propuesta de banquetería elegante para matrimonios, aniversarios y eventos privados, inspirada en una estética romántica y boutique, con montaje cuidado, cocina delicada y atención al detalle.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contacto">Agenda tu fecha</a>
+            <a class="btn btn-secondary" href="#galeria">Ver montajes</a>
+          </div>
+          <div class="hero-notes">
+            <div class="hero-note">
+              <strong>+120</strong>
+              <span>celebraciones íntimas y matrimonios diseñados con estilo propio</span>
+            </div>
+            <div class="hero-note">
+              <strong>Menús</strong>
+              <span>personalizados según estación, horario y tipo de evento</span>
+            </div>
+            <div class="hero-note">
+              <strong>Santiago</strong>
+              <span>y alrededores, con coordinación previa y servicio a medida</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Montaje elegante de matrimonio">
+          <div class="frame-main"></div>
+          <div class="frame-accent"></div>
+          <div class="hero-card">
+            <h3>Diseño integral</h3>
+            <p>Banquete, estación dulce, montaje floral, vajilla y coordinación visual para que cada mesa se vea tan bien como se vive.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story" id="historia">
+      <div class="container story-grid">
+        <div>
+          <div class="eyebrow">Nuestra esencia</div>
+          <h2 class="section-title">Una banquetería con sensibilidad editorial y espíritu de celebración.</h2>
+          <p class="section-copy">
+            Inspirada en marcas de pastelería boutique como Bonté, esta propuesta traslada esa delicadeza visual a matrimonios y eventos sociales: una identidad suave, refinada y centrada en la experiencia completa de los invitados.
+          </p>
+        </div>
+        <div class="story-panel">
+          <blockquote>
+            “Cada montaje debe sentirse íntimo, elegante y cuidado hasta el último detalle.”
+          </blockquote>
+          <div class="story-list">
+            <div><strong>Propuesta visual</strong><br>Paleta suave, materiales nobles, flores, velas y montaje con presencia cálida.</div>
+            <div><strong>Cocina y servicio</strong><br>Cocktail, cena, buffet dulce y estaciones especiales adaptadas al estilo de la celebración.</div>
+            <div><strong>Experiencia</strong><br>Planificación cercana para que novios y anfitriones disfruten con tranquilidad.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="servicios">
+      <div class="container">
+        <div class="services-header">
+          <div>
+            <div class="eyebrow">Servicios</div>
+            <h2 class="section-title">Formatos pensados para matrimonios y eventos memorables.</h2>
+          </div>
+          <p class="section-copy">
+            Puedes usar estas tarjetas para mostrar tus planes reales, cambiar precios, agregar fotos y adaptar cada propuesta según capacidad, locación y temporada.
+          </p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card">
+            <h3>Matrimonios</h3>
+            <p>Servicio completo para celebraciones románticas con identidad visual armónica y experiencia cuidada.</p>
+            <ul>
+              <li>Cocktail de bienvenida y recepción</li>
+              <li>Cena servida o formato buffet elegante</li>
+              <li>Mesa de postres, torta y estación dulce</li>
+              <li>Montaje, vajilla y coordinación del servicio</li>
+            </ul>
+          </article>
+          <article class="service-card">
+            <h3>Eventos privados</h3>
+            <p>Ideal para aniversarios, cumpleaños, pedidas de mano, brunch y celebraciones familiares con sello boutique.</p>
+            <ul>
+              <li>Menú flexible según horario del evento</li>
+              <li>Opciones dulces y saladas</li>
+              <li>Ambientación de mesas y detalles decorativos</li>
+              <li>Versión íntima para espacios pequeños</li>
+            </ul>
+          </article>
+          <article class="service-card">
+            <h3>Estaciones especiales</h3>
+            <p>Complementos para elevar la experiencia visual y gastronómica durante la celebración.</p>
+            <ul>
+              <li>Barra de espumantes o mocktails</li>
+              <li>Grazing table y mesa de quesos</li>
+              <li>Buffet de postres finos</li>
+              <li>Café, petit fours y cierre del evento</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" id="galeria">
+      <div class="container">
+        <div class="gallery-header">
+          <div>
+            <div class="eyebrow">Montajes</div>
+            <h2 class="section-title">Una presentación tan importante como el menú.</h2>
+          </div>
+          <p class="section-copy">
+            Esta sección replica la sensación premium y femenina de la referencia, pero enfocada en montaje de eventos, mesas largas, flores, iluminación y detalles de celebración.
+          </p>
+        </div>
+        <div class="gallery-grid">
+          <article class="gallery-card gallery-photo-large" role="img" aria-label="Mesa larga decorada para matrimonio"></article>
+          <div class="gallery-stack">
+            <article class="gallery-card gallery-photo-small" role="img" aria-label="Brindis de invitados en evento elegante"></article>
+            <article class="gallery-card gallery-copy">
+              <h3>Detalles que sostienen la atmósfera.</h3>
+              <p>
+                Tonos suaves, vajilla texturada, cristalería delicada y una propuesta que se ve coherente desde la invitación hasta la mesa de postres.
+              </p>
+              <a class="btn btn-primary" href="#contacto">Quiero una propuesta así</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <div class="container">
+        <div class="testimonials-header">
+          <div>
+            <div class="eyebrow">Experiencias</div>
+            <h2 class="section-title">Texto de ejemplo para testimonios de clientes.</h2>
+          </div>
+          <p class="section-copy">
+            Reemplaza estos textos por opiniones reales de novios o anfitriones para dar más confianza y reforzar la calidad del servicio.
+          </p>
+        </div>
+        <div class="testimonials-grid">
+          <article class="testimonial">
+            <p>“Todo se veía precioso y el servicio fue impecable. Sentimos que entendieron perfecto el estilo que soñábamos para nuestro matrimonio.”</p>
+            <strong>Camila & Andrés</strong>
+          </article>
+          <article class="testimonial">
+            <p>“La mesa dulce fue el centro de todas las fotos. Elegante, delicada y con sabores realmente memorables.”</p>
+            <strong>Josefina R.</strong>
+          </article>
+          <article class="testimonial">
+            <p>“Nos acompañaron en cada detalle y lograron una celebración cálida, ordenada y hermosa de principio a fin.”</p>
+            <strong>Martina y Felipe</strong>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contacto">
+      <div class="container contact-grid">
+        <div>
+          <div class="contact-header">
+            <div>
+              <div class="eyebrow">Contacto</div>
+              <h2 class="section-title">Pide una cotización según fecha, lugar y número de invitados.</h2>
+            </div>
+          </div>
+          <p class="section-copy">
+            Puedes reemplazar estos datos por tu número real, correo, Instagram y zonas de cobertura. El estilo de contacto está inspirado en la claridad comercial que usa la referencia Bonté.
+          </p>
+          <div class="contact-card contact-info">
+            <div class="contact-item">
+              <span>WhatsApp</span>
+              <strong>+56 9 1234 5678</strong>
+            </div>
+            <div class="contact-item">
+              <span>Correo</span>
+              <strong>hola@maison-evenements.cl</strong>
+            </div>
+            <div class="contact-item">
+              <span>Instagram</span>
+              <strong>@maison.evenements</strong>
+            </div>
+            <div class="contact-item">
+              <span>Cobertura</span>
+              <strong>Santiago, Chicureo, Pirque y alrededores</strong>
+            </div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <form>
+            <label>
+              Nombre
+              <input type="text" placeholder="Tu nombre" />
+            </label>
+            <label>
+              Correo electrónico
+              <input type="email" placeholder="tucorreo@ejemplo.com" />
+            </label>
+            <label>
+              Tipo de evento
+              <select>
+                <option>Matrimonio</option>
+                <option>Aniversario</option>
+                <option>Cumpleaños</option>
+                <option>Evento privado</option>
+              </select>
+            </label>
+            <label>
+              Cuéntanos tu idea
+              <textarea placeholder="Fecha tentativa, cantidad de invitados, comuna y estilo que imaginas para tu evento"></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit">Enviar solicitud</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>Plantilla HTML inspirada en una estética boutique similar a Bonté, adaptada a banquetería para matrimonios y eventos.</span>
+      <a href="#inicio">Volver arriba</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const toggle = document.querySelector('[data-theme-toggle]');
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+      if (toggle) {
+        toggle.textContent = theme === 'dark' ? '☀' : '☾';
+        toggle.addEventListener('click', function () {
+          theme = theme === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', theme);
+          toggle.textContent = theme === 'dark' ? '☀' : '☾';
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
