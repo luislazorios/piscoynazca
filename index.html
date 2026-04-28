@@ -657,6 +657,59 @@
   font-size: 1.8rem;
   margin-top: 0.35rem;
 }
+  .quote-options {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+  font-weight: 500;
+}
+
+.check-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 0.2rem;
+  accent-color: var(--color-primary);
+}
+
+.quote-result-list {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.quote-result-item {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+}
+
+.quote-total {
+  margin-top: var(--space-5);
+  padding: var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--color-highlight);
+  border: 1px solid var(--color-border);
+}
+
+.quote-total strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  margin-top: 0.35rem;
+}
   </style>
 </head>
 <body>
@@ -857,10 +910,10 @@
     <div class="contact-header">
       <div>
         <div class="eyebrow">Cotización</div>
-        <h2 class="section-title">Calcula una propuesta estimada según tu cantidad de invitados.</h2>
+        <h2 class="section-title">Calcula tu propuesta según invitados y servicios.</h2>
       </div>
       <p class="section-copy">
-        Selecciona la cantidad de personas y revisa los servicios incluidos para tu evento.
+        Selecciona la cantidad de personas y marca solo los servicios que deseas incluir.
       </p>
     </div>
 
@@ -869,13 +922,48 @@
         <form id="quoteForm">
           <label>
             Cantidad de personas
-            <input type="number" id="personas" min="1" placeholder="Ej: 80" required />
+            <input type="number" id="personas" min="20" max="60" placeholder="Entre 20 y 60" required />
           </label>
 
+          <div class="quote-options">
+            <label class="check-row">
+              <input type="checkbox" id="chkAlmuerzo" />
+              <span>Almuerzos — $7.000 por persona</span>
+            </label>
+
+            <label class="check-row">
+              <input type="checkbox" id="chkMenaje" />
+              <span>Menaje, manteles y decoración de mesa</span>
+            </label>
+
+            <label class="check-row">
+              <input type="checkbox" id="chkTorta" />
+              <span>Torta según tramo de personas</span>
+            </label>
+
+            <label class="check-row">
+              <input type="checkbox" id="chkBocaditos" />
+              <span>Bocaditos mix — $750 por persona</span>
+            </label>
+
+            <label class="check-row">
+              <input type="checkbox" id="chkJugoNatural" />
+              <span>Bebestibles jugo natural — $1.800 por persona</span>
+            </label>
+
+            <label class="check-row">
+              <input type="checkbox" id="chkBebidaArtificial" />
+              <span>Bebestibles artificiales — $1.200 por persona</span>
+            </label>
+          </div>
+
           <label>
-            Servicios incluidos
-            <select id="tipoServicio">
-              <option value="full">Servicio completo</option>
+            Decoración de local
+            <select id="decoracionLocal">
+              <option value="">No incluir</option>
+              <option value="50000">Pequeño — $50.000</option>
+              <option value="100000">Mediano — $100.000</option>
+              <option value="150000">Grande — $150.000</option>
             </select>
           </label>
 
@@ -886,11 +974,12 @@
       <div class="contact-card">
         <div id="quoteResult">
           <h3 style="margin-top:0; font-family: var(--font-display); font-size: 1.9rem;">Resumen estimado</h3>
-          <p class="section-copy">Ingresa la cantidad de personas para ver el cálculo aproximado.</p>
+          <p class="section-copy">Ingresa entre 20 y 60 personas y selecciona los servicios que necesitas.</p>
         </div>
       </div>
     </div>
   </div>
+</section>
 </section>
     <section class="contact" id="contacto">
       <div class="container contact-grid">
@@ -1000,20 +1089,12 @@
     <path fill="currentColor" d="M16.03 3.2c-6.96 0-12.61 5.63-12.61 12.57 0 2.22.58 4.39 1.69 6.3L3 29l7.15-1.87a12.66 12.66 0 0 0 5.88 1.49h.01c6.95 0 12.61-5.64 12.61-12.58 0-3.36-1.31-6.52-3.7-8.89a12.54 12.54 0 0 0-8.92-3.95Zm0 23.3h-.01a10.55 10.55 0 0 1-5.38-1.47l-.39-.23-4.24 1.11 1.13-4.13-.25-.42a10.42 10.42 0 0 1-1.61-5.56c0-5.75 4.7-10.43 10.49-10.43 2.8 0 5.42 1.08 7.4 3.04a10.34 10.34 0 0 1 3.08 7.39c0 5.76-4.71 10.44-10.5 10.44Z"/>
   </svg>
 </a>
-  <script>
+ <script>
   (function () {
     const form = document.getElementById('quoteForm');
     const result = document.getElementById('quoteResult');
 
     if (!form || !result) return;
-
-    const precios = {
-      almuerzoBebestibles: 35000,
-      menaje: 8000,
-      decoracionMesas: 250000,
-      decoracionLocal: 400000,
-      barraBebestibles: 15000
-    };
 
     const formatCLP = (value) =>
       new Intl.NumberFormat('es-CL', {
@@ -1022,57 +1103,117 @@
         maximumFractionDigits: 0
       }).format(value);
 
+    function getMenajeValue(personas) {
+      if (personas < 30) return 16000;
+      if (personas < 40) return 20000;
+      return 25000;
+    }
+
+    function getTortaValue(personas) {
+      if (personas >= 20 && personas < 30) return 36000;
+      if (personas >= 30 && personas < 40) return 46000;
+      if (personas >= 40 && personas <= 50) return 56000;
+      if (personas > 50 && personas <= 60) return 56000;
+      return 0;
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
       const personas = Number(document.getElementById('personas').value);
+      const chkAlmuerzo = document.getElementById('chkAlmuerzo').checked;
+      const chkMenaje = document.getElementById('chkMenaje').checked;
+      const chkTorta = document.getElementById('chkTorta').checked;
+      const chkBocaditos = document.getElementById('chkBocaditos').checked;
+      const chkJugoNatural = document.getElementById('chkJugoNatural').checked;
+      const chkBebidaArtificial = document.getElementById('chkBebidaArtificial').checked;
+      const decoracionLocal = Number(document.getElementById('decoracionLocal').value || 0);
 
-      if (!personas || personas < 1) {
+      if (!personas || personas < 20 || personas > 60) {
         result.innerHTML = `
           <h3 style="margin-top:0; font-family: var(--font-display); font-size: 1.9rem;">Resumen estimado</h3>
-          <p class="section-copy">Por favor ingresa una cantidad válida de personas.</p>
+          <p class="section-copy">Debes ingresar una cantidad válida entre 20 y 60 personas.</p>
         `;
         return;
       }
 
-      const totalAlmuerzo = personas * precios.almuerzoBebestibles;
-      const totalMenaje = personas * precios.menaje;
-      const totalBarra = personas * precios.barraBebestibles;
-      const totalMesas = precios.decoracionMesas;
-      const totalLocal = precios.decoracionLocal;
+      const items = [];
 
-      const total =
-        totalAlmuerzo +
-        totalMenaje +
-        totalBarra +
-        totalMesas +
-        totalLocal;
+      if (chkAlmuerzo) {
+        items.push({
+          nombre: 'Almuerzos',
+          total: personas * 7000
+        });
+      }
+
+      if (chkMenaje) {
+        items.push({
+          nombre: 'Menaje, manteles y decoración mesa',
+          total: getMenajeValue(personas)
+        });
+      }
+
+      if (chkTorta) {
+        items.push({
+          nombre: 'Torta',
+          total: getTortaValue(personas)
+        });
+      }
+
+      if (chkBocaditos) {
+        items.push({
+          nombre: 'Bocaditos mix',
+          total: personas * 750
+        });
+      }
+
+      if (chkJugoNatural) {
+        items.push({
+          nombre: 'Bebestibles jugo natural',
+          total: personas * 1800
+        });
+      }
+
+      if (chkBebidaArtificial) {
+        items.push({
+          nombre: 'Bebestibles artificiales',
+          total: personas * 1200
+        });
+      }
+
+      if (decoracionLocal > 0) {
+        let nombreDecoracion = 'Decoración de local';
+        if (decoracionLocal === 50000) nombreDecoracion = 'Decoración local pequeño';
+        if (decoracionLocal === 100000) nombreDecoracion = 'Decoración local mediano';
+        if (decoracionLocal === 150000) nombreDecoracion = 'Decoración local grande';
+
+        items.push({
+          nombre: nombreDecoracion,
+          total: decoracionLocal
+        });
+      }
+
+      if (items.length === 0) {
+        result.innerHTML = `
+          <h3 style="margin-top:0; font-family: var(--font-display); font-size: 1.9rem;">Resumen estimado</h3>
+          <p class="section-copy">Selecciona al menos un servicio para calcular la cotización.</p>
+        `;
+        return;
+      }
+
+      const total = items.reduce((acc, item) => acc + item.total, 0);
 
       result.innerHTML = `
         <h3 style="margin-top:0; font-family: var(--font-display); font-size: 1.9rem;">Cotización estimada</h3>
         <p class="section-copy">Propuesta referencial para ${personas} personas.</p>
 
         <div class="quote-result-list">
-          <div class="quote-result-item">
-            <span>Almuerzo + bebestibles</span>
-            <strong>${formatCLP(totalAlmuerzo)}</strong>
-          </div>
-          <div class="quote-result-item">
-            <span>Servicio de menaje</span>
-            <strong>${formatCLP(totalMenaje)}</strong>
-          </div>
-          <div class="quote-result-item">
-            <span>Decoración de mesas</span>
-            <strong>${formatCLP(totalMesas)}</strong>
-          </div>
-          <div class="quote-result-item">
-            <span>Decoración de local</span>
-            <strong>${formatCLP(totalLocal)}</strong>
-          </div>
-          <div class="quote-result-item">
-            <span>Barra de bebestibles</span>
-            <strong>${formatCLP(totalBarra)}</strong>
-          </div>
+          ${items.map(item => `
+            <div class="quote-result-item">
+              <span>${item.nombre}</span>
+              <strong>${formatCLP(item.total)}</strong>
+            </div>
+          `).join('')}
         </div>
 
         <div class="quote-total">
