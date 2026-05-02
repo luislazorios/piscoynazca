@@ -605,41 +605,55 @@
       });
     })();
 
-    async function pagarConMercadoPago(payload) {
-      const submitButton = document.getElementById('submitDelivery');
-      const originalText = submitButton.textContent;
+   async function pagarConMercadoPago(payload) {
+  const submitButton = document.getElementById('submitDelivery');
+  const originalText = submitButton.textContent;
 
-      try {
-        submitButton.disabled = true;
-        submitButton.textContent = 'Redirigiendo...';
+  try {
+    submitButton.disabled = true;
+    submitButton.textContent = 'Redirigiendo...';
 
-        const response = await fetch('https://sttbtcaba3gxexgbdi57iwyala0gvuhx.lambda-url.sa-east-1.on.aws/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
+    const response = await fetch('https://sttbtcaba3gxexgbdi57iwyala0gvuhx.lambda-url.sa-east-1.on.aws/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
 
-        const data = await response.json();
+    const rawText = await response.text();
+    console.log('Respuesta Lambda:', rawText);
 
-        if (!response.ok) {
-          throw new Error(data.error || 'No se pudo crear el pago');
-        }
-
-        if (!data.init_point) {
-          throw new Error('Mercado Pago no devolvió una URL de pago');
-        }
-
-        window.location.href = data.init_point;
-
-      } catch (error) {
-        console.error(error);
-        showToast('Error al iniciar el pago');
-        submitButton.disabled = false;
-        submitButton.textContent = originalText;
-      }
+    let data;
+    try {
+      data = JSON.parse(rawText);
+    } catch {
+      throw new Error('Respuesta no válida del servidor: ' + rawText);
     }
+
+    if (!response.ok) {
+      throw new Error(data.error || 'No se pudo crear el pago');
+    }
+
+    if (!data.init_point && !data.sandbox_init_point) {
+      throw new Error('Mercado Pago no devolvió URL de pago');
+    }
+
+    // Puedes descomentar la siguiente línea si quieres que el sandbox se use siempre
+    // const url = data.sandbox_init_point || data.init_point;
+
+    // O bien, usa este comportamiento “automatico”:
+    const url = data.sandbox_init_point || data.init_point;
+
+    window.location.href = url;
+
+  } catch (error) {
+    console.error('ERROR al pagar:', error);
+    showToast('Error al iniciar el pago');
+    submitButton.disabled = false;
+    submitButton.textContent = originalText;
+  }
+}
 
     document.getElementById('submitDelivery').addEventListener('click', () => {
       if (!cart.length) {
