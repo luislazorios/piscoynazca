@@ -121,6 +121,21 @@
     .empty{color:var(--color-text-muted);text-align:center;padding:var(--space-12) var(--space-4)}
     .overlay{position:fixed;inset:0;background:rgba(20,12,8,.28);opacity:0;pointer-events:none;transition:opacity 220ms ease;z-index:55}
     .overlay.open{opacity:1;pointer-events:auto}
+    .form-field{display:grid;gap:.45rem}
+    .form-field input,.form-field select,.form-field textarea{
+      width:100%;
+      padding:.9rem 1rem;
+      border:1px solid var(--color-border);
+      border-radius:var(--radius-md);
+      background:var(--color-surface-2);
+      color:var(--color-text);
+    }
+    .form-help{color:var(--color-text-muted);font-size:var(--text-xs)}
+    .shipping-box{
+      display:flex;align-items:flex-start;gap:.75rem;padding:1rem;
+      background:var(--color-surface-2);border:1px solid var(--color-border);
+      border-radius:var(--radius-lg);
+    }
     .toast{position:fixed;left:50%;bottom:var(--space-6);transform:translateX(-50%) translateY(20px);background:var(--color-text);color:var(--color-text-inverse);padding:var(--space-3) var(--space-4);border-radius:var(--radius-full);opacity:0;pointer-events:none;transition:all 200ms ease;z-index:80}
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
     footer{padding:var(--space-12) 0;color:var(--color-text-muted)}
@@ -139,6 +154,8 @@
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
   <div class="overlay" id="overlay"></div>
+  <div class="overlay" id="deliveryOverlay"></div>
+
   <header>
     <div class="container topbar">
       <div class="brand">
@@ -248,8 +265,68 @@
     <div class="cart-list" id="cartItems"></div>
     <div class="cart-footer">
       <div class="cart-total"><span>Total</span><span id="cartTotal">$0</span></div>
-     <button class="btn btn-primary" id="payButton">Pagar con Mercado Pago</button>
+      <button class="btn btn-primary" id="continueButton">Continuar con entrega</button>
       <button class="btn btn-secondary" id="clearCart">Vaciar carrito</button>
+    </div>
+  </aside>
+
+  <aside class="cart-drawer" id="deliveryDrawer" aria-label="Formulario de entrega" aria-hidden="true">
+    <div class="cart-header">
+      <div class="section-head" style="margin-bottom:0; align-items:center;">
+        <div>
+          <span class="eyebrow">Entrega</span>
+          <h2>Formulario de entrega</h2>
+        </div>
+        <button class="theme-toggle" id="closeDelivery" aria-label="Cerrar formulario">✕</button>
+      </div>
+    </div>
+
+    <div class="cart-list">
+      <form id="deliveryForm" style="display:grid; gap:1rem;">
+        <label class="form-field">
+          <span>Nombre de contacto</span>
+          <input type="text" id="contactName" required placeholder="Nombre y apellido">
+        </label>
+
+        <label class="form-field">
+          <span>Teléfono</span>
+          <input type="tel" id="contactPhone" required placeholder="+56 9 ...">
+        </label>
+
+        <label class="form-field">
+          <span>Fecha de envío</span>
+          <input type="date" id="deliveryDate" required>
+          <small class="form-help">Mínimo 48 horas desde hoy.</small>
+        </label>
+
+        <label class="form-field">
+          <span>Ciudad / comuna</span>
+          <select id="deliveryCity" required>
+            <option value="Copiapó">Copiapó</option>
+          </select>
+          <small class="form-help">Solo disponible para Copiapó.</small>
+        </label>
+
+        <label class="form-field">
+          <span>Dirección de entrega</span>
+          <input type="text" id="deliveryAddress" required placeholder="Calle, número, villa, referencia">
+        </label>
+
+        <label class="shipping-box">
+          <input type="checkbox" id="shippingOption" style="margin-top:.25rem;">
+          <span>
+            <strong>Agregar envío local</strong><br>
+            <small class="form-help">Costo fijo: $4.000 dentro de Copiapó.</small>
+          </span>
+        </label>
+      </form>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-total"><span>Subtotal productos</span><span id="deliverySubtotal">$0</span></div>
+      <div class="cart-total"><span>Envío</span><span id="deliveryShipping">$0</span></div>
+      <div class="cart-total" style="font-size:1.1rem;"><span>Total final</span><span id="deliveryTotal">$0</span></div>
+      <button class="btn btn-primary" id="submitDelivery">Ir a pagar con Mercado Pago</button>
     </div>
   </aside>
 
@@ -281,9 +358,14 @@
     };
 
     const cart = [];
+    const DELIVERY_PRICE = 4000;
 
     function formatCLP(value) {
-      return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }).format(value);
+      return new Intl.NumberFormat('es-CL', {
+        style: 'currency',
+        currency: 'CLP',
+        maximumFractionDigits: 0
+      }).format(value);
     }
 
     function illustration(type) {
@@ -361,8 +443,10 @@
       const input = document.getElementById(`qty-${id}`);
       const qty = Math.max(1, Number(input.value || 1));
       const existing = cart.find(item => item.id === id);
+
       if (existing) existing.qty += qty;
       else cart.push({ ...product, qty });
+
       renderCart();
       showToast(`${product.name} agregado al carrito`);
       input.value = 1;
@@ -377,18 +461,41 @@
     function clearCart() {
       cart.length = 0;
       renderCart();
+      closeDeliveryForm();
+    }
+
+    function getCartSubtotal() {
+      return cart.reduce((sum, item) => sum + item.qty * item.price, 0);
+    }
+
+    function getDeliveryCharge() {
+      return document.getElementById('shippingOption').checked ? DELIVERY_PRICE : 0;
+    }
+
+    function updateDeliverySummary() {
+      const subtotal = getCartSubtotal();
+      const shipping = getDeliveryCharge();
+      const total = subtotal + shipping;
+
+      document.getElementById('deliverySubtotal').textContent = formatCLP(subtotal);
+      document.getElementById('deliveryShipping').textContent = formatCLP(shipping);
+      document.getElementById('deliveryTotal').textContent = formatCLP(total);
     }
 
     function renderCart() {
       const cartItems = document.getElementById('cartItems');
       const count = cart.reduce((sum, item) => sum + item.qty, 0);
-      const total = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
+      const total = getCartSubtotal();
+
       document.getElementById('cartCount').textContent = count;
       document.getElementById('cartTotal').textContent = formatCLP(total);
+
       if (!cart.length) {
         cartItems.innerHTML = '<div class="empty">Todavía no agregas productos. Selecciona tus favoritos y aquí verás el resumen.</div>';
+        updateDeliverySummary();
         return;
       }
+
       cartItems.innerHTML = cart.map(item => `
         <article class="cart-item">
           <div>
@@ -401,28 +508,73 @@
           </div>
         </article>
       `).join('');
+
+      updateDeliverySummary();
     }
 
     const cartDrawer = document.getElementById('cartDrawer');
     const overlay = document.getElementById('overlay');
+
     function openCart() {
       cartDrawer.classList.add('open');
       overlay.classList.add('open');
       cartDrawer.setAttribute('aria-hidden', 'false');
     }
+
     function closeCart() {
       cartDrawer.classList.remove('open');
       overlay.classList.remove('open');
       cartDrawer.setAttribute('aria-hidden', 'true');
     }
+
+    const deliveryDrawer = document.getElementById('deliveryDrawer');
+    const deliveryOverlay = document.getElementById('deliveryOverlay');
+    const deliveryDateInput = document.getElementById('deliveryDate');
+
+    function setMinDeliveryDate() {
+      const minDate = new Date(Date.now() + 48 * 60 * 60 * 1000);
+      deliveryDateInput.min = minDate.toISOString().split('T')[0];
+    }
+
+    function openDeliveryForm() {
+      if (!cart.length) {
+        showToast('Tu carrito está vacío');
+        return;
+      }
+
+      setMinDeliveryDate();
+      updateDeliverySummary();
+      deliveryDrawer.classList.add('open');
+      deliveryOverlay.classList.add('open');
+      deliveryDrawer.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeDeliveryForm() {
+      deliveryDrawer.classList.remove('open');
+      deliveryOverlay.classList.remove('open');
+      deliveryDrawer.setAttribute('aria-hidden', 'true');
+    }
+
     document.getElementById('openCart').addEventListener('click', openCart);
     document.getElementById('closeCart').addEventListener('click', closeCart);
     overlay.addEventListener('click', closeCart);
     document.getElementById('clearCart').addEventListener('click', clearCart);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
+
+    document.getElementById('continueButton').addEventListener('click', openDeliveryForm);
+    document.getElementById('closeDelivery').addEventListener('click', closeDeliveryForm);
+    deliveryOverlay.addEventListener('click', closeDeliveryForm);
+    document.getElementById('shippingOption').addEventListener('change', updateDeliverySummary);
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        closeCart();
+        closeDeliveryForm();
+      }
+    });
 
     const toast = document.getElementById('toast');
     let toastTimer;
+
     function showToast(message) {
       toast.textContent = message;
       toast.classList.add('show');
@@ -431,60 +583,121 @@
     }
 
     (function(){
-      const t=document.querySelector('[data-theme-toggle]'), r=document.documentElement;
-      let d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
-      r.setAttribute('data-theme',d);
-      const setIcon=()=>{t.innerHTML=d==='dark'?'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>':'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';};
+      const t = document.querySelector('[data-theme-toggle]');
+      const r = document.documentElement;
+      let d = matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+
+      r.setAttribute('data-theme', d);
+
+      const setIcon = () => {
+        t.innerHTML = d === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      };
+
       setIcon();
-      t.addEventListener('click',()=>{d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d);setIcon();t.setAttribute('aria-label','Cambiar a modo '+(d==='dark'?'claro':'oscuro'));});
+
+      t.addEventListener('click', () => {
+        d = d === 'dark' ? 'light' : 'dark';
+        r.setAttribute('data-theme', d);
+        setIcon();
+        t.setAttribute('aria-label', 'Cambiar a modo ' + (d === 'dark' ? 'claro' : 'oscuro'));
+      });
     })();
+
+    async function pagarConMercadoPago(payload) {
+      const submitButton = document.getElementById('submitDelivery');
+      const originalText = submitButton.textContent;
+
+      try {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Redirigiendo...';
+
+        const response = await fetch('https://TU-ENDPOINT-LAMBDA.amazonaws.com/prod/create-preference', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'No se pudo crear el pago');
+        }
+
+        if (!data.init_point) {
+          throw new Error('Mercado Pago no devolvió una URL de pago');
+        }
+
+        window.location.href = data.init_point;
+
+      } catch (error) {
+        console.error(error);
+        showToast('Error al iniciar el pago');
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+      }
+    }
+
+    document.getElementById('submitDelivery').addEventListener('click', () => {
+      if (!cart.length) {
+        showToast('Tu carrito está vacío');
+        return;
+      }
+
+      const contactName = document.getElementById('contactName').value.trim();
+      const contactPhone = document.getElementById('contactPhone').value.trim();
+      const deliveryDate = document.getElementById('deliveryDate').value;
+      const deliveryCity = document.getElementById('deliveryCity').value;
+      const deliveryAddress = document.getElementById('deliveryAddress').value.trim();
+      const shipping = getDeliveryCharge();
+      const subtotal = getCartSubtotal();
+      const total = subtotal + shipping;
+
+      if (!contactName || !contactPhone || !deliveryDate || !deliveryAddress) {
+        showToast('Completa todos los datos de entrega');
+        return;
+      }
+
+      const minAllowed = new Date(Date.now() + 48 * 60 * 60 * 1000);
+      const selectedDate = new Date(deliveryDate + 'T00:00:00');
+
+      if (selectedDate < minAllowed) {
+        showToast('La fecha debe ser con al menos 48 horas de anticipación');
+        return;
+      }
+
+      if (deliveryCity !== 'Copiapó') {
+        showToast('Solo se hacen envíos en Copiapó');
+        return;
+      }
+
+      const payload = {
+        items: cart,
+        customer: {
+          name: contactName,
+          phone: contactPhone
+        },
+        delivery: {
+          date: deliveryDate,
+          city: deliveryCity,
+          address: deliveryAddress
+        },
+        shipping,
+        subtotal,
+        total
+      };
+
+      pagarConMercadoPago(payload);
+    });
 
     renderProducts(products.cakes, 'cakesGrid');
     renderProducts(products.loaves, 'loafGrid');
     renderProducts(products.snacks, 'snackGrid');
     renderCart();
-  async function pagarConMercadoPago() {
-  if (!cart.length) {
-    showToast('Tu carrito está vacío');
-    return;
-  }
-
-  const payButton = document.getElementById('payButton');
-  const originalText = payButton.textContent;
-
-  try {
-    payButton.disabled = true;
-    payButton.textContent = 'Redirigiendo...';
-
-    const response = await fetch('https://TU-ENDPOINT-LAMBDA.amazonaws.com/prod/create-preference', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ items: cart })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || 'No se pudo crear el pago');
-    }
-
-    if (!data.init_point) {
-      throw new Error('Mercado Pago no devolvió una URL de pago');
-    }
-
-    window.location.href = data.init_point;
-
-  } catch (error) {
-    console.error(error);
-    showToast('Error al iniciar el pago');
-    payButton.disabled = false;
-    payButton.textContent = originalText;
-  }
-}
-
-document.getElementById('payButton').addEventListener('click', pagarConMercadoPago);
+    setMinDeliveryDate();
   </script>
 </body>
 </html>
