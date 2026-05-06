@@ -1023,6 +1023,87 @@
               <button class="btn btn-primary" type="submit">Calcular cotización</button>
             </form>
           </div>
+<section class="contact" id="acceso">
+  <div class="container contact-grid">
+    <div>
+      <div class="contact-header">
+        <div>
+          <div class="eyebrow">Acceso</div>
+          <h2 class="section-title">Crea tu cuenta o inicia sesión.</h2>
+        </div>
+      </div>
+      <p class="section-copy">
+        Regístrate para consultar, guardar tus datos y continuar con tu solicitud.
+      </p>
+
+      <div class="contact-card contact-info">
+        <div class="contact-item">
+          <span>Estado</span>
+          <strong id="authStatus">No has iniciado sesión</strong>
+        </div>
+        <div class="contact-item">
+          <span>Usuario</span>
+          <strong id="authUser">—</strong>
+        </div>
+        <div class="contact-item">
+          <span>Acción rápida</span>
+          <strong><a href="#" id="logoutLink">Cerrar sesión</a></strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <div style="display:grid; gap: 1rem; margin-bottom: 1rem;">
+        <div style="display:flex; gap: .75rem; flex-wrap: wrap;">
+          <button class="btn btn-secondary" type="button" data-auth-view="signup">Crear cuenta</button>
+          <button class="btn btn-secondary" type="button" data-auth-view="confirm">Confirmar código</button>
+          <button class="btn btn-secondary" type="button" data-auth-view="signin">Iniciar sesión</button>
+        </div>
+        <p id="authMessage" class="section-copy" style="margin:0;"></p>
+      </div>
+
+      <form id="signUpForm" data-auth-panel>
+        <label>
+          Nombre completo
+          <input type="text" id="signupName" placeholder="Tu nombre" />
+        </label>
+        <label>
+          Correo electrónico
+          <input type="email" id="signupEmail" placeholder="correo@ejemplo.com" required />
+        </label>
+        <label>
+          Contraseña
+          <input type="password" id="signupPassword" placeholder="Mínimo 8 caracteres" required />
+        </label>
+        <button class="btn btn-primary" type="submit">Crear cuenta</button>
+      </form>
+
+      <form id="confirmForm" data-auth-panel hidden>
+        <label>
+          Correo electrónico
+          <input type="email" id="confirmEmail" placeholder="correo@ejemplo.com" required />
+        </label>
+        <label>
+          Código de confirmación
+          <input type="text" id="confirmCode" placeholder="123456" required />
+        </label>
+        <button class="btn btn-primary" type="submit">Confirmar cuenta</button>
+      </form>
+
+      <form id="signInForm" data-auth-panel hidden>
+        <label>
+          Correo electrónico
+          <input type="email" id="signinEmail" placeholder="correo@ejemplo.com" required />
+        </label>
+        <label>
+          Contraseña
+          <input type="password" id="signinPassword" placeholder="Tu contraseña" required />
+        </label>
+        <button class="btn btn-primary" type="submit">Iniciar sesión</button>
+      </form>
+    </div>
+  </div>
+</section>
 
           <div class="contact-card">
             <div id="quoteResult">
