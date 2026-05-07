@@ -1403,13 +1403,13 @@
     }
   }
 
-  function openPage(view = 'login') {
-    authView = view;
-    syncView();
-    authPage.hidden = false;
-    document.body.classList.add('auth-open');
-    authPage.querySelector('dialog')?.showModal?.();
-  }
+function openPage(view = 'login') {
+  authView = view;
+  syncView();
+  authPage.hidden = false;
+  authPage.showModal?.();
+  document.body.classList.add('auth-open');
+}
 
   function closePage() {
     authPage.hidden = true;
