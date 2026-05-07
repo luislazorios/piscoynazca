@@ -1468,7 +1468,7 @@ input:focus, textarea:focus, select:focus {
     authMessage.style.color = error ? '#b42318' : '';
   }
 
- function syncView() {
+function syncView() {
   if (authView === 'login') {
     authModalTitle.textContent = 'Iniciar sesión';
     authSubmit.textContent = 'Iniciar sesión';
@@ -1476,7 +1476,6 @@ input:focus, textarea:focus, select:focus {
     confirmWrap.hidden = true;
     setMessage('Ingresa tus datos para continuar.');
   }
-   
 
   if (authView === 'register') {
     authModalTitle.textContent = 'Crear cuenta';
@@ -1493,8 +1492,7 @@ input:focus, textarea:focus, select:focus {
     confirmWrap.hidden = false;
     setMessage(`Te enviamos un código a ${authEmail.value.trim()}.`);
   }
-
-  }
+}
    document.querySelectorAll('[data-auth-view]').forEach(btn => {
   btn.addEventListener('click', () => {
     authView = btn.dataset.authView;
@@ -1566,10 +1564,10 @@ input:focus, textarea:focus, select:focus {
         ]
       }));
 
-      pendingEmail = email;
-      authView = 'confirm';
-      syncView();
-      setMessage('Cuenta creada. Revisa tu correo para confirmar el código.');
+      pauthEmail.value = email;
+authView = 'confirm';
+syncView();
+setMessage('Cuenta creada. Revisa tu correo para confirmar el código.');
       return;
     }
 
