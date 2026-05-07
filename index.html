@@ -765,7 +765,6 @@
      <div class="nav-actions">
   <button class="theme-toggle" type="button" aria-label="Cambiar tema" data-theme-toggle></button>
   <a class="btn btn-secondary" href="catalogo.html">Ver Catálogo</a>
-  <button class="btn btn-secondary" type="button" id="openRegisterPage">Crear cuenta</button>
   <button class="btn btn-primary" type="button" id="openLoginPage">Iniciar sesión</button>
 </div>
   </header>
@@ -1108,10 +1107,9 @@
       <h2 class="section-title" id="authModalTitle">Iniciar sesión</h2>
       <p class="section-copy" id="authMessage">Ingresa tus datos para continuar.</p>
     </div>
-    <div class="auth-switcher">
-      <button class="btn btn-secondary" type="button" data-auth-view="login">Iniciar sesión</button>
-      <button class="btn btn-secondary" type="button" data-auth-view="register">Crear cuenta</button>
-    </div>
+  <div class="auth-switcher">
+  <button class="btn btn-secondary active" type="button" data-auth-view="login">Iniciar sesión</button>
+</div>
     <form id="authForm">
       <label id="nameWrap" hidden>
         Nombre completo
@@ -1131,6 +1129,10 @@
       </label>
       <button class="btn btn-primary" type="submit" id="authSubmit">Iniciar sesión</button>
     </form>
+    <p style="text-align: center; margin: var(--space-6) 0 0; font-size: var(--text-sm);">
+  ¿No tienes cuenta? 
+  <button type="button" class="link-like" data-auth-view="register">Crear cuenta</button>
+</p>
     <div class="auth-session">
       <span>Estado:</span><strong id="authStatus">No has iniciado sesión</strong>
       <span>Usuario:</span><strong id="authUser">—</strong>
