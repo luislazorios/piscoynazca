@@ -1100,7 +1100,44 @@
       <a href="#inicio">Volver arriba</a>
     </div>
   </footer>
-
+<div class="auth-page" id="authPage" hidden>
+  <dialog class="dialog-surface" aria-labelledby="authModalTitle">
+    <button class="auth-close" type="button" id="closeAuthPage" aria-label="Cerrar">&times;</button>
+    <div class="auth-modal-head">
+      <div class="eyebrow">Acceso privado</div>
+      <h2 class="section-title" id="authModalTitle">Iniciar sesión</h2>
+      <p class="section-copy" id="authMessage">Ingresa tus datos para continuar.</p>
+    </div>
+    <div class="auth-switcher">
+      <button class="btn btn-secondary" type="button" data-auth-view="login">Iniciar sesión</button>
+      <button class="btn btn-secondary" type="button" data-auth-view="register">Crear cuenta</button>
+    </div>
+    <form id="authForm">
+      <label id="nameWrap" hidden>
+        Nombre completo
+        <input type="text" id="signupName" placeholder="Tu nombre" />
+      </label>
+      <label>
+        Correo electrónico
+        <input type="email" id="authEmail" placeholder="correo@ejemplo.com" required />
+      </label>
+      <label>
+        Contraseña
+        <input type="password" id="authPassword" placeholder="Tu contraseña" required />
+      </label>
+      <label id="confirmWrap" hidden>
+        Código de confirmación
+        <input type="text" id="confirmCode" placeholder="123456" />
+      </label>
+      <button class="btn btn-primary" type="submit" id="authSubmit">Iniciar sesión</button>
+    </form>
+    <div class="auth-session">
+      <span>Estado:</span><strong id="authStatus">No has iniciado sesión</strong>
+      <span>Usuario:</span><strong id="authUser">—</strong>
+      <button class="btn btn-secondary" type="button" id="logoutButton">Cerrar sesión</button>
+    </div>
+  </dialog>
+</div>
   <script>
     (function () {
       const root = document.documentElement;
