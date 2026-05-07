@@ -834,141 +834,10 @@ input:focus, textarea:focus, select:focus {
   margin-bottom: 1.25rem;
 }
 
-
-
-  .auth-page {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  display: grid;
-  place-items: center;
-  padding: 1.5rem;
-  background:
-    radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 35%),
-    rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(10px);
-}
-
-.auth-page dialog {
-  width: min(92vw, 460px);
-  border: 1px solid var(--color-border);
-  border-radius: 1.75rem;
-  padding: 0;
-  background: var(--color-surface);
-  color: var(--color-text);
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
-  overflow: hidden;
-}
-
-.auth-modal-head {
-  padding: 2rem 2rem 1.25rem;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--color-primary) 10%, transparent), transparent),
-    var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.auth-modal-head .eyebrow {
-  margin-bottom: 0.5rem;
-}
-
-.auth-modal-head .section-title {
-  margin-bottom: 0.6rem;
-  font-size: clamp(1.8rem, 3vw, 2.3rem);
-}
-
-.auth-modal-head .section-copy {
-  margin: 0;
-  line-height: 1.6;
-}
-
-.auth-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  background: var(--color-surface-2);
-  color: var(--color-text-muted);
-  display: grid;
-  place-items: center;
-  transition: 180ms ease;
-}
-
-.auth-close:hover {
-  background: var(--color-surface-offset);
-  color: var(--color-text);
-}
-
-.auth-switcher {
-  padding: 1.25rem 2rem 0;
-  display: flex;
-  gap: 0.75rem;
-}
-
-.auth-switcher .btn {
-  flex: 1;
-  min-height: 42px;
-}
-
-.auth-switcher .active {
-  background: var(--color-primary);
-  color: var(--color-text-inverse);
-  border-color: transparent;
-}
-
-#authForm {
-  padding: 1.25rem 2rem 0.5rem;
-  gap: 1rem;
-}
-
-#authForm label {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-text);
-}
-
-#authForm input {
-  border-radius: 1rem;
-  background: var(--color-surface-2);
-  border: 1px solid var(--color-border);
-  padding: 0.95rem 1rem;
-}
-
-#authForm input::placeholder {
-  color: var(--color-text-faint);
-}
-
-#authSubmit {
-  margin-top: 0.25rem;
-  box-shadow: 0 10px 24px rgba(140, 95, 82, 0.18);
-}
-
-.auth-page p[style*="text-align: center"] {
-  padding: 0 2rem;
-  margin-top: 1rem !important;
-  color: var(--color-text-muted);
-}
-
 .auth-session {
   margin-top: 1.25rem;
-  padding: 1rem 2rem 2rem;
+  padding-top: 1rem;
   border-top: 1px solid var(--color-border);
-  display: grid;
-  gap: 0.6rem;
-}
-
-.auth-session span {
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--color-text-muted);
-}
-
-.auth-session strong {
-  font-size: 1rem;
 }
   </style>
 </head>
@@ -1562,7 +1431,7 @@ input:focus, textarea:focus, select:focus {
   const bgMusic = document.getElementById('bgMusic');
   bgMusic.volume = 0.3;
 </script>
-
+</body>
  <script type="module">
   import { CognitoIdentityProviderClient, InitiateAuthCommand, SignUpCommand, ConfirmSignUpCommand, GetUserCommand } from 'https://esm.sh/@aws-sdk/client-cognito-identity-provider';
 
@@ -1733,5 +1602,4 @@ input:focus, textarea:focus, select:focus {
 
   loadCurrentUser();  // Carga estado inicial
 </script>
-  </body>
 </html>
