@@ -745,6 +745,100 @@
   padding: 0;
 }
 .link-like:hover { opacity: 0.8; }
+    :root {
+  --shadow-soft: 0 10px 30px rgba(67, 42, 31, 0.08);
+  --shadow-hover: 0 14px 36px rgba(67, 42, 31, 0.14);
+}
+
+.site-header {
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 10px 30px rgba(0,0,0,0.04);
+}
+
+.hero {
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(140, 95, 82, 0.10), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(233, 216, 207, 0.24), transparent 30%);
+  pointer-events: none;
+}
+
+.hero-grid,
+.story-grid,
+.contact-grid,
+.gallery-grid,
+.services-grid,
+.testimonials-grid {
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.service-card,
+.testimonial,
+.gallery-card,
+.story-panel,
+.contact-card {
+  box-shadow: var(--shadow-soft);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.service-card:hover,
+.testimonial:hover,
+.gallery-card:hover,
+.story-panel:hover,
+.contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn-primary {
+  box-shadow: 0 10px 24px rgba(140, 95, 82, 0.22);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  border-color: color-mix(in srgb, var(--color-border) 70%, transparent);
+}
+
+.section-title {
+  letter-spacing: -0.02em;
+}
+
+.section-copy {
+  line-height: 1.75;
+}
+
+input, textarea, select {
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 16%, transparent);
+}
+
+.dialog-surface {
+  width: min(92vw, 460px);
+  border-radius: 1.6rem;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.28);
+  padding: 2rem;
+}
+
+.auth-modal-head {
+  margin-bottom: 1.25rem;
+}
+
+.auth-session {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
   </style>
 </head>
 <body>
@@ -1507,6 +1601,5 @@
   });
 
   loadCurrentUser();  // Carga estado inicial
-</script>
 </script>
 </html>
