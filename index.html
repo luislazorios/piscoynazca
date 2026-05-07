@@ -1344,17 +1344,22 @@
   bgMusic.volume = 0.3;
 </script>
 
- <script type="module">
-  import { CognitoIdentityProviderClient, InitiateAuthCommand, SignUpCommand, ConfirmSignUpCommand, GetUserCommand } from 'https://esm.sh/@aws-sdk/client-cognito-identity-provider';
+<script type="module">
+  import {
+    CognitoIdentityProviderClient,
+    InitiateAuthCommand,
+    SignUpCommand,
+    ConfirmSignUpCommand,
+    GetUserCommand
+  } from 'https://esm.sh/@aws-sdk/client-cognito-identity-provider';
 
   const cognitoConfig = {
-    region: 'us-east-1',  // Tu región
-    clientId: 'TU_CLIENT_ID_AQUI'  // De AWS Cognito App Client
+    region: 'us-east-1',
+    clientId: 'TU_CLIENT_ID_AQUI'
   };
 
   const client = new CognitoIdentityProviderClient({ region: cognitoConfig.region });
 
-  // Elementos DOM
   const authPage = document.getElementById('authPage');
   const openLoginPage = document.getElementById('openLoginPage');
   const closeAuthPage = document.getElementById('closeAuthPage');
@@ -1372,7 +1377,7 @@
   const confirmWrap = document.getElementById('confirmWrap');
   const confirmCode = document.getElementById('confirmCode');
 
-  let authView = 'login';  // Por defecto: login
+  let authView = 'login';
   let authState = { accessToken: null, idToken: null, refreshToken: null, email: null };
 
   function setMessage(message, error = false) {
@@ -1436,15 +1441,11 @@
     }
   }
 
-  // Event listeners
   openLoginPage?.addEventListener('click', () => openPage('login'));
-  // openRegisterPage eliminado del header
-
   closeAuthPage?.addEventListener('click', closePage);
   authPage?.addEventListener('click', e => { if (e.target === authPage) closePage(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !authPage.hidden) closePage(); });
 
-  // Switcher y enlace "Crear cuenta"
   document.querySelectorAll('[data-auth-view]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       authView = e.target.dataset.authView;
@@ -1454,19 +1455,25 @@
 
   authForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
+
     const email = authEmail.value.trim();
     const password = authPassword.value;
     const name = signupName.value.trim();
     const code = confirmCode.value.trim();
 
     try {
-     if (authView === 'register') {
-  await client.send(new SignUpCommand({...}));
-  setMessage('Cuenta creada. Revisa tu correo para confirmar.');
-  authView = 'login';
-  syncView();
-  confirmWrap.hidden = true;  // FIX: Oculta código en login
-  return;
+      if (authView === 'register') {
+        await client.send(new SignUpCommand({
+          ClientId: cognitoConfig.clientId,
+          Username: email,
+          Password: password,
+          UserAttributes: name ? [{ Name: 'name', Value: name }] : []
+        }));
+        setMessage('Cuenta creada. Revisa tu correo para confirmar.');
+        authView = 'login';
+        syncView();
+        confirmWrap.hidden = true;
+        return;
       }
 
       if (code) {
@@ -1492,6 +1499,7 @@
         refreshToken: r.AuthenticationResult?.RefreshToken || null,
         email
       };
+
       setLoggedInUI(email);
       setMessage('Sesión iniciada correctamente.');
       closePage();
@@ -1507,7 +1515,8 @@
     setMessage('Sesión cerrada.');
   });
 
-  loadCurrentUser();  // Carga estado inicial
+  loadCurrentUser();
 </script>
 </body>
 </html>
+
