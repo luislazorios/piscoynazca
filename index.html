@@ -1385,19 +1385,21 @@
   }
 
   function syncView() {
-    if (authView === 'register') {
-      authModalTitle.textContent = 'Crear cuenta';
-      authSubmit.textContent = 'Crear cuenta';
-      nameWrap.hidden = false;
-      confirmWrap.hidden = false;
-      setMessage('Completa tus datos para registrar tu usuario.');
-    } else {
-      authModalTitle.textContent = 'Iniciar sesión';
-      authSubmit.textContent = 'Iniciar sesión';
-      nameWrap.hidden = true;
-      confirmWrap.hidden = true;
-      setMessage('Ingresa tus datos para continuar.');
-    }
+    function syncView() {
+  if (authView === 'register') {
+    authModalTitle.textContent = 'Crear cuenta';
+    authSubmit.textContent = 'Crear cuenta';
+    nameWrap.hidden = false;
+    confirmWrap.hidden = true;
+    setMessage('Completa tus datos para registrar tu usuario.');
+  } else {
+    authModalTitle.textContent = 'Iniciar sesión';
+    authSubmit.textContent = 'Iniciar sesión';
+    nameWrap.hidden = true;
+    confirmWrap.hidden = true;
+    setMessage('Ingresa tus datos para continuar.');
+  }
+
   }
 
 function openPage(view = 'login') {
