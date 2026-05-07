@@ -1431,7 +1431,7 @@ input:focus, textarea:focus, select:focus {
   const bgMusic = document.getElementById('bgMusic');
   bgMusic.volume = 0.3;
 </script>
-</body>
+
  <script type="module">
   import { CognitoIdentityProviderClient, InitiateAuthCommand, SignUpCommand, ConfirmSignUpCommand, GetUserCommand } from 'https://esm.sh/@aws-sdk/client-cognito-identity-provider';
 
@@ -1468,20 +1468,31 @@ input:focus, textarea:focus, select:focus {
     authMessage.style.color = error ? '#b42318' : '';
   }
 
-  function syncView() {
-    if (authView === 'register') {
-      authModalTitle.textContent = 'Crear cuenta';
-      authSubmit.textContent = 'Crear cuenta';
-      nameWrap.hidden = false;
-      confirmWrap.hidden = false;
-      setMessage('Completa tus datos para registrar tu usuario.');
-    } else {
-      authModalTitle.textContent = 'Iniciar sesión';
-      authSubmit.textContent = 'Iniciar sesión';
-      nameWrap.hidden = true;
-      confirmWrap.hidden = true;
-      setMessage('Ingresa tus datos para continuar.');
-    }
+ function syncView() {
+  if (authView === 'login') {
+    authModalTitle.textContent = 'Iniciar sesión';
+    authSubmit.textContent = 'Iniciar sesión';
+    nameWrap.hidden = true;
+    confirmWrap.hidden = true;
+    setMessage('Ingresa tus datos para continuar.');
+  }
+
+  if (authView === 'register') {
+    authModalTitle.textContent = 'Crear cuenta';
+    authSubmit.textContent = 'Crear cuenta';
+    nameWrap.hidden = false;
+    confirmWrap.hidden = true;
+    setMessage('Completa tus datos para registrar tu usuario.');
+  }
+
+  if (authView === 'confirm') {
+    authModalTitle.textContent = 'Confirmar cuenta';
+    authSubmit.textContent = 'Confirmar cuenta';
+    nameWrap.hidden = true;
+    confirmWrap.hidden = false;
+    setMessage(`Te enviamos un código a ${authEmail.value.trim()}.`);
+  }
+
   }
 
   function openPage(view = 'login') {
@@ -1528,72 +1539,70 @@ input:focus, textarea:focus, select:focus {
   openLoginPage?.addEventListener('click', () => openPage('login'));
   // openRegisterPage eliminado del header
 
-  closeAuthPage?.addEventListener('click', closePage);
-  authPage?.addEventListener('click', e => { if (e.target === authPage) closePage(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !authPage.hidden) closePage(); });
+ authForm?.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-  // Switcher y enlace "Crear cuenta"
-  document.querySelectorAll('[data-auth-view]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      authView = e.target.dataset.authView;
-      syncView();
-    });
-  });
+  const email = authEmail.value.trim();
+  const password = authPassword.value;
+  const name = signupName.value.trim();
+  const code = confirmCode.value.trim();
 
-  authForm?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = authEmail.value.trim();
-    const password = authPassword.value;
-    const name = signupName.value.trim();
-    const code = confirmCode.value.trim();
-
-    try {
-      if (authView === 'register') {
-        await client.send(new SignUpCommand({
-          ClientId: cognitoConfig.clientId,
-          Username: email,
-          Password: password,
-          UserAttributes: [{ Name: 'email', Value: email }, ...(name ? [{ Name: 'name', Value: name }] : [])]
-        }));
-        setMessage('Cuenta creada. Revisa tu correo para confirmar el código.');
-        authView = 'login';
-        syncView();
-        confirmWrap.hidden = false;
-        return;
-      }
-
-      if (code) {
-        await client.send(new ConfirmSignUpCommand({
-          ClientId: cognitoConfig.clientId,
-          Username: email,
-          ConfirmationCode: code
-        }));
-        setMessage('Cuenta confirmada. Ahora puedes iniciar sesión.');
-        confirmWrap.hidden = true;
-        return;
-      }
-
-      const r = await client.send(new InitiateAuthCommand({
-        AuthFlow: 'USER_PASSWORD_AUTH',
+  try {
+    if (authView === 'register') {
+      await client.send(new SignUpCommand({
         ClientId: cognitoConfig.clientId,
-        AuthParameters: { USERNAME: email, PASSWORD: password }
+        Username: email,
+        Password: password,
+        UserAttributes: [
+          { Name: 'email', Value: email },
+          ...(name ? [{ Name: 'name', Value: name }] : [])
+        ]
       }));
 
-      authState = {
-        accessToken: r.AuthenticationResult?.AccessToken || null,
-        idToken: r.AuthenticationResult?.IdToken || null,
-        refreshToken: r.AuthenticationResult?.RefreshToken || null,
-        email
-      };
-      setLoggedInUI(email);
-      setMessage('Sesión iniciada correctamente.');
-      closePage();
-    } catch (err) {
-      console.error(err);
-      setMessage(err.message || 'No se pudo completar la acción.', true);
+      pendingEmail = email;
+      authView = 'confirm';
+      syncView();
+      setMessage('Cuenta creada. Revisa tu correo para confirmar el código.');
+      return;
     }
-  });
 
+    if (authView === 'confirm') {
+      await client.send(new ConfirmSignUpCommand({
+        ClientId: cognitoConfig.clientId,
+        Username: email,
+        ConfirmationCode: code
+      }));
+
+      authView = 'login';
+      syncView();
+      setMessage('Cuenta confirmada. Ahora puedes iniciar sesión.');
+      return;
+    }
+
+    const r = await client.send(new InitiateAuthCommand({
+      AuthFlow: 'USER_PASSWORD_AUTH',
+      ClientId: cognitoConfig.clientId,
+      AuthParameters: {
+        USERNAME: email,
+        PASSWORD: password
+      }
+    }));
+
+    authState = {
+      accessToken: r.AuthenticationResult?.AccessToken || null,
+      idToken: r.AuthenticationResult?.IdToken || null,
+      refreshToken: r.AuthenticationResult?.RefreshToken || null,
+      email
+    };
+
+    setLoggedInUI(email);
+    setMessage('Sesión iniciada correctamente.');
+    closePage();
+  } catch (err) {
+    console.error(err);
+    setMessage(err.message || 'No se pudo completar la acción.', true);
+  }
+});
   logoutButton?.addEventListener('click', () => {
     authState = { accessToken: null, idToken: null, refreshToken: null, email: null };
     setLoggedOutUI();
@@ -1602,4 +1611,5 @@ input:focus, textarea:focus, select:focus {
 
   loadCurrentUser();  // Carga estado inicial
 </script>
+</body>
 </html>
