@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    
     :root, [data-theme="light"] {
       --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
       --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
@@ -734,6 +735,16 @@
         height: 28px;
       }
     }
+    .link-like {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+.link-like:hover { opacity: 0.8; }
   </style>
 </head>
 <body>
@@ -1327,15 +1338,19 @@
   bgMusic.volume = 0.3;
 </script>
 </body>
-  <script type="module">
-  import { CognitoIdentityProviderClient, InitiateAuthCommand, SignUpCommand, ConfirmSignUpCommand, GetUserCommand } from "https://esm.sh/@aws-sdk/client-cognito-identity-provider";
+ <script type="module">
+  import { CognitoIdentityProviderClient, InitiateAuthCommand, SignUpCommand, ConfirmSignUpCommand, GetUserCommand } from 'https://esm.sh/@aws-sdk/client-cognito-identity-provider';
 
-  const cognitoConfig = { region: "us-east-1", clientId: "XXXXXXXXXXXXXXXXXXXXXXXXXX" };
+  const cognitoConfig = {
+    region: 'us-east-1',  // Tu región
+    clientId: 'TU_CLIENT_ID_AQUI'  // De AWS Cognito App Client
+  };
+
   const client = new CognitoIdentityProviderClient({ region: cognitoConfig.region });
 
+  // Elementos DOM
   const authPage = document.getElementById('authPage');
   const openLoginPage = document.getElementById('openLoginPage');
-  const openRegisterPage = document.getElementById('openRegisterPage');
   const closeAuthPage = document.getElementById('closeAuthPage');
   const authModalTitle = document.getElementById('authModalTitle');
   const authMessage = document.getElementById('authMessage');
@@ -1351,7 +1366,7 @@
   const confirmWrap = document.getElementById('confirmWrap');
   const confirmCode = document.getElementById('confirmCode');
 
-  let authView = 'login';
+  let authView = 'login';  // Por defecto: login
   let authState = { accessToken: null, idToken: null, refreshToken: null, email: null };
 
   function setMessage(message, error = false) {
@@ -1396,7 +1411,7 @@
 
   function setLoggedInUI(email) {
     authStatus.textContent = 'Sesión iniciada';
-    authUser.textContent = email || 'Usuario autenticado';
+    authUser.textContent = email;
   }
 
   async function loadCurrentUser() {
@@ -1407,7 +1422,7 @@
     try {
       const r = await client.send(new GetUserCommand({ AccessToken: authState.accessToken }));
       const emailAttr = r.UserAttributes?.find(a => a.Name === 'email');
-      setLoggedInUI(emailAttr?.Value || authState.email || 'Usuario autenticado');
+      setLoggedInUI(emailAttr?.Value || authState.email);
     } catch (err) {
       console.error(err);
       setLoggedOutUI();
@@ -1415,13 +1430,23 @@
     }
   }
 
+  // Event listeners
   openLoginPage?.addEventListener('click', () => openPage('login'));
-  openRegisterPage?.addEventListener('click', () => openPage('register'));
+  // openRegisterPage eliminado del header
+
   closeAuthPage?.addEventListener('click', closePage);
   authPage?.addEventListener('click', e => { if (e.target === authPage) closePage(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !authPage.hidden) closePage(); });
 
-  authForm?.addEventListener('submit', async e => {
+  // Switcher y enlace "Crear cuenta"
+  document.querySelectorAll('[data-auth-view]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      authView = e.target.dataset.authView;
+      syncView();
+    });
+  });
+
+  authForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = authEmail.value.trim();
     const password = authPassword.value;
@@ -1434,10 +1459,7 @@
           ClientId: cognitoConfig.clientId,
           Username: email,
           Password: password,
-          UserAttributes: [
-            { Name: 'email', Value: email },
-            ...(name ? [{ Name: 'name', Value: name }] : [])
-          ]
+          UserAttributes: [{ Name: 'email', Value: email }, ...(name ? [{ Name: 'name', Value: name }] : [])]
         }));
         setMessage('Cuenta creada. Revisa tu correo para confirmar el código.');
         authView = 'login';
@@ -1469,7 +1491,6 @@
         refreshToken: r.AuthenticationResult?.RefreshToken || null,
         email
       };
-
       setLoggedInUI(email);
       setMessage('Sesión iniciada correctamente.');
       closePage();
@@ -1485,7 +1506,7 @@
     setMessage('Sesión cerrada.');
   });
 
-  setLoggedOutUI();
-  loadCurrentUser();
+  loadCurrentUser();  // Carga estado inicial
+</script>
 </script>
 </html>
