@@ -1390,7 +1390,7 @@
     authModalTitle.textContent = 'Crear cuenta';
     authSubmit.textContent = 'Crear cuenta';
     nameWrap.hidden = false;
-    confirmWrap.hidden = false;
+    confirmWrap.hidden = true;
     setMessage('Completa tus datos para registrar tu usuario.');
   } else {
     authModalTitle.textContent = 'Iniciar sesión';
@@ -1458,7 +1458,8 @@ function closePage() {
     const email = authEmail.value.trim();
     const password = authPassword.value;
     const name = signupName.value.trim();
-const code = authView === 'register' && confirmCode ? confirmCode.value.trim() : '';
+    const code = confirmCode.value.trim();
+
     try {
      
       const r = await client.send(new InitiateAuthCommand({
@@ -1493,4 +1494,3 @@ const code = authView === 'register' && confirmCode ? confirmCode.value.trim() :
 </script>
 </body>
 </html>
-
