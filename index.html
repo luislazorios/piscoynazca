@@ -745,11 +745,6 @@
   padding: 0;
 }
 .link-like:hover { opacity: 0.8; }
-
-    body.auth-open{overflow:hidden;position:fixed;width:100%}
-
-    
-                                    
   </style>
 </head>
 <body>
@@ -1342,23 +1337,18 @@
   const bgMusic = document.getElementById('bgMusic');
   bgMusic.volume = 0.3;
 </script>
-
-<script type="module">
-  import {
-    CognitoIdentityProviderClient,
-    InitiateAuthCommand,
-    SignUpCommand,
-    ConfirmSignUpCommand,
-    GetUserCommand
-  } from 'https://esm.sh/@aws-sdk/client-cognito-identity-provider';
+</body>
+ <script type="module">
+  import { CognitoIdentityProviderClient, InitiateAuthCommand, SignUpCommand, ConfirmSignUpCommand, GetUserCommand } from 'https://esm.sh/@aws-sdk/client-cognito-identity-provider';
 
   const cognitoConfig = {
-    region: 'us-east-1',
-    clientId: 'TU_CLIENT_ID_AQUI'
+    region: 'us-east-1',  // Tu región
+    clientId: 'TU_CLIENT_ID_AQUI'  // De AWS Cognito App Client
   };
 
   const client = new CognitoIdentityProviderClient({ region: cognitoConfig.region });
 
+  // Elementos DOM
   const authPage = document.getElementById('authPage');
   const openLoginPage = document.getElementById('openLoginPage');
   const closeAuthPage = document.getElementById('closeAuthPage');
@@ -1376,7 +1366,7 @@
   const confirmWrap = document.getElementById('confirmWrap');
   const confirmCode = document.getElementById('confirmCode');
 
-  let authView = 'login';
+  let authView = 'login';  // Por defecto: login
   let authState = { accessToken: null, idToken: null, refreshToken: null, email: null };
 
   function setMessage(message, error = false) {
@@ -1385,34 +1375,34 @@
   }
 
   function syncView() {
-    function syncView() {
-  if (authView === 'register') {
-    authModalTitle.textContent = 'Crear cuenta';
-    authSubmit.textContent = 'Crear cuenta';
-    nameWrap.hidden = false;
-    confirmWrap.hidden = true;
-    setMessage('Completa tus datos para registrar tu usuario.');
-  } else {
-    authModalTitle.textContent = 'Iniciar sesión';
-    authSubmit.textContent = 'Iniciar sesión';
-    nameWrap.hidden = true;
-    confirmWrap.hidden = true;
-    setMessage('Ingresa tus datos para continuar.');
+    if (authView === 'register') {
+      authModalTitle.textContent = 'Crear cuenta';
+      authSubmit.textContent = 'Crear cuenta';
+      nameWrap.hidden = false;
+      confirmWrap.hidden = false;
+      setMessage('Completa tus datos para registrar tu usuario.');
+    } else {
+      authModalTitle.textContent = 'Iniciar sesión';
+      authSubmit.textContent = 'Iniciar sesión';
+      nameWrap.hidden = true;
+      confirmWrap.hidden = true;
+      setMessage('Ingresa tus datos para continuar.');
+    }
   }
 
+  function openPage(view = 'login') {
+    authView = view;
+    syncView();
+    authPage.hidden = false;
+    document.body.classList.add('auth-open');
+    authPage.querySelector('dialog')?.showModal?.();
   }
 
-function openPage(view = 'login') {
-  authView = view;
-  syncView();
-  authPage.hidden = false;
-  authPage.querySelector('dialog')?.showModal?.();
-}
-
-function closePage() {
-  authPage.querySelector('dialog')?.close?.();
-  authPage.hidden = true;
-}
+  function closePage() {
+    authPage.hidden = true;
+    document.body.classList.remove('auth-open');
+    authPage.querySelector('dialog')?.close?.();
+  }
 
   function setLoggedOutUI() {
     authStatus.textContent = 'No has iniciado sesión';
@@ -1440,11 +1430,15 @@ function closePage() {
     }
   }
 
+  // Event listeners
   openLoginPage?.addEventListener('click', () => openPage('login'));
+  // openRegisterPage eliminado del header
+
   closeAuthPage?.addEventListener('click', closePage);
   authPage?.addEventListener('click', e => { if (e.target === authPage) closePage(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !authPage.hidden) closePage(); });
 
+  // Switcher y enlace "Crear cuenta"
   document.querySelectorAll('[data-auth-view]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       authView = e.target.dataset.authView;
@@ -1454,14 +1448,37 @@ function closePage() {
 
   authForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const email = authEmail.value.trim();
     const password = authPassword.value;
     const name = signupName.value.trim();
     const code = confirmCode.value.trim();
 
     try {
-     
+      if (authView === 'register') {
+        await client.send(new SignUpCommand({
+          ClientId: cognitoConfig.clientId,
+          Username: email,
+          Password: password,
+          UserAttributes: [{ Name: 'email', Value: email }, ...(name ? [{ Name: 'name', Value: name }] : [])]
+        }));
+        setMessage('Cuenta creada. Revisa tu correo para confirmar el código.');
+        authView = 'login';
+        syncView();
+        confirmWrap.hidden = false;
+        return;
+      }
+
+      if (code) {
+        await client.send(new ConfirmSignUpCommand({
+          ClientId: cognitoConfig.clientId,
+          Username: email,
+          ConfirmationCode: code
+        }));
+        setMessage('Cuenta confirmada. Ahora puedes iniciar sesión.');
+        confirmWrap.hidden = true;
+        return;
+      }
+
       const r = await client.send(new InitiateAuthCommand({
         AuthFlow: 'USER_PASSWORD_AUTH',
         ClientId: cognitoConfig.clientId,
@@ -1474,7 +1491,6 @@ function closePage() {
         refreshToken: r.AuthenticationResult?.RefreshToken || null,
         email
       };
-
       setLoggedInUI(email);
       setMessage('Sesión iniciada correctamente.');
       closePage();
@@ -1490,7 +1506,7 @@ function closePage() {
     setMessage('Sesión cerrada.');
   });
 
-  loadCurrentUser();
+  loadCurrentUser();  // Carga estado inicial
 </script>
-</body>
+</script>
 </html>
