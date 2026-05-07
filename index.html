@@ -1454,18 +1454,13 @@
     const code = confirmCode.value.trim();
 
     try {
-      if (authView === 'register') {
-        await client.send(new SignUpCommand({
-          ClientId: cognitoConfig.clientId,
-          Username: email,
-          Password: password,
-          UserAttributes: [{ Name: 'email', Value: email }, ...(name ? [{ Name: 'name', Value: name }] : [])]
-        }));
-        setMessage('Cuenta creada. Revisa tu correo para confirmar el código.');
-        authView = 'login';
-        syncView();
-        confirmWrap.hidden = false;
-        return;
+     if (authView === 'register') {
+  await client.send(new SignUpCommand({...}));
+  setMessage('Cuenta creada. Revisa tu correo para confirmar.');
+  authView = 'login';
+  syncView();
+  confirmWrap.hidden = true;  // FIX: Oculta código en login
+  return;
       }
 
       if (code) {
