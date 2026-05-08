@@ -1240,48 +1240,105 @@ input:focus, textarea:focus, select:focus {
   <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.js"></script>
   <script>
     // AWS Amplify Cognito Configuration
-    const awsconfig = {
-      Auth: {
-        region: 'us-east-1',
-        userPoolId: 'us-east-1_XXXXXXXXX',
-        userPoolWebClientId: 'XXXXXXXXXXXXXXXXXXXXXXXXXX',
-        oauth: {
-          domain: 'your-domain.auth.us-east-1.amazoncognito.com',
-          scope: ['email', 'openid', 'profile'],
-          redirectSignIn: 'https://yourdomain.com/',
-          redirectSignOut: 'https://yourdomain.com/',
-          responseType: 'code'
-        }
-      }
-    };
-
-    aws_amplify_1.Amplify.configure(awsconfig);
-
-    const openLoginButton = document.getElementById('openLoginPage');
-    
-    openLoginButton.addEventListener('click', async () => {
-      try {
-        await aws_amplify_1.Auth.signIn();
-      } catch (error) {
-        console.log('Login cancelled or error:', error);
-      }
-    });
-
-    // Check if user is already authenticated on page load
-    async function checkAuthStatus() {
-      try {
-        const user = await aws_amplify_1.Auth.currentAuthenticatedUser();
-        openLoginButton.textContent = 'Cerrar sesión';
-        openLoginButton.addEventListener('click', async () => {
-          await aws_amplify_1.Auth.signOut();
-          location.reload();
-        });
-      } catch (error) {
-        console.log('User not authenticated');
-      }
+   <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.min.js"></script>
+<script>
+// Tu config Amplify (copia la tuya exacta de awsconfig)
+const awsconfig = {
+  Auth: {
+    region: 'us-east-1',
+    userPoolId: 'us-east-1_XXXXXXXXX',  // ← Tu UserPool ID
+    userPoolWebClientId: 'XXXXXXXXXXXXXXXXXXXXXXXXXX',  // ← Tu App Client ID
+    oauth: {
+      domain: 'tu-dominio.auth.us-east-1.amazoncognito.com',
+      scope: ['email', 'openid', 'profile'],
+      redirectSignIn: 'http://localhost:3000/',  // Tu dominio
+      redirectSignOut: 'http://localhost:3000/',
+      responseType: 'code'
     }
+  }
+};
+AWSAmplify.configure(awsconfig);
 
-    checkAuthStatus();
+// Listener global de auth (NUEVO - clave para historial dinámico)
+window.addEventListener('aws-amplify-auth', (event) => {
+  const { event: authEvent, data } = event.detail;
+  if (authEvent === 'signIn' || authEvent === 'signedIn') {
+    loadUserFeatures();
+    updateLoginButton('Cerrar sesión');
+  } else if (authEvent === 'signOut') {
+    hideUserFeatures();
+    updateLoginButton('Iniciar sesión');
+  }
+});
+
+// Carga features al loguear (historial, etc.)
+async function loadUserFeatures() {
+  try {
+    const user = await AWSAmplify.Auth.currentAuthenticatedUser();
+    const idToken = user.signInUserSession.idToken.jwtToken;
+    
+    // Carga historial (cambia URL por tu API)
+    const historial = await fetch('/api/historial', {
+      headers: { 'Authorization': `Bearer ${idToken}` }
+    }).then(r => r.json());
+    
+    // Muestra secciones
+    showElement('#user-menu');
+    showElement('#historial-section');
+    updateHistorial(historial);
+    
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+function hideUserFeatures() {
+  hideElement('#user-menu');
+  hideElement('#historial-section');
+  document.getElementById('historial-lista').innerHTML = '';
+}
+
+// Helpers
+function showElement(selector) { 
+  const el = document.querySelector(selector); 
+  if (el) el.style.display = 'block'; 
+}
+function hideElement(selector) { 
+  const el = document.querySelector(selector); 
+  if (el) el.style.display = 'none'; 
+}
+function updateLoginButton(text) {
+  document.getElementById('openLoginPage').textContent = text;
+}
+function updateHistorial(data) {
+  const lista = document.getElementById('historial-lista');
+  lista.innerHTML = data.map(item => 
+    `<li>${item.fecha}: $${item.total}</li>`
+  ).join('') || '<li>No hay cotizaciones aún</li>';
+}
+
+// Botón login/logout (mejorado)
+document.getElementById('openLoginPage').addEventListener('click', async () => {
+  try {
+    await AWSAmplify.Auth.currentAuthenticatedUser();
+    await AWSAmplify.Auth.signOut();  // Si logueado → logout
+  } catch {
+    await AWSAmplify.Auth.federatedSignIn();  // Sino → login popup
+  }
+});
+
+// Chequeo inicial
+async function checkAuthStatus() {
+  try {
+    await AWSAmplify.Auth.currentAuthenticatedUser();
+    updateLoginButton('Cerrar sesión');
+    await loadUserFeatures();
+  } catch {
+    updateLoginButton('Iniciar sesión');
+  }
+}
+checkAuthStatus();
+</script>
 
     // Theme Toggle
     const themeToggle = document.querySelector('[data-theme-toggle]');
