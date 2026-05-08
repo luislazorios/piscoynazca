@@ -745,6 +745,100 @@
   padding: 0;
 }
 .link-like:hover { opacity: 0.8; }
+    :root {
+  --shadow-soft: 0 10px 30px rgba(67, 42, 31, 0.08);
+  --shadow-hover: 0 14px 36px rgba(67, 42, 31, 0.14);
+}
+
+.site-header {
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 10px 30px rgba(0,0,0,0.04);
+}
+
+.hero {
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(140, 95, 82, 0.10), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(233, 216, 207, 0.24), transparent 30%);
+  pointer-events: none;
+}
+
+.hero-grid,
+.story-grid,
+.contact-grid,
+.gallery-grid,
+.services-grid,
+.testimonials-grid {
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.service-card,
+.testimonial,
+.gallery-card,
+.story-panel,
+.contact-card {
+  box-shadow: var(--shadow-soft);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.service-card:hover,
+.testimonial:hover,
+.gallery-card:hover,
+.story-panel:hover,
+.contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn-primary {
+  box-shadow: 0 10px 24px rgba(140, 95, 82, 0.22);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  border-color: color-mix(in srgb, var(--color-border) 70%, transparent);
+}
+
+.section-title {
+  letter-spacing: -0.02em;
+}
+
+.section-copy {
+  line-height: 1.75;
+}
+
+input, textarea, select {
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 16%, transparent);
+}
+
+.dialog-surface {
+  width: min(92vw, 460px);
+  border-radius: 1.6rem;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.28);
+  padding: 2rem;
+}
+
+.auth-modal-head {
+  margin-bottom: 1.25rem;
+}
+
+.auth-session {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
   </style>
 </head>
 <body>
@@ -763,21 +857,20 @@
           <span>Banquetería Buffet</span>
         </span>
       </a>
-
-    <nav class="nav-links" aria-label="Principal">
-  <a href="#historia">Nosotros</a>
-  <a href="#servicios">Servicios</a>
-  <a href="#galeria">Montajes</a>
-  <a href="catalogo.html">Catálogo</a>
-  <a href="#cotizacion">Cotización</a>
-  <a href="#contacto">Contacto</a>
-</nav>
-
-     <div class="nav-actions">
-  <button class="theme-toggle" type="button" aria-label="Cambiar tema" data-theme-toggle></button>
-  <a class="btn btn-secondary" href="catalogo.html">Ver Catálogo</a>
-  <button class="btn btn-primary" type="button" id="openLoginPage">Iniciar sesión</button>
-</div>
+      <nav class="nav-links" aria-label="Principal">
+        <a href="#historia">Nosotros</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#galeria">Montajes</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="#cotizacion">Cotización</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" aria-label="Cambiar tema" data-theme-toggle></button>
+        <a class="btn btn-secondary" href="catalogo.html">Ver Catálogo</a>
+        <button class="btn btn-primary" type="button" id="openLoginPage">Iniciar sesión</button>
+      </div>
+    </div>
   </header>
 
   <main id="inicio">
@@ -821,12 +914,12 @@
           <div class="eyebrow">Nuestra esencia</div>
           <h2 class="section-title">Una banquetería con sensibilidad editorial y espíritu de celebración.</h2>
           <p class="section-copy">
-            Una banquetería con alma peruana, donde la riqueza de la gastronomía tradicional se encuentra con el refinamiento de un servicio de celebración. Inspirada en la calidez de las mesas familiares y en la diversidad de sabores de la cocina peruana, esta propuesta lleva los sabores de la papa, el maíz, el ají y el mar a matrimonios y eventos sociales, con un enfoque que resalta ingredientes frescos, técnicas auténticas y un montaje que honra la identidad cultural sin perder elegancia ni confort.
+            Una banquetería con alma peruana, donde la riqueza de la gastronomía tradicional se encuentra con el refinamiento de un servicio de celebración. Inspirada en la calidez de las mesas familiares y el sabor de compartir.
           </p>
         </div>
         <div class="story-panel">
           <blockquote>
-            “Porque no es solo importante que se vea bien, sino que todos digan: Pucha qué rico he!.”
+            "Porque no es solo importante que se vea bien, sino que todos digan: Pucha qué rico he!."
           </blockquote>
           <div class="story-list">
             <div><strong>Postres y tortas</strong><br>Muchas variedades a pedido del cliente, la especialidad, Torta Helada.</div>
@@ -917,15 +1010,15 @@
         </div>
         <div class="testimonials-grid">
           <article class="testimonial">
-            <p>“Todo se veía precioso y el servicio fue impecable. Sentimos que entendieron perfecto el estilo que soñábamos para nuestro matrimonio.”</p>
+            <p>"Todo se veía precioso y el servicio fue impecable. Sentimos que entendieron perfecto el estilo que soñábamos para nuestro matrimonio."</p>
             <strong>Camila & Andrés</strong>
           </article>
           <article class="testimonial">
-            <p>“La mesa dulce fue el centro de todas las fotos. Elegante, delicada y con sabores realmente memorables.”</p>
+            <p>"La mesa dulce fue el centro de todas las fotos. Elegante, delicada y con sabores realmente memorables."</p>
             <strong>Josefina R.</strong>
           </article>
           <article class="testimonial">
-            <p>“Nos acompañaron en cada detalle y lograron una celebración cálida, ordenada y hermosa de principio a fin.”</p>
+            <p>"Nos acompañaron en cada detalle y lograron una celebración cálida, ordenada y hermosa de principio a fin."</p>
             <strong>Martina y Felipe</strong>
           </article>
         </div>
@@ -1001,21 +1094,43 @@
                   <input type="checkbox" id="chkJugoNatural" />
                   <div class="quote-option-content">
                     <div class="quote-option-top">
-                      <strong>Jugo natural</strong>
-                      <span class="quote-price">$1.800 por persona</span>
+                      <strong>Jugos naturales o agua con frutas</strong>
+                      <span class="quote-price">$500 por persona</span>
                     </div>
-                    <p>Bebestible natural calculado por cantidad de invitados.</p>
+                    <p>Bebidas frescas y de temporada, preparadas al momento.</p>
                   </div>
                 </label>
 
-                <label class="quote-option-card" for="chkBebidaArtificial">
-                  <input type="checkbox" id="chkBebidaArtificial" />
+                <label class="quote-option-card" for="chkEstacionDulce">
+                  <input type="checkbox" id="chkEstacionDulce" />
                   <div class="quote-option-content">
                     <div class="quote-option-top">
-                      <strong>Bebestible artificial</strong>
-                      <span class="quote-price">$1.200 por persona</span>
+                      <strong>Estación dulce</strong>
+                      <span class="quote-price">Según tramo</span>
                     </div>
-                    <p>Opción de bebida artificial para todos los asistentes.</p>
+                    <p>20-29 personas: $22.000, 30-39: $28.000, 40 o más: $35.000.</p>
+                  </div>
+                </label>
+
+                <label class="quote-option-card" for="chkCafe">
+                  <input type="checkbox" id="chkCafe" />
+                  <div class="quote-option-content">
+                    <div class="quote-option-top">
+                      <strong>Café, té y petit fours</strong>
+                      <span class="quote-price">$1.000 por persona</span>
+                    </div>
+                    <p>Cierre elegante con opciones de café, té y dulces finos.</p>
+                  </div>
+                </label>
+
+                <label class="quote-option-card" for="chkDecoLocal">
+                  <input type="checkbox" id="chkDecoLocal" />
+                  <div class="quote-option-content">
+                    <div class="quote-option-top">
+                      <strong>Decoración de local</strong>
+                      <span class="quote-price">Según tamaño</span>
+                    </div>
+                    <p>Flores, luces y ambientación personalizada para tu evento.</p>
                   </div>
                 </label>
               </div>
@@ -1065,7 +1180,7 @@
             </div>
             <div class="contact-item">
               <span>Facebook</span>
-              <strong><a href="https://www.facebook.com/profile.php?id=100057617192182" target="_blank" rel="noopener noreferrer">Entre Pisco y Nazca &lt;-- Click ahí</a></strong>
+              <strong><a href="https://www.facebook.com/profile.php?id=100057617192182" target="_blank" rel="noopener noreferrer">Entre Pisco y Nazca</a></strong>
             </div>
             <div class="contact-item">
               <span>Cobertura</span>
@@ -1106,407 +1221,183 @@
 
   <footer class="footer">
     <div class="container footer-inner">
-      <span>Plantilla realizada por @Luis Lazo y @Perplexity AI</span>
-      <a href="#inicio">Volver arriba</a>
+      <p>&copy; 2025 Entre Pisco y Nazca. Todos los derechos reservados.</p>
+      <p>Hecho con ❤️ en Copiapó, Chile</p>
     </div>
   </footer>
-<div class="auth-page" id="authPage" hidden>
-  <dialog class="dialog-surface" aria-labelledby="authModalTitle">
-    <button class="auth-close" type="button" id="closeAuthPage" aria-label="Cerrar">&times;</button>
-    <div class="auth-modal-head">
-      <div class="eyebrow">Acceso privado</div>
-      <h2 class="section-title" id="authModalTitle">Iniciar sesión</h2>
-      <p class="section-copy" id="authMessage">Ingresa tus datos para continuar.</p>
-    </div>
-  <div class="auth-switcher">
-  <button class="btn btn-secondary active" type="button" data-auth-view="login">Iniciar sesión</button>
-</div>
-    <form id="authForm">
-      <label id="nameWrap" hidden>
-        Nombre completo
-        <input type="text" id="signupName" placeholder="Tu nombre" />
-      </label>
-      <label>
-        Correo electrónico
-        <input type="email" id="authEmail" placeholder="correo@ejemplo.com" required />
-      </label>
-      <label>
-        Contraseña
-        <input type="password" id="authPassword" placeholder="Tu contraseña" required />
-      </label>
-      <label id="confirmWrap" hidden>
-        Código de confirmación
-        <input type="text" id="confirmCode" placeholder="123456" />
-      </label>
-      <button class="btn btn-primary" type="submit" id="authSubmit">Iniciar sesión</button>
-    </form>
-    <p style="text-align: center; margin: var(--space-6) 0 0; font-size: var(--text-sm);">
-  ¿No tienes cuenta? 
-  <button type="button" class="link-like" data-auth-view="register">Crear cuenta</button>
-</p>
-    <div class="auth-session">
-      <span>Estado:</span><strong id="authStatus">No has iniciado sesión</strong>
-      <span>Usuario:</span><strong id="authUser">—</strong>
-      <button class="btn btn-secondary" type="button" id="logoutButton">Cerrar sesión</button>
-    </div>
-  </dialog>
-</div>
-  <script>
-    (function () {
-      const root = document.documentElement;
-      const toggle = document.querySelector('[data-theme-toggle]');
-      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      root.setAttribute('data-theme', theme);
 
-      if (toggle) {
-        toggle.textContent = theme === 'dark' ? '☀' : '☾';
-        toggle.addEventListener('click', function () {
-          theme = theme === 'dark' ? 'light' : 'dark';
-          root.setAttribute('data-theme', theme);
-          toggle.textContent = theme === 'dark' ? '☀' : '☾';
-        });
-      }
-    })();
-  </script>
-
-  <script>
-    (function () {
-      const form = document.getElementById('quoteForm');
-      const result = document.getElementById('quoteResult');
-
-      if (!form || !result) return;
-
-      const formatCLP = (value) =>
-        new Intl.NumberFormat('es-CL', {
-          style: 'currency',
-          currency: 'CLP',
-          maximumFractionDigits: 0
-        }).format(value);
-
-      function getMenajeValue(personas) {
-        if (personas < 30) return 16000;
-        if (personas < 40) return 20000;
-        return 25000;
-      }
-
-      function getTortaValue(personas) {
-        if (personas >= 20 && personas < 30) return 36000;
-        if (personas >= 30 && personas < 40) return 46000;
-        if (personas >= 40 && personas <= 50) return 56000;
-        if (personas > 50 && personas <= 60) return 56000;
-        return 0;
-      }
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const personas = Number(document.getElementById('personas').value);
-        const chkAlmuerzo = document.getElementById('chkAlmuerzo').checked;
-        const chkMenaje = document.getElementById('chkMenaje').checked;
-        const chkTorta = document.getElementById('chkTorta').checked;
-        const chkBocaditos = document.getElementById('chkBocaditos').checked;
-        const chkJugoNatural = document.getElementById('chkJugoNatural').checked;
-        const chkBebidaArtificial = document.getElementById('chkBebidaArtificial').checked;
-        const decoracionLocal = Number(document.getElementById('decoracionLocal').value || 0);
-
-        if (!personas || personas < 20 || personas > 60) {
-          result.innerHTML = `
-            <h3 style="margin-top:0; font-family: var(--font-display); font-size: 1.9rem;">Resumen estimado</h3>
-            <p class="section-copy">Debes ingresar una cantidad válida entre 20 y 60 personas.</p>
-          `;
-          return;
-        }
-
-        const items = [];
-
-        if (chkAlmuerzo) {
-          items.push({
-            nombre: 'Almuerzos',
-            total: personas * 7000
-          });
-        }
-
-        if (chkMenaje) {
-          items.push({
-            nombre: 'Menaje, manteles y decoración mesa',
-            total: getMenajeValue(personas)
-          });
-        }
-
-        if (chkTorta) {
-          items.push({
-            nombre: 'Torta',
-            total: getTortaValue(personas)
-          });
-        }
-
-        if (chkBocaditos) {
-          items.push({
-            nombre: 'Bocaditos mix',
-            total: personas * 750
-          });
-        }
-
-        if (chkJugoNatural) {
-          items.push({
-            nombre: 'Bebestibles jugo natural',
-            total: personas * 1800
-          });
-        }
-
-        if (chkBebidaArtificial) {
-          items.push({
-            nombre: 'Bebestibles artificiales',
-            total: personas * 1200
-          });
-        }
-
-        if (decoracionLocal > 0) {
-          let nombreDecoracion = 'Decoración de local';
-          if (decoracionLocal === 50000) nombreDecoracion = 'Decoración local pequeño';
-          if (decoracionLocal === 100000) nombreDecoracion = 'Decoración local mediano';
-          if (decoracionLocal === 150000) nombreDecoracion = 'Decoración local grande';
-
-          items.push({
-            nombre: nombreDecoracion,
-            total: decoracionLocal
-          });
-        }
-
-        if (items.length === 0) {
-          result.innerHTML = `
-            <h3 style="margin-top:0; font-family: var(--font-display); font-size: 1.9rem;">Resumen estimado</h3>
-            <p class="section-copy">Selecciona al menos un servicio para calcular la cotización.</p>
-          `;
-          return;
-        }
-
-        const total = items.reduce((acc, item) => acc + item.total, 0);
-
-        result.innerHTML = `
-          <h3 style="margin-top:0; font-family: var(--font-display); font-size: 1.9rem;">Cotización estimada</h3>
-          <p class="section-copy">Propuesta referencial para ${personas} personas.</p>
-
-          <div class="quote-result-list">
-            ${items.map(item => `
-              <div class="quote-result-item">
-                <span>${item.nombre}</span>
-                <strong>${formatCLP(item.total)}</strong>
-              </div>
-            `).join('')}
-          </div>
-
-          <div class="quote-total">
-            <span>Total estimado</span>
-            <strong>${formatCLP(total)}</strong>
-          </div>
-        `;
-      });
-    })();
-  </script>
-
-  <a
-    href="https://www.facebook.com/profile.php?id=100057617192182"
-    class="social-float facebook-float"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Abrir Facebook"
-  >
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path fill="currentColor" d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.6-1.6h1.7V4.8c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.2V11H8v3h2.4v8h3.1Z"/>
+  <a href="https://www.facebook.com/profile.php?id=100057617192182" target="_blank" rel="noopener noreferrer" class="social-float facebook-float" aria-label="Facebook">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+  </a>
+  <a href="https://wa.me/56949658897" target="_blank" rel="noopener noreferrer" class="social-float whatsapp-float" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a6.963 6.963 0 00-6.953 6.954 6.968 6.968 0 001.025 3.678l-1.086 3.972 4.066-1.065a6.981 6.981 0 003.347.889h.004c3.837 0 6.953-3.114 6.953-6.952 0-1.856-.73-3.599-2.053-4.915-1.321-1.317-3.056-2.045-4.915-2.045"/>
     </svg>
   </a>
 
-  <a
-    href="https://wa.me/56949658897?text=Hola%2C%20quiero%20cotizar%20un%20evento"
-    class="social-float whatsapp-float"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Escribir por WhatsApp"
-  >
-    <svg viewBox="0 0 32 32" aria-hidden="true">
-      <path fill="currentColor" d="M19.11 17.21c-.27-.14-1.58-.78-1.82-.87-.24-.09-.42-.14-.6.14-.18.27-.69.87-.85 1.05-.16.18-.31.21-.58.07-.27-.14-1.13-.42-2.15-1.33-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.41.12-.55.12-.12.27-.31.4-.47.13-.16.18-.27.27-.45.09-.18.04-.34-.02-.47-.07-.14-.6-1.45-.82-1.99-.22-.52-.44-.45-.6-.46h-.51c-.18 0-.47.07-.71.34-.24.27-.93.91-.93 2.22 0 1.31.96 2.57 1.09 2.75.13.18 1.88 2.87 4.56 4.03.64.28 1.15.45 1.54.58.65.21 1.24.18 1.71.11.52-.08 1.58-.65 1.8-1.29.22-.64.22-1.19.16-1.29-.07-.1-.25-.16-.52-.29Z"/>
-      <path fill="currentColor" d="M16.03 3.2c-6.96 0-12.61 5.63-12.61 12.57 0 2.22.58 4.39 1.69 6.3L3 29l7.15-1.87a12.66 12.66 0 0 0 5.88 1.49h.01c6.95 0 12.61-5.64 12.61-12.58 0-3.36-1.31-6.52-3.7-8.89a12.54 12.54 0 0 0-8.92-3.95Zm0 23.3h-.01a10.55 10.55 0 0 1-5.38-1.47l-.39-.23-4.24 1.11 1.13-4.13-.25-.42a10.42 10.42 0 0 1-1.61-5.56c0-5.75 4.7-10.43 10.49-10.43 2.8 0 5.42 1.08 7.4 3.04a10.34 10.34 0 0 1 3.08 7.39c0 5.76-4.71 10.44-10.5 10.44Z"/>
-    </svg>
-  </a>
+  <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.js"></script>
+  <script>
+    // AWS Amplify Cognito Configuration
+    const awsconfig = {
+      Auth: {
+        region: 'us-east-1',
+        userPoolId: 'us-east-1_XXXXXXXXX',
+        userPoolWebClientId: 'XXXXXXXXXXXXXXXXXXXXXXXXXX',
+        oauth: {
+          domain: 'your-domain.auth.us-east-1.amazoncognito.com',
+          scope: ['email', 'openid', 'profile'],
+          redirectSignIn: 'https://yourdomain.com/',
+          redirectSignOut: 'https://yourdomain.com/',
+          responseType: 'code'
+        }
+      }
+    };
 
-<audio id="bgMusic" autoplay loop>
-  <source src="sounds/Jai.mp3" type="audio/mpeg">
-</audio>
-<script>
-  const bgMusic = document.getElementById('bgMusic');
-  bgMusic.volume = 0.3;
-</script>
-</body>
- <script type="module">
-  import { CognitoIdentityProviderClient, InitiateAuthCommand, SignUpCommand, ConfirmSignUpCommand, GetUserCommand } from 'https://esm.sh/@aws-sdk/client-cognito-identity-provider';
+    aws_amplify_1.Amplify.configure(awsconfig);
 
-  const cognitoConfig = {
-    region: 'us-east-1',  // Tu región
-    clientId: 'TU_CLIENT_ID_AQUI'  // De AWS Cognito App Client
-  };
-
-  const client = new CognitoIdentityProviderClient({ region: cognitoConfig.region });
-
-  // Elementos DOM
-  const authPage = document.getElementById('authPage');
-  const openLoginPage = document.getElementById('openLoginPage');
-  const closeAuthPage = document.getElementById('closeAuthPage');
-  const authModalTitle = document.getElementById('authModalTitle');
-  const authMessage = document.getElementById('authMessage');
-  const authStatus = document.getElementById('authStatus');
-  const authUser = document.getElementById('authUser');
-  const logoutButton = document.getElementById('logoutButton');
-  const authForm = document.getElementById('authForm');
-  const authEmail = document.getElementById('authEmail');
-  const authPassword = document.getElementById('authPassword');
-  const authSubmit = document.getElementById('authSubmit');
-  const nameWrap = document.getElementById('nameWrap');
-  const signupName = document.getElementById('signupName');
-  const confirmWrap = document.getElementById('confirmWrap');
-  const confirmCode = document.getElementById('confirmCode');
-
-  let authView = 'login';  // Por defecto: login
-  let authState = { accessToken: null, idToken: null, refreshToken: null, email: null };
-
-  function setMessage(message, error = false) {
-    authMessage.textContent = message;
-    authMessage.style.color = error ? '#b42318' : '';
-  }
-
-  function syncView() {
-    if (authView === 'register') {
-      authModalTitle.textContent = 'Crear cuenta';
-      authSubmit.textContent = 'Crear cuenta';
-      nameWrap.hidden = false;
-      confirmWrap.hidden = false;
-      setMessage('Completa tus datos para registrar tu usuario.');
-    } else {
-      authModalTitle.textContent = 'Iniciar sesión';
-      authSubmit.textContent = 'Iniciar sesión';
-      nameWrap.hidden = true;
-      confirmWrap.hidden = true;
-      setMessage('Ingresa tus datos para continuar.');
-    }
-  }
-
-  function openPage(view = 'login') {
-    authView = view;
-    syncView();
-    authPage.hidden = false;
-    document.body.classList.add('auth-open');
-    authPage.querySelector('dialog')?.showModal?.();
-  }
-
-  function closePage() {
-    authPage.hidden = true;
-    document.body.classList.remove('auth-open');
-    authPage.querySelector('dialog')?.close?.();
-  }
-
-  function setLoggedOutUI() {
-    authStatus.textContent = 'No has iniciado sesión';
-    authUser.textContent = '—';
-  }
-
-  function setLoggedInUI(email) {
-    authStatus.textContent = 'Sesión iniciada';
-    authUser.textContent = email;
-  }
-
-  async function loadCurrentUser() {
-    if (!authState.accessToken) {
-      setLoggedOutUI();
-      return;
-    }
-    try {
-      const r = await client.send(new GetUserCommand({ AccessToken: authState.accessToken }));
-      const emailAttr = r.UserAttributes?.find(a => a.Name === 'email');
-      setLoggedInUI(emailAttr?.Value || authState.email);
-    } catch (err) {
-      console.error(err);
-      setLoggedOutUI();
-      setMessage('La sesión expiró. Inicia sesión otra vez.', true);
-    }
-  }
-
-  // Event listeners
-  openLoginPage?.addEventListener('click', () => openPage('login'));
-  // openRegisterPage eliminado del header
-
-  closeAuthPage?.addEventListener('click', closePage);
-  authPage?.addEventListener('click', e => { if (e.target === authPage) closePage(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !authPage.hidden) closePage(); });
-
-  // Switcher y enlace "Crear cuenta"
-  document.querySelectorAll('[data-auth-view]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      authView = e.target.dataset.authView;
-      syncView();
+    const openLoginButton = document.getElementById('openLoginPage');
+    
+    openLoginButton.addEventListener('click', async () => {
+      try {
+        await aws_amplify_1.Auth.signIn();
+      } catch (error) {
+        console.log('Login cancelled or error:', error);
+      }
     });
-  });
 
-  authForm?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = authEmail.value.trim();
-    const password = authPassword.value;
-    const name = signupName.value.trim();
-    const code = confirmCode.value.trim();
-
-    try {
-      if (authView === 'register') {
-        await client.send(new SignUpCommand({
-          ClientId: cognitoConfig.clientId,
-          Username: email,
-          Password: password,
-          UserAttributes: [{ Name: 'email', Value: email }, ...(name ? [{ Name: 'name', Value: name }] : [])]
-        }));
-        setMessage('Cuenta creada. Revisa tu correo para confirmar el código.');
-        authView = 'login';
-        syncView();
-        confirmWrap.hidden = false;
-        return;
+    // Check if user is already authenticated on page load
+    async function checkAuthStatus() {
+      try {
+        const user = await aws_amplify_1.Auth.currentAuthenticatedUser();
+        openLoginButton.textContent = 'Cerrar sesión';
+        openLoginButton.addEventListener('click', async () => {
+          await aws_amplify_1.Auth.signOut();
+          location.reload();
+        });
+      } catch (error) {
+        console.log('User not authenticated');
       }
-
-      if (code) {
-        await client.send(new ConfirmSignUpCommand({
-          ClientId: cognitoConfig.clientId,
-          Username: email,
-          ConfirmationCode: code
-        }));
-        setMessage('Cuenta confirmada. Ahora puedes iniciar sesión.');
-        confirmWrap.hidden = true;
-        return;
-      }
-
-      const r = await client.send(new InitiateAuthCommand({
-        AuthFlow: 'USER_PASSWORD_AUTH',
-        ClientId: cognitoConfig.clientId,
-        AuthParameters: { USERNAME: email, PASSWORD: password }
-      }));
-
-      authState = {
-        accessToken: r.AuthenticationResult?.AccessToken || null,
-        idToken: r.AuthenticationResult?.IdToken || null,
-        refreshToken: r.AuthenticationResult?.RefreshToken || null,
-        email
-      };
-      setLoggedInUI(email);
-      setMessage('Sesión iniciada correctamente.');
-      closePage();
-    } catch (err) {
-      console.error(err);
-      setMessage(err.message || 'No se pudo completar la acción.', true);
     }
-  });
 
-  logoutButton?.addEventListener('click', () => {
-    authState = { accessToken: null, idToken: null, refreshToken: null, email: null };
-    setLoggedOutUI();
-    setMessage('Sesión cerrada.');
-  });
+    checkAuthStatus();
 
-  loadCurrentUser();  // Carga estado inicial
-</script>
-</script>
+    // Theme Toggle
+    const themeToggle = document.querySelector('[data-theme-toggle]');
+    const html = document.documentElement;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme) {
+      html.setAttribute('data-theme', savedTheme);
+    } else if (prefersDark) {
+      html.setAttribute('data-theme', 'dark');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+
+    // Quote Calculator
+    const quoteForm = document.getElementById('quoteForm');
+    const quoteResult = document.getElementById('quoteResult');
+
+    const prices = {
+      almuerzo: 7000,
+      bocaditos: 750,
+      jugoNatural: 500,
+      cafe: 1000,
+      menaje: { '20-29': 16000, '30-39': 20000, '40+': 25000 },
+      torta: { '20-29': 36000, '30-39': 46000, '40-60': 56000 },
+      estacionDulce: { '20-29': 22000, '30-39': 28000, '40+': 35000 }
+    };
+
+    function getTramo(personas) {
+      if (personas >= 20 && personas <= 29) return '20-29';
+      if (personas >= 30 && personas <= 39) return '30-39';
+      if (personas >= 40) return '40+';
+    }
+
+    quoteForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const personas = parseInt(document.getElementById('personas').value);
+      const tramo = getTramo(personas);
+      let total = 0;
+      let items = [];
+
+      if (document.getElementById('chkAlmuerzo').checked) {
+        const subtotal = personas * prices.almuerzo;
+        items.push({ name: 'Almuerzos', price: subtotal });
+        total += subtotal;
+      }
+
+      if (document.getElementById('chkMenaje').checked) {
+        const subtotal = prices.menaje[tramo];
+        items.push({ name: 'Menaje, manteles y decoración', price: subtotal });
+        total += subtotal;
+      }
+
+      if (document.getElementById('chkTorta').checked) {
+        const subtotal = prices.torta[tramo];
+        items.push({ name: 'Torta', price: subtotal });
+        total += subtotal;
+      }
+
+      if (document.getElementById('chkBocaditos').checked) {
+        const subtotal = personas * prices.bocaditos;
+        items.push({ name: 'Bocaditos mix', price: subtotal });
+        total += subtotal;
+      }
+
+      if (document.getElementById('chkJugoNatural').checked) {
+        const subtotal = personas * prices.jugoNatural;
+        items.push({ name: 'Jugos naturales', price: subtotal });
+        total += subtotal;
+      }
+
+      if (document.getElementById('chkEstacionDulce').checked) {
+        const subtotal = prices.estacionDulce[tramo];
+        items.push({ name: 'Estación dulce', price: subtotal });
+        total += subtotal;
+      }
+
+      if (document.getElementById('chkCafe').checked) {
+        const subtotal = personas * prices.cafe;
+        items.push({ name: 'Café, té y petit fours', price: subtotal });
+        total += subtotal;
+      }
+
+      const decorLocal = document.getElementById('decoracionLocal').value;
+      if (decorLocal) {
+        const decorPrice = parseInt(decorLocal);
+        items.push({ name: 'Decoración de local', price: decorPrice });
+        total += decorPrice;
+      }
+
+      let html = '<h3 style="margin-top:0; font-family: var(--font-display); font-size: 1.9rem;">Resumen de cotización</h3>';
+      html += '<div class="quote-result-list">';
+
+      items.forEach(item => {
+        html += `<div class="quote-result-item">
+          <span>${item.name}</span>
+          <strong>$${item.price.toLocaleString('es-CL')}</strong>
+        </div>`;
+      });
+
+      html += '</div>';
+      html += `<div class="quote-total">
+        <span>Total estimado para ${personas} personas</span>
+        <strong>$${total.toLocaleString('es-CL')}</strong>
+      </div>`;
+      html += '<p class="section-copy" style="margin-top: var(--space-4);">Estos precios son orientativos. Contáctanos para una cotización final personalizada.</p>';
+
+      quoteResult.innerHTML = html;
+    });
+  </script>
+</body>
 </html>
