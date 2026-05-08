@@ -839,29 +839,6 @@ input:focus, textarea:focus, select:focus {
   padding-top: 1rem;
   border-top: 1px solid var(--color-border);
 }
-
-    .dialog-surface::backdrop {
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-}
-
-.auth-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  font-size: 1.5rem;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.auth-close:hover {
-  background: var(--color-surface-offset);
-}
   </style>
 </head>
 <body>
@@ -1455,70 +1432,57 @@ input:focus, textarea:focus, select:focus {
   bgMusic.volume = 0.3;
 </script>
 
-<!-- Librería Cognito -->
+<!-- NUEVO: Librería ligera para browser -->
 <script src="https://unpkg.com/amazon-cognito-identity-js@6.5.2/dist/amazon-cognito-identity.min.js"></script>
-
-<dialog class="dialog-surface" id="authDialog" aria-labelledby="authModalTitle">
-  <button class="auth-close" type="button" id="closeAuthPage" aria-label="Cerrar">&times;</button>
-  <div class="auth-modal-head">
-    <div class="eyebrow">Acceso privado</div>
-    <h2 class="section-title" id="authModalTitle">Iniciar sesión</h2>
-    <p class="section-copy" id="authMessage">Ingresa tus datos para continuar.</p>
-  </div>
-  <div class="auth-switcher">
-    <button class="btn btn-secondary active" type="button" data-auth-view="login">Iniciar sesión</button>
-  </div>
-  <form id="authForm">
-    <label id="nameWrap" hidden>
-      Nombre completo
-      <input type="text" id="signupName" placeholder="Tu nombre" />
-    </label>
-    <label>
-      Correo electrónico
-      <input type="email" id="authEmail" placeholder="correo@ejemplo.com" required />
-    </label>
-    <label>
-      Contraseña
-      <input type="password" id="authPassword" placeholder="Tu contraseña" required />
-    </label>
-    <label id="confirmWrap" hidden>
-      Código de confirmación
-      <input type="text" id="confirmCode" placeholder="123456" />
-    </label>
-    <button class="btn btn-primary" type="submit" id="authSubmit">Iniciar sesión</button>
-  </form>
-  <p style="text-align: center; margin: var(--space-6) 0 0; font-size: var(--text-sm);">
-    ¿No tienes cuenta? 
-    <button type="button" class="link-like" data-auth-view="register">Crear cuenta</button>
-  </p>
-  <div class="auth-session">
-    <span>Estado:</span><strong id="authStatus">No has iniciado sesión</strong>
-    <span>Usuario:</span><strong id="authUser">—</strong>
-    <button class="btn btn-secondary" type="button" id="logoutButton">Cerrar sesión</button>
-  </div>
-</dialog>
-
 <script>
-// ===== CONFIGURACIÓN COGNITO =====
+// Configuración Cognito (solo Pool ID y Client ID)
 const poolData = {
-  UserPoolId: 'sa-east-1_M8Ambi8wB',
-  ClientId: '4eafun04ou9vb8q698au8sso2a'
+  UserPoolId: 'sa-east-1_M8Ambi8wB',  // <-- Tu User Pool ID (ej: sa-east-1_abc123)
+  ClientId: '4eafun04ou9vb8q698au8sso2a'       // <-- Tu App Client ID
 };
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
-// ===== ELEMENTOS DOM =====
-const authDialog = document.getElementById('authDialog');
-const openLoginPage = document.getElementById('openLoginPage');
-const closeAuthPage = document.getElementById('closeAuthPage');
-const authModalTitle = document.getElementById('authModalTitle');
-const authMessage = document.getElementById('authMessage');
+// Elementos DOM (igual que antes)
 const authStatus = document.getElementById('authStatus');
 const authUser = document.getElementById('authUser');
-const logoutButton = document.getElementById('logoutButton');
 const authForm = document.getElementById('authForm');
 const authEmail = document.getElementById('authEmail');
 const authPassword = document.getElementById('authPassword');
-const authSubmit = document.getElementById('authSubmit');
-const nameWrap = document.getElementById('nameWrap');
-const signup
+let currentUser = null;
+
+// Login/Signup
+authForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const email = authEmail.value.trim();
+  const password = authPassword.value;
+  
+  const userData = { Username: email, Pool: userPool };
+  const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+  const authDetails = new AmazonCognitoIdentity.AuthenticationDetails({
+    Username: email, Password: password
+  });
+  
+  cognitoUser.authenticateUser(authDetails, {
+    onSuccess: (result) => {
+      currentUser = cognitoUser;
+      const token = result.getIdToken().getJwtToken();
+      console.log('Token JWT:', token);  // Tu token aquí
+      authStatus.textContent = 'Sesión iniciada';
+      authUser.textContent = email;
+      document.getElementById('authMessage').textContent = '¡Bienvenido!';
+    },
+    onFailure: (err) => {
+      document.getElementById('authMessage').textContent = 'Error: ' + err.message;
+    }
+  });
+});
+
+// Logout
+document.getElementById('logoutButton').addEventListener('click', () => {
+  if (currentUser) currentUser.signOut();
+  authStatus.textContent = 'No has iniciado sesión';
+  authUser.textContent = '';
+});
+</script>
+</body>
 </html>
