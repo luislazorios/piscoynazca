@@ -1432,56 +1432,166 @@ input:focus, textarea:focus, select:focus {
   bgMusic.volume = 0.3;
 </script>
 
-<!-- NUEVO: Librería ligera para browser -->
+<!-- Librería Cognito -->
 <script src="https://unpkg.com/amazon-cognito-identity-js@6.5.2/dist/amazon-cognito-identity.min.js"></script>
 <script>
-// Configuración Cognito (solo Pool ID y Client ID)
+// ===== CONFIGURACIÓN COGNITO =====
 const poolData = {
-  UserPoolId: 'sa-east-1_M8Ambi8wB',  // <-- Tu User Pool ID (ej: sa-east-1_abc123)
-  ClientId: '4eafun04ou9vb8q698au8sso2a'       // <-- Tu App Client ID
+  UserPoolId: 'sa-east-1_M8Ambi8wB',  // Tu Pool ID ✓
+  ClientId: '4eafun04ou9vb8q698au8sso2a'  // Tu Client ID ✓
 };
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
-// Elementos DOM (igual que antes)
+// ===== ELEMENTOS DOM =====
+const authPage = document.getElementById('authPage');
+const openLoginPage = document.getElementById('openLoginPage');
+const closeAuthPage = document.getElementById('closeAuthPage');
+const authModalTitle = document.getElementById('authModalTitle');
+const authMessage = document.getElementById('authMessage');
 const authStatus = document.getElementById('authStatus');
 const authUser = document.getElementById('authUser');
+const logoutButton = document.getElementById('logoutButton');
 const authForm = document.getElementById('authForm');
 const authEmail = document.getElementById('authEmail');
 const authPassword = document.getElementById('authPassword');
-let currentUser = null;
+const authSubmit = document.getElementById('authSubmit');
+const nameWrap = document.getElementById('nameWrap');
+const signupName = document.getElementById('signupName');
+const confirmWrap = document.getElementById('confirmWrap');
+const confirmCode = document.getElementById('confirmCode');
 
-// Login/Signup
-authForm.addEventListener('submit', (e) => {
+let currentUser = null;
+let authView = 'login';  // login/register/confirm
+
+// ===== FUNCIONES UI =====
+function setMessage(message, error = false) {
+  authMessage.textContent = message;
+  authMessage.style.color = error ? '#b42318' : '';
+}
+
+function syncView() {
+  if (authView === 'login') {
+    authModalTitle.textContent = 'Iniciar sesión';
+    authSubmit.textContent = 'Iniciar sesión';
+    nameWrap.hidden = true;
+    confirmWrap.hidden = true;
+    setMessage('Ingresa tus datos para continuar.');
+  } else if (authView === 'register') {
+    authModalTitle.textContent = 'Crear cuenta';
+    authSubmit.textContent = 'Crear cuenta';
+    nameWrap.hidden = false;
+    confirmWrap.hidden = true;
+    setMessage('Completa tus datos para registrar tu usuario.');
+  } else if (authView === 'confirm') {
+    authModalTitle.textContent = 'Confirmar cuenta';
+    authSubmit.textContent = 'Confirmar';
+    nameWrap.hidden = true;
+    confirmWrap.hidden = false;
+    setMessage(`Te enviamos un código a ${authEmail.value.trim()}`);
+  }
+}
+
+// Abrir/Cerrar modal
+function openPage(view = 'login') {
+  authView = view;
+  syncView();
+  authPage.hidden = false;
+  document.body.classList.add('auth-open');
+  authPage.querySelector('dialog')?.showModal?.();
+}
+
+function closePage() {
+  authPage.hidden = true;
+  document.body.classList.remove('auth-open');
+  authPage.querySelector('dialog')?.close?.();
+}
+
+function setLoggedInUI(email) {
+  authStatus.textContent = 'Sesión iniciada ✓';
+  authUser.textContent = email;
+}
+
+function setLoggedOutUI() {
+  authStatus.textContent = 'No has iniciado sesión';
+  authUser.textContent = '';
+}
+
+// ===== LOGIN/SIGNUP =====
+authForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const email = authEmail.value.trim();
   const password = authPassword.value;
-  
-  const userData = { Username: email, Pool: userPool };
-  const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-  const authDetails = new AmazonCognitoIdentity.AuthenticationDetails({
-    Username: email, Password: password
-  });
-  
-  cognitoUser.authenticateUser(authDetails, {
-    onSuccess: (result) => {
-      currentUser = cognitoUser;
-      const token = result.getIdToken().getJwtToken();
-      console.log('Token JWT:', token);  // Tu token aquí
-      authStatus.textContent = 'Sesión iniciada';
-      authUser.textContent = email;
-      document.getElementById('authMessage').textContent = '¡Bienvenido!';
-    },
-    onFailure: (err) => {
-      document.getElementById('authMessage').textContent = 'Error: ' + err.message;
+  const name = signupName.value.trim();
+  const code = confirmCode.value.trim();
+
+  try {
+    if (authView === 'register') {
+      // Registro
+      userPool.signUp(email, password, [{ Name: 'email', Value: email }], null, (err, result) => {
+        if (err) {
+          setMessage(err.message, true);
+          return;
+        }
+        authView = 'confirm';
+        syncView();
+        setMessage('Cuenta creada. Revisa tu correo para confirmar el código.');
+      });
+      return;
     }
+
+    if (authView === 'confirm') {
+      // Confirmar
+      const userData = { Username: email, Pool: userPool };
+      const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+      cognitoUser.confirmRegistration(code, password, {
+        onSuccess: () => {
+          authView = 'login';
+          syncView();
+          setMessage('Cuenta confirmada. Ahora puedes iniciar sesión.');
+        },
+        onFailure: (err) => setMessage(err.message, true)
+      });
+      return;
+    }
+
+    // Login normal
+    const userData = { Username: email, Pool: userPool };
+    const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    const authDetails = new AmazonCognitoIdentity.AuthenticationDetails({
+      Username: email, Password: password
+    });
+
+    cognitoUser.authenticateUser(authDetails, {
+      onSuccess: (result) => {
+        currentUser = cognitoUser;
+        const token = result.getIdToken().getJwtToken();
+        console.log('✅ Token JWT:', token);
+        setLoggedInUI(email);
+        setMessage('¡Sesión iniciada correctamente!');
+        closePage();
+      },
+      onFailure: (err) => setMessage(err.message || 'Error al iniciar sesión', true)
+    });
+  } catch (err) {
+    setMessage(err.message, true);
+  }
+});
+
+// ===== EVENT LISTENERS =====
+document.querySelectorAll('[data-auth-view]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    authView = btn.dataset.authView;
+    syncView();
   });
 });
 
-// Logout
-document.getElementById('logoutButton').addEventListener('click', () => {
+openLoginPage?.addEventListener('click', () => openPage('login'));
+closeAuthPage?.addEventListener('click', closePage);
+logoutButton?.addEventListener('click', () => {
   if (currentUser) currentUser.signOut();
-  authStatus.textContent = 'No has iniciado sesión';
-  authUser.textContent = '';
+  currentUser = null;
+  setLoggedOutUI();
+  setMessage('Sesión cerrada.');
 });
 </script>
 </body>
