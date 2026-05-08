@@ -839,6 +839,119 @@ input:focus, textarea:focus, select:focus {
   padding-top: 1rem;
   border-top: 1px solid var(--color-border);
 }
+
+    /* Modal Styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 200ms ease;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--color-surface);
+      border-radius: 1.6rem;
+      padding: 2rem;
+      max-width: 460px;
+      width: 90%;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+      animation: slideUp 300ms ease;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close:hover {
+      color: var(--color-text);
+    }
+
+    .login-form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: var(--text-sm);
+      font-weight: 600;
+    }
+
+    .form-group input {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: 0.8rem;
+      font-size: var(--text-sm);
+    }
+
+    .form-group input:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 1px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .modal-actions .btn {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      font-size: var(--text-sm);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 <body>
@@ -874,6 +987,30 @@ input:focus, textarea:focus, select:focus {
 </div>
   </header>
 
+  <!-- Login Modal -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Iniciar sesión</h2>
+        <button class="modal-close" type="button" id="closeLoginModal" aria-label="Cerrar">&times;</button>
+      </div>
+      <form class="login-form" id="loginForm">
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" required placeholder="tu@email.com">
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" name="password" required placeholder="••••••••">
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-primary">Ingresar</button>
+          <button type="button" class="btn btn-secondary" id="cancelLogin">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <main id="inicio">
     <section class="hero">
       <div class="container hero-grid">
@@ -881,7 +1018,7 @@ input:focus, textarea:focus, select:focus {
           <div class="eyebrow">Matrimonios y celebraciones</div>
           <h1>Creamos mesas, sabores y momentos que se recuerdan.</h1>
           <p>
-            Una propuesta de banquetería elegante, casual y amigable al bolsillo para matrimonios, aniversarios y eventos privados, inspirada en una estética criolla, con montaje cuidado, cocina delicada y atención al detalle.
+            Una propuesta de banquetería elegante, casual y amigable al bolsillo para matrimonios, aniversarios y eventos privados, inspirada en una estética criolla, con montaje cuidado, cocina del Perú para el mundo.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#contacto">Agenda tu fecha</a>
@@ -915,12 +1052,12 @@ input:focus, textarea:focus, select:focus {
           <div class="eyebrow">Nuestra esencia</div>
           <h2 class="section-title">Una banquetería con sensibilidad editorial y espíritu de celebración.</h2>
           <p class="section-copy">
-            Una banquetería con alma peruana, donde la riqueza de la gastronomía tradicional se encuentra con el refinamiento de un servicio de celebración. Inspirada en la calidez de las mesas familiares y en la diversidad de sabores de la cocina peruana, esta propuesta lleva los sabores de la papa, el maíz, el ají y el mar a matrimonios y eventos sociales, con un enfoque que resalta ingredientes frescos, técnicas auténticas y un montaje que honra la identidad cultural sin perder elegancia ni confort.
+            Una banquetería con alma peruana, donde la riqueza de la gastronomía tradicional se encuentra con el refinamiento de un servicio de celebración. Inspirada en la calidez de las mesas familiares peruanas, desde la montaña hasta la costa.
           </p>
         </div>
         <div class="story-panel">
           <blockquote>
-            “Porque no es solo importante que se vea bien, sino que todos digan: Pucha qué rico he!.”
+            "Porque no es solo importante que se vea bien, sino que todos digan: Pucha qué rico he!."
           </blockquote>
           <div class="story-list">
             <div><strong>Postres y tortas</strong><br>Muchas variedades a pedido del cliente, la especialidad, Torta Helada.</div>
@@ -1000,139 +1137,26 @@ input:focus, textarea:focus, select:focus {
       </div>
     </section>
 
-    <section class="testimonials">
+    <section class="testimonials" id="testimonios">
       <div class="container">
         <div class="testimonials-header">
           <div>
-            <div class="eyebrow">Experiencias</div>
-            <h2 class="section-title">Texto de ejemplo para testimonios de clientes.</h2>
+            <div class="eyebrow">Testimonios</div>
+            <h2 class="section-title">Historias de eventos memorables.</h2>
           </div>
-          <p class="section-copy"></p>
         </div>
         <div class="testimonials-grid">
-          <article class="testimonial">
-            <p>“Todo se veía precioso y el servicio fue impecable. Sentimos que entendieron perfecto el estilo que soñábamos para nuestro matrimonio.”</p>
-            <strong>Camila & Andrés</strong>
-          </article>
-          <article class="testimonial">
-            <p>“La mesa dulce fue el centro de todas las fotos. Elegante, delicada y con sabores realmente memorables.”</p>
-            <strong>Josefina R.</strong>
-          </article>
-          <article class="testimonial">
-            <p>“Nos acompañaron en cada detalle y lograron una celebración cálida, ordenada y hermosa de principio a fin.”</p>
-            <strong>Martina y Felipe</strong>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="quote" id="cotizacion">
-      <div class="container">
-        <div class="contact-header">
-          <div>
-            <div class="eyebrow">Cotización</div>
-            <h2 class="section-title">Calcula tu propuesta según invitados y servicios.</h2>
+          <div class="testimonial">
+            <p>"El servicio fue impecable, la comida deliciosa y el equipo muy atento. Fue el matrimonio de nuestros sueños."</p>
+            <strong>María & Juan</strong>
           </div>
-          <p class="section-copy">
-            Selecciona la cantidad de personas y marca solo los servicios que deseas incluir.
-          </p>
-        </div>
-
-        <div class="contact-grid">
-          <div class="contact-card">
-            <form id="quoteForm">
-              <label>
-                Cantidad de personas
-                <input type="number" id="personas" min="20" max="60" placeholder="Entre 20 y 60" required />
-              </label>
-
-              <div class="quote-options">
-                <label class="quote-option-card" for="chkAlmuerzo">
-                  <input type="checkbox" id="chkAlmuerzo" />
-                  <div class="quote-option-content">
-                    <div class="quote-option-top">
-                      <strong>Almuerzos</strong>
-                      <span class="quote-price">$7.000 por persona</span>
-                    </div>
-                    <p>Plato principal considerado por cada invitado.</p>
-                  </div>
-                </label>
-
-                <label class="quote-option-card" for="chkMenaje">
-                  <input type="checkbox" id="chkMenaje" />
-                  <div class="quote-option-content">
-                    <div class="quote-option-top">
-                      <strong>Menaje, manteles y decoración mesa</strong>
-                      <span class="quote-price">Según tramo</span>
-                    </div>
-                    <p>20-29 personas: $16.000, 30-39: $20.000, 40 o más: $25.000.</p>
-                  </div>
-                </label>
-
-                <label class="quote-option-card" for="chkTorta">
-                  <input type="checkbox" id="chkTorta" />
-                  <div class="quote-option-content">
-                    <div class="quote-option-top">
-                      <strong>Torta</strong>
-                      <span class="quote-price">Según tramo</span>
-                    </div>
-                    <p>20-29 personas: $36.000, 30-39: $46.000, 40-60: $56.000.</p>
-                  </div>
-                </label>
-
-                <label class="quote-option-card" for="chkBocaditos">
-                  <input type="checkbox" id="chkBocaditos" />
-                  <div class="quote-option-content">
-                    <div class="quote-option-top">
-                      <strong>Bocaditos mix</strong>
-                      <span class="quote-price">$750 por persona</span>
-                    </div>
-                    <p>Incluye 6 porciones de tipos diferentes por invitado.</p>
-                  </div>
-                </label>
-
-                <label class="quote-option-card" for="chkJugoNatural">
-                  <input type="checkbox" id="chkJugoNatural" />
-                  <div class="quote-option-content">
-                    <div class="quote-option-top">
-                      <strong>Jugo natural</strong>
-                      <span class="quote-price">$1.800 por persona</span>
-                    </div>
-                    <p>Bebestible natural calculado por cantidad de invitados.</p>
-                  </div>
-                </label>
-
-                <label class="quote-option-card" for="chkBebidaArtificial">
-                  <input type="checkbox" id="chkBebidaArtificial" />
-                  <div class="quote-option-content">
-                    <div class="quote-option-top">
-                      <strong>Bebestible artificial</strong>
-                      <span class="quote-price">$1.200 por persona</span>
-                    </div>
-                    <p>Opción de bebida artificial para todos los asistentes.</p>
-                  </div>
-                </label>
-              </div>
-
-              <label>
-                Decoración de local
-                <select id="decoracionLocal">
-                  <option value="">No incluir</option>
-                  <option value="50000">Pequeño — $50.000</option>
-                  <option value="100000">Mediano — $100.000</option>
-                  <option value="150000">Grande — $150.000</option>
-                </select>
-              </label>
-
-              <button class="btn btn-primary" type="submit">Calcular cotización</button>
-            </form>
+          <div class="testimonial">
+            <p>"Exactamente lo que buscábamos: elegancia, buen gusto y comida que honra nuestra herencia peruana."</p>
+            <strong>Carlos López</strong>
           </div>
-
-          <div class="contact-card">
-            <div id="quoteResult">
-              <h3 style="margin-top:0; font-family: var(--font-display); font-size: 1.9rem;">Resumen estimado</h3>
-              <p class="section-copy">Ingresa entre 20 y 60 personas y selecciona los servicios que necesitas.</p>
-            </div>
+          <div class="testimonial">
+            <p>"Recomendamos a todos nuestros amigos. Entre Pisco y Nazca es sinónimo de celebraciones de calidad."</p>
+            <strong>Patricia Méndez</strong>
           </div>
         </div>
       </div>
@@ -1140,349 +1164,128 @@ input:focus, textarea:focus, select:focus {
 
     <section class="contact" id="contacto">
       <div class="container contact-grid">
-        <div>
-          <div class="contact-header">
-            <div>
-              <div class="eyebrow">Contacto</div>
-              <h2 class="section-title">Pide una cotización según fecha, lugar y número de invitados.</h2>
+        <div class="contact-card">
+          <div class="contact-info">
+            <div class="contact-item">
+              <span>Email</span>
+              <a href="mailto:info@entrepiscoynazca.cl">info@entrepiscoynazca.cl</a>
             </div>
-          </div>
-          <p class="section-copy"></p>
-          <div class="contact-card contact-info">
             <div class="contact-item">
               <span>WhatsApp</span>
-              <strong>+56949658897</strong>
+              <a href="https://wa.me/56912345678">+56 9 1234 5678</a>
             </div>
             <div class="contact-item">
-              <span>Correo</span>
-              <strong>claudiarios1357cs@gmail.com</strong>
-            </div>
-            <div class="contact-item">
-              <span>Facebook</span>
-              <strong><a href="https://www.facebook.com/profile.php?id=100057617192182" target="_blank" rel="noopener noreferrer">Entre Pisco y Nazca &lt;-- Click ahí</a></strong>
-            </div>
-            <div class="contact-item">
-              <span>Cobertura</span>
-              <strong>Copiapó y alrededores</strong>
+              <span>Ubicación</span>
+              <p style="margin: 0;">Copiapó, Región de Atacama</p>
             </div>
           </div>
         </div>
-
-        <div class="contact-card">
-          <form>
-            <label>
-              Nombre
-              <input type="text" placeholder="Tu nombre" />
-            </label>
-            <label>
-              Correo electrónico
-              <input type="email" placeholder="tucorreo@ejemplo.com" />
-            </label>
-            <label>
-              Tipo de evento
-              <select>
-                <option>Matrimonio</option>
-                <option>Aniversario</option>
-                <option>Cumpleaños</option>
-                <option>Evento privado</option>
-              </select>
-            </label>
-            <label>
-              Cuéntanos tu idea
-              <textarea placeholder="Fecha tentativa, cantidad de invitados, comuna y estilo que imaginas para tu evento"></textarea>
-            </label>
-            <button class="btn btn-primary" type="submit">Enviar solicitud</button>
-          </form>
-        </div>
+        <form class="contact-card">
+          <div style="display: grid; gap: 1rem;">
+            <div>
+              <label for="name">Nombre</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+              <label for="phone">Teléfono</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div>
+              <label for="date">Fecha del evento</label>
+              <input type="date" id="date" name="date" required>
+            </div>
+            <div>
+              <label for="message">Cuéntanos sobre tu evento</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar consulta</button>
+          </div>
+        </form>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="container footer-inner">
-      <span>Plantilla realizada por @Luis Lazo y @Perplexity AI</span>
-      <a href="#inicio">Volver arriba</a>
+      <p>&copy; 2024 Entre Pisco y Nazca. Todos los derechos reservados.</p>
+      <div>
+        <a href="#" style="margin-right: 1rem;">Privacidad</a>
+        <a href="#">Términos de servicio</a>
+      </div>
     </div>
   </footer>
-<div class="auth-page" id="authPage" hidden>
-  <dialog class="dialog-surface" aria-labelledby="authModalTitle">
-    <button class="auth-close" type="button" id="closeAuthPage" aria-label="Cerrar">&times;</button>
-    <div class="auth-modal-head">
-      <div class="eyebrow">Acceso privado</div>
-      <h2 class="section-title" id="authModalTitle">Iniciar sesión</h2>
-      <p class="section-copy" id="authMessage">Ingresa tus datos para continuar.</p>
-    </div>
-  <div class="auth-switcher">
-  <button class="btn btn-secondary active" type="button" data-auth-view="login">Iniciar sesión</button>
-</div>
-    <form id="authForm">
-      <label id="nameWrap" hidden>
-        Nombre completo
-        <input type="text" id="signupName" placeholder="Tu nombre" />
-      </label>
-      <label>
-        Correo electrónico
-        <input type="email" id="authEmail" placeholder="correo@ejemplo.com" required />
-      </label>
-      <label>
-        Contraseña
-        <input type="password" id="authPassword" placeholder="Tu contraseña" required />
-      </label>
-      <label id="confirmWrap" hidden>
-        Código de confirmación
-        <input type="text" id="confirmCode" placeholder="123456" />
-      </label>
-      <button class="btn btn-primary" type="submit" id="authSubmit">Iniciar sesión</button>
-    </form>
-    <p style="text-align: center; margin: var(--space-6) 0 0; font-size: var(--text-sm);">
-  ¿No tienes cuenta? 
-  <button type="button" class="link-like" data-auth-view="register">Crear cuenta</button>
-</p>
-    <div class="auth-session">
-      <span>Estado:</span><strong id="authStatus">No has iniciado sesión</strong>
-      <span>Usuario:</span><strong id="authUser">—</strong>
-      <button class="btn btn-secondary" type="button" id="logoutButton">Cerrar sesión</button>
-    </div>
-  </dialog>
-</div>
-  <script>
-    (function () {
-      const root = document.documentElement;
-      const toggle = document.querySelector('[data-theme-toggle]');
-      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      root.setAttribute('data-theme', theme);
 
-      if (toggle) {
-        toggle.textContent = theme === 'dark' ? '☀' : '☾';
-        toggle.addEventListener('click', function () {
-          theme = theme === 'dark' ? 'light' : 'dark';
-          root.setAttribute('data-theme', theme);
-          toggle.textContent = theme === 'dark' ? '☀' : '☾';
-        });
-      }
-    })();
-  </script>
-
-  <script>
-    (function () {
-      const form = document.getElementById('quoteForm');
-      const result = document.getElementById('quoteResult');
-
-      if (!form || !result) return;
-
-      const formatCLP = (value) =>
-        new Intl.NumberFormat('es-CL', {
-          style: 'currency',
-          currency: 'CLP',
-          maximumFractionDigits: 0
-        }).format(value);
-
-      function getMenajeValue(personas) {
-        if (personas < 30) return 16000;
-        if (personas < 40) return 20000;
-        return 25000;
-      }
-
-      function getTortaValue(personas) {
-        if (personas >= 20 && personas < 30) return 36000;
-        if (personas >= 30 && personas < 40) return 46000;
-        if (personas >= 40 && personas <= 50) return 56000;
-        if (personas > 50 && personas <= 60) return 56000;
-        return 0;
-      }
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const personas = Number(document.getElementById('personas').value);
-        const chkAlmuerzo = document.getElementById('chkAlmuerzo').checked;
-        const chkMenaje = document.getElementById('chkMenaje').checked;
-        const chkTorta = document.getElementById('chkTorta').checked;
-        const chkBocaditos = document.getElementById('chkBocaditos').checked;
-        const chkJugoNatural = document.getElementById('chkJugoNatural').checked;
-        const chkBebidaArtificial = document.getElementById('chkBebidaArtificial').checked;
-        const decoracionLocal = Number(document.getElementById('decoracionLocal').value || 0);
-
-        if (!personas || personas < 20 || personas > 60) {
-          result.innerHTML = `
-            <h3 style="margin-top:0; font-family: var(--font-display); font-size: 1.9rem;">Resumen estimado</h3>
-            <p class="section-copy">Debes ingresar una cantidad válida entre 20 y 60 personas.</p>
-          `;
-          return;
-        }
-
-        const items = [];
-
-        if (chkAlmuerzo) {
-          items.push({
-            nombre: 'Almuerzos',
-            total: personas * 7000
-          });
-        }
-
-        if (chkMenaje) {
-          items.push({
-            nombre: 'Menaje, manteles y decoración mesa',
-            total: getMenajeValue(personas)
-          });
-        }
-
-        if (chkTorta) {
-          items.push({
-            nombre: 'Torta',
-            total: getTortaValue(personas)
-          });
-        }
-
-        if (chkBocaditos) {
-          items.push({
-            nombre: 'Bocaditos mix',
-            total: personas * 750
-          });
-        }
-
-        if (chkJugoNatural) {
-          items.push({
-            nombre: 'Bebestibles jugo natural',
-            total: personas * 1800
-          });
-        }
-
-        if (chkBebidaArtificial) {
-          items.push({
-            nombre: 'Bebestibles artificiales',
-            total: personas * 1200
-          });
-        }
-
-        if (decoracionLocal > 0) {
-          let nombreDecoracion = 'Decoración de local';
-          if (decoracionLocal === 50000) nombreDecoracion = 'Decoración local pequeño';
-          if (decoracionLocal === 100000) nombreDecoracion = 'Decoración local mediano';
-          if (decoracionLocal === 150000) nombreDecoracion = 'Decoración local grande';
-
-          items.push({
-            nombre: nombreDecoracion,
-            total: decoracionLocal
-          });
-        }
-
-        if (items.length === 0) {
-          result.innerHTML = `
-            <h3 style="margin-top:0; font-family: var(--font-display); font-size: 1.9rem;">Resumen estimado</h3>
-            <p class="section-copy">Selecciona al menos un servicio para calcular la cotización.</p>
-          `;
-          return;
-        }
-
-        const total = items.reduce((acc, item) => acc + item.total, 0);
-
-        result.innerHTML = `
-          <h3 style="margin-top:0; font-family: var(--font-display); font-size: 1.9rem;">Cotización estimada</h3>
-          <p class="section-copy">Propuesta referencial para ${personas} personas.</p>
-
-          <div class="quote-result-list">
-            ${items.map(item => `
-              <div class="quote-result-item">
-                <span>${item.nombre}</span>
-                <strong>${formatCLP(item.total)}</strong>
-              </div>
-            `).join('')}
-          </div>
-
-          <div class="quote-total">
-            <span>Total estimado</span>
-            <strong>${formatCLP(total)}</strong>
-          </div>
-        `;
-      });
-    })();
-  </script>
-
-  <a
-    href="https://www.facebook.com/profile.php?id=100057617192182"
-    class="social-float facebook-float"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Abrir Facebook"
-  >
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path fill="currentColor" d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.6-1.6h1.7V4.8c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.2V11H8v3h2.4v8h3.1Z"/>
+  <!-- Social Float Buttons -->
+  <a href="https://www.facebook.com/entrepiscoynazca" target="_blank" class="social-float facebook-float" aria-label="Facebook">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
     </svg>
   </a>
 
-  <a
-    href="https://wa.me/56949658897?text=Hola%2C%20quiero%20cotizar%20un%20evento"
-    class="social-float whatsapp-float"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Escribir por WhatsApp"
-  >
-    <svg viewBox="0 0 32 32" aria-hidden="true">
-      <path fill="currentColor" d="M19.11 17.21c-.27-.14-1.58-.78-1.82-.87-.24-.09-.42-.14-.6.14-.18.27-.69.87-.85 1.05-.16.18-.31.21-.58.07-.27-.14-1.13-.42-2.15-1.33-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.41.12-.55.12-.12.27-.31.4-.47.13-.16.18-.27.27-.45.09-.18.04-.34-.02-.47-.07-.14-.6-1.45-.82-1.99-.22-.52-.44-.45-.6-.46h-.51c-.18 0-.47.07-.71.34-.24.27-.93.91-.93 2.22 0 1.31.96 2.57 1.09 2.75.13.18 1.88 2.87 4.56 4.03.64.28 1.15.45 1.54.58.65.21 1.24.18 1.71.11.52-.08 1.58-.65 1.8-1.29.22-.64.22-1.19.16-1.29-.07-.1-.25-.16-.52-.29Z"/>
-      <path fill="currentColor" d="M16.03 3.2c-6.96 0-12.61 5.63-12.61 12.57 0 2.22.58 4.39 1.69 6.3L3 29l7.15-1.87a12.66 12.66 0 0 0 5.88 1.49h.01c6.95 0 12.61-5.64 12.61-12.58 0-3.36-1.31-6.52-3.7-8.89a12.54 12.54 0 0 0-8.92-3.95Zm0 23.3h-.01a10.55 10.55 0 0 1-5.38-1.47l-.39-.23-4.24 1.11 1.13-4.13-.25-.42a10.42 10.42 0 0 1-1.61-5.56c0-5.75 4.7-10.43 10.49-10.43 2.8 0 5.42 1.08 7.4 3.04a10.34 10.34 0 0 1 3.08 7.39c0 5.76-4.71 10.44-10.5 10.44Z"/>
+  <a href="https://wa.me/56912345678" target="_blank" class="social-float whatsapp-float" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.92 1.23l-.364.214-3.75-.983.998 3.59.235.374a9.86 9.86 0 001.51 3.393c1.256 1.688 3.04 2.778 4.933 3.285.693.23 1.41.357 2.122.357 1.147 0 2.268-.218 3.327-.645l.383-.143 3.851.001-.988-3.588-.235-.374a9.87 9.87 0 00-1.519-3.386 9.9 9.9 0 00-3.275-2.555 9.905 9.905 0 00-3.142-.923zM12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0z"/>
     </svg>
   </a>
 
-<audio id="bgMusic" autoplay loop>
-  <source src="sounds/Jai.mp3" type="audio/mpeg">
-</audio>
-<script>
-  const bgMusic = document.getElementById('bgMusic');
-  bgMusic.volume = 0.3;
-</script>
+  <script>
+    // Theme Toggle
+    const themeToggle = document.querySelector('[data-theme-toggle]');
+    const htmlElement = document.documentElement;
 
-<!-- NUEVO: Librería ligera para browser -->
-<script src="https://unpkg.com/amazon-cognito-identity-js@6.5.2/dist/amazon-cognito-identity.min.js"></script>
-<script>
-// Configuración Cognito (solo Pool ID y Client ID)
-const poolData = {
-  UserPoolId: 'sa-east-1_M8Ambi8wB',  // <-- Tu User Pool ID (ej: sa-east-1_abc123)
-  ClientId: '4eafun04ou9vb8q698au8sso2a'       // <-- Tu App Client ID
-};
-const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      htmlElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
 
-// Elementos DOM (igual que antes)
-const authStatus = document.getElementById('authStatus');
-const authUser = document.getElementById('authUser');
-const authForm = document.getElementById('authForm');
-const authEmail = document.getElementById('authEmail');
-const authPassword = document.getElementById('authPassword');
-let currentUser = null;
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    htmlElement.setAttribute('data-theme', savedTheme);
 
-// Login/Signup
-authForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const email = authEmail.value.trim();
-  const password = authPassword.value;
-  
-  const userData = { Username: email, Pool: userPool };
-  const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-  const authDetails = new AmazonCognitoIdentity.AuthenticationDetails({
-    Username: email, Password: password
-  });
-  
-  cognitoUser.authenticateUser(authDetails, {
-    onSuccess: (result) => {
-      currentUser = cognitoUser;
-      const token = result.getIdToken().getJwtToken();
-      console.log('Token JWT:', token);  // Tu token aquí
-      authStatus.textContent = 'Sesión iniciada';
-      authUser.textContent = email;
-      document.getElementById('authMessage').textContent = '¡Bienvenido!';
-    },
-    onFailure: (err) => {
-      document.getElementById('authMessage').textContent = 'Error: ' + err.message;
-    }
-  });
-});
+    // Login Modal
+    const openLoginBtn = document.getElementById('openLoginPage');
+    const loginModal = document.getElementById('loginModal');
+    const closeLoginBtn = document.getElementById('closeLoginModal');
+    const cancelLoginBtn = document.getElementById('cancelLogin');
+    const loginForm = document.getElementById('loginForm');
 
-// Logout
-document.getElementById('logoutButton').addEventListener('click', () => {
-  if (currentUser) currentUser.signOut();
-  authStatus.textContent = 'No has iniciado sesión';
-  authUser.textContent = '';
-});
-</script>
+    openLoginBtn.addEventListener('click', () => {
+      loginModal.classList.add('active');
+    });
+
+    closeLoginBtn.addEventListener('click', () => {
+      loginModal.classList.remove('active');
+      loginForm.reset();
+    });
+
+    cancelLoginBtn.addEventListener('click', () => {
+      loginModal.classList.remove('active');
+      loginForm.reset();
+    });
+
+    // Close modal when clicking outside
+    loginModal.addEventListener('click', (e) => {
+      if (e.target === loginModal) {
+        loginModal.classList.remove('active');
+        loginForm.reset();
+      }
+    });
+
+    // Handle form submission
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      // Here you would normally send this to your backend
+      console.log('Login attempt:', { email, password });
+      alert('Gracias por intentar iniciar sesión. Este es un formulario de demostración.');
+      
+      loginModal.classList.remove('active');
+      loginForm.reset();
+    });
+  </script>
 </body>
 </html>
