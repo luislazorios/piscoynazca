@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Callback Cognito</title>
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1000.0.min.js"></script>
+</head>
+<body>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const error = urlParams.get('error');
+    const state = urlParams.get('state'); // Para logout: 'logout'
+    
+    if (error) {
+      window.opener.postMessage({ type: 'COGNITO_ERROR', error }, '*');
+    } else if (code || state === 'logout') {
+      if (state === 'logout') {
+        // Logout: borra tokens
+        localStorage.removeItem('cognito-id-token');
+        localStorage.removeItem('cognito-expiry');
+        window.opener.postMessage({ type: 'COGNITO_LOGOUT' }, '*');
+      } else {
+        // Login: intercambia code por tokens (simplificado)
+        const tokens = { idToken: 'token-simulado-por-code', expiry: Date.now() + 3600000 };
+        localStorage.setItem('cognito-id-token', tokens.idToken);
+        localStorage.setItem('cognito-expiry', tokens.expiry);
+        window.opener.postMessage({ type: 'COGNITO_LOGIN_SUCCESS', tokens }, '*');
+      }
+    }
+    
+    window.close();
+  </script>
+</body>
+</html>
