@@ -745,100 +745,6 @@
   padding: 0;
 }
 .link-like:hover { opacity: 0.8; }
-    :root {
-  --shadow-soft: 0 10px 30px rgba(67, 42, 31, 0.08);
-  --shadow-hover: 0 14px 36px rgba(67, 42, 31, 0.14);
-}
-
-.site-header {
-  box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 10px 30px rgba(0,0,0,0.04);
-}
-
-.hero {
-  position: relative;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at top left, rgba(140, 95, 82, 0.10), transparent 35%),
-    radial-gradient(circle at bottom right, rgba(233, 216, 207, 0.24), transparent 30%);
-  pointer-events: none;
-}
-
-.hero-grid,
-.story-grid,
-.contact-grid,
-.gallery-grid,
-.services-grid,
-.testimonials-grid {
-  gap: clamp(1rem, 2vw, 1.5rem);
-}
-
-.service-card,
-.testimonial,
-.gallery-card,
-.story-panel,
-.contact-card {
-  box-shadow: var(--shadow-soft);
-  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
-}
-
-.service-card:hover,
-.testimonial:hover,
-.gallery-card:hover,
-.story-panel:hover,
-.contact-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
-}
-
-.btn-primary {
-  box-shadow: 0 10px 24px rgba(140, 95, 82, 0.22);
-}
-
-.btn-primary:hover {
-  transform: translateY(-1px);
-}
-
-.btn-secondary {
-  border-color: color-mix(in srgb, var(--color-border) 70%, transparent);
-}
-
-.section-title {
-  letter-spacing: -0.02em;
-}
-
-.section-copy {
-  line-height: 1.75;
-}
-
-input, textarea, select {
-  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
-}
-
-input:focus, textarea:focus, select:focus {
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 16%, transparent);
-}
-
-.dialog-surface {
-  width: min(92vw, 460px);
-  border-radius: 1.6rem;
-  box-shadow: 0 24px 70px rgba(0,0,0,0.28);
-  padding: 2rem;
-}
-
-.auth-modal-head {
-  margin-bottom: 1.25rem;
-}
-
-.auth-session {
-  margin-top: 1.25rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--color-border);
-}
   </style>
 </head>
 <body>
@@ -857,7 +763,7 @@ input:focus, textarea:focus, select:focus {
           <span>Banquetería Buffet</span>
         </span>
       </a>
-    </div>
+
     <nav class="nav-links" aria-label="Principal">
   <a href="#historia">Nosotros</a>
   <a href="#servicios">Servicios</a>
@@ -866,7 +772,7 @@ input:focus, textarea:focus, select:focus {
   <a href="#cotizacion">Cotización</a>
   <a href="#contacto">Contacto</a>
 </nav>
-  </div>
+
      <div class="nav-actions">
   <button class="theme-toggle" type="button" aria-label="Cambiar tema" data-theme-toggle></button>
   <a class="btn btn-secondary" href="catalogo.html">Ver Catálogo</a>
@@ -1431,224 +1337,176 @@ input:focus, textarea:focus, select:focus {
   const bgMusic = document.getElementById('bgMusic');
   bgMusic.volume = 0.3;
 </script>
+</body>
+ <script type="module">
+  import { CognitoIdentityProviderClient, InitiateAuthCommand, SignUpCommand, ConfirmSignUpCommand, GetUserCommand } from 'https://esm.sh/@aws-sdk/client-cognito-identity-provider';
 
-<script src="https://unpkg.com/amazon-cognito-identity-js@6.5.2/dist/amazon-cognito-identity.min.js"></script>
+  const cognitoConfig = {
+    region: 'us-east-1',  // Tu región
+    clientId: 'TU_CLIENT_ID_AQUI'  // De AWS Cognito App Client
+  };
 
-<dialog class="dialog-surface" id="authDialog" aria-labelledby="authModalTitle">
-  <button class="auth-close" type="button" id="closeAuthPage" aria-label="Cerrar">&times;</button>
-  <div class="auth-modal-head">
-    <div class="eyebrow">Acceso privado</div>
-    <h2 class="section-title" id="authModalTitle">Iniciar sesión</h2>
-    <p class="section-copy" id="authMessage">Ingresa tus datos para continuar.</p>
-  </div>
-  <div class="auth-switcher">
-    <button class="btn btn-secondary active" type="button" data-auth-view="login">Iniciar sesión</button>
-  </div>
-  <form id="authForm">
-    <label id="nameWrap" hidden>
-      Nombre completo
-      <input type="text" id="signupName" placeholder="Tu nombre" />
-    </label>
-    <label>
-      Correo electrónico
-      <input type="email" id="authEmail" placeholder="correo@ejemplo.com" required />
-    </label>
-    <label>
-      Contraseña
-      <input type="password" id="authPassword" placeholder="Tu contraseña" required />
-    </label>
-    <label id="confirmWrap" hidden>
-      Código de confirmación
-      <input type="text" id="confirmCode" placeholder="123456" />
-    </label>
-    <button class="btn btn-primary" type="submit" id="authSubmit">Iniciar sesión</button>
-  </form>
-  <p style="text-align: center; margin: var(--space-6) 0 0; font-size: var(--text-sm);">
-    ¿No tienes cuenta? 
-    <button type="button" class="link-like" data-auth-view="register">Crear cuenta</button>
-  </p>
-  <div class="auth-session">
-    <span>Estado:</span><strong id="authStatus">No has iniciado sesión</strong>
-    <span>Usuario:</span><strong id="authUser">—</strong>
-    <button class="btn btn-secondary" type="button" id="logoutButton">Cerrar sesión</button>
-  </div>
-</dialog>
+  const client = new CognitoIdentityProviderClient({ region: cognitoConfig.region });
 
-<script>
-// ===== CONFIGURACIÓN COGNITO =====
-const poolData = {
-  UserPoolId: 'sa-east-1_M8Ambi8wB',
-  ClientId: '4eafun04ou9vb8q698au8sso2a'
-};
-const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+  // Elementos DOM
+  const authPage = document.getElementById('authPage');
+  const openLoginPage = document.getElementById('openLoginPage');
+  const closeAuthPage = document.getElementById('closeAuthPage');
+  const authModalTitle = document.getElementById('authModalTitle');
+  const authMessage = document.getElementById('authMessage');
+  const authStatus = document.getElementById('authStatus');
+  const authUser = document.getElementById('authUser');
+  const logoutButton = document.getElementById('logoutButton');
+  const authForm = document.getElementById('authForm');
+  const authEmail = document.getElementById('authEmail');
+  const authPassword = document.getElementById('authPassword');
+  const authSubmit = document.getElementById('authSubmit');
+  const nameWrap = document.getElementById('nameWrap');
+  const signupName = document.getElementById('signupName');
+  const confirmWrap = document.getElementById('confirmWrap');
+  const confirmCode = document.getElementById('confirmCode');
 
-// ===== ELEMENTOS DOM =====
-const authDialog = document.getElementById('authDialog');
-const openLoginPage = document.getElementById('openLoginPage');
-const closeAuthPage = document.getElementById('closeAuthPage');
-const authModalTitle = document.getElementById('authModalTitle');
-const authMessage = document.getElementById('authMessage');
-const authStatus = document.getElementById('authStatus');
-const authUser = document.getElementById('authUser');
-const logoutButton = document.getElementById('logoutButton');
-const authForm = document.getElementById('authForm');
-const authEmail = document.getElementById('authEmail');
-const authPassword = document.getElementById('authPassword');
-const authSubmit = document.getElementById('authSubmit');
-const nameWrap = document.getElementById('nameWrap');
-const signupName = document.getElementById('signupName');
-const confirmWrap = document.getElementById('confirmWrap');
-const confirmCode = document.getElementById('confirmCode');
+  let authView = 'login';  // Por defecto: login
+  let authState = { accessToken: null, idToken: null, refreshToken: null, email: null };
 
-let currentUser = null;
-let authView = 'login';
-
-// ===== FUNCIONES UI =====
-function setMessage(message, error = false) {
-  authMessage.textContent = message;
-  authMessage.style.color = error ? '#b42318' : '';
-}
-
-function syncView() {
-  if (authView === 'login') {
-    authModalTitle.textContent = 'Iniciar sesión';
-    authSubmit.textContent = 'Iniciar sesión';
-    nameWrap.hidden = true;
-    confirmWrap.hidden = true;
-    setMessage('Ingresa tus datos para continuar.');
-  } else if (authView === 'register') {
-    authModalTitle.textContent = 'Crear cuenta';
-    authSubmit.textContent = 'Crear cuenta';
-    nameWrap.hidden = false;
-    confirmWrap.hidden = true;
-    setMessage('Completa tus datos para registrar tu usuario.');
-  } else if (authView === 'confirm') {
-    authModalTitle.textContent = 'Confirmar cuenta';
-    authSubmit.textContent = 'Confirmar';
-    nameWrap.hidden = true;
-    confirmWrap.hidden = false;
-    setMessage(`Te enviamos un código a ${authEmail.value.trim()}`);
-  }
-}
-
-function openPage(view = 'login') {
-  authView = view;
-  syncView();
-  authDialog.showModal();
-}
-
-function closePage() {
-  authDialog.close();
-}
-
-function setLoggedInUI(email) {
-  authStatus.textContent = 'Sesión iniciada ✓';
-  authUser.textContent = email;
-  openLoginPage.textContent = 'Mi cuenta';
-}
-
-function setLoggedOutUI() {
-  authStatus.textContent = 'No has iniciado sesión';
-  authUser.textContent = '';
-  openLoginPage.textContent = 'Iniciar sesión';
-}
-
-// ===== LOGIN/SIGNUP =====
-authForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const email = authEmail.value.trim();
-  const password = authPassword.value;
-  const name = signupName.value.trim();
-  const code = confirmCode.value.trim();
-
-  if (authView === 'register') {
-    userPool.signUp(email, password, [{ Name: 'email', Value: email }], null, (err, result) => {
-      if (err) {
-        setMessage(err.message, true);
-        return;
-      }
-      authView = 'confirm';
-      syncView();
-      setMessage('Cuenta creada. Revisa tu correo para confirmar el código.');
-    });
-    return;
+  function setMessage(message, error = false) {
+    authMessage.textContent = message;
+    authMessage.style.color = error ? '#b42318' : '';
   }
 
-  if (authView === 'confirm') {
-    const userData = { Username: email, Pool: userPool };
-    const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-    cognitoUser.confirmRegistration(code, true, (err, result) => {
-      if (err) {
-        setMessage(err.message, true);
-        return;
-      }
-      authView = 'login';
-      syncView();
-      setMessage('Cuenta confirmada. Ahora puedes iniciar sesión.');
-    });
-    return;
+  function syncView() {
+    if (authView === 'register') {
+      authModalTitle.textContent = 'Crear cuenta';
+      authSubmit.textContent = 'Crear cuenta';
+      nameWrap.hidden = false;
+      confirmWrap.hidden = false;
+      setMessage('Completa tus datos para registrar tu usuario.');
+    } else {
+      authModalTitle.textContent = 'Iniciar sesión';
+      authSubmit.textContent = 'Iniciar sesión';
+      nameWrap.hidden = true;
+      confirmWrap.hidden = true;
+      setMessage('Ingresa tus datos para continuar.');
+    }
   }
 
-  const userData = { Username: email, Pool: userPool };
-  const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-  const authDetails = new AmazonCognitoIdentity.AuthenticationDetails({
-    Username: email, Password: password
-  });
-
-  cognitoUser.authenticateUser(authDetails, {
-    onSuccess: (result) => {
-      currentUser = cognitoUser;
-      const token = result.getIdToken().getJwtToken();
-      console.log('✅ Token JWT:', token);
-      setLoggedInUI(email);
-      setMessage('¡Sesión iniciada correctamente!');
-      setTimeout(closePage, 800);
-    },
-    onFailure: (err) => setMessage(err.message || 'Error al iniciar sesión', true)
-  });
-});
-
-// ===== EVENT LISTENERS =====
-document.querySelectorAll('[data-auth-view]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    authView = btn.dataset.authView;
+  function openPage(view = 'login') {
+    authView = view;
     syncView();
-  });
-});
-
-openLoginPage.addEventListener('click', () => {
-  if (currentUser) {
-    openPage('login');
-  } else {
-    openPage('login');
+    authPage.hidden = false;
+    document.body.classList.add('auth-open');
+    authPage.querySelector('dialog')?.showModal?.();
   }
-});
 
-closeAuthPage.addEventListener('click', closePage);
+  function closePage() {
+    authPage.hidden = true;
+    document.body.classList.remove('auth-open');
+    authPage.querySelector('dialog')?.close?.();
+  }
 
-logoutButton.addEventListener('click', () => {
-  if (currentUser) currentUser.signOut();
-  currentUser = null;
-  setLoggedOutUI();
-  setMessage('Sesión cerrada.');
-  closePage();
-});
+  function setLoggedOutUI() {
+    authStatus.textContent = 'No has iniciado sesión';
+    authUser.textContent = '—';
+  }
 
-authDialog.addEventListener('click', (e) => {
-  if (e.target === authDialog) closePage();
-});
+  function setLoggedInUI(email) {
+    authStatus.textContent = 'Sesión iniciada';
+    authUser.textContent = email;
+  }
 
-// Verificar si ya hay sesión al cargar
-const cognitoUser = userPool.getCurrentUser();
-if (cognitoUser != null) {
-  cognitoUser.getSession((err, session) => {
-    if (err) return;
-    if (session.isValid()) {
-      currentUser = cognitoUser;
-      setLoggedInUI(cognitoUser.getUsername());
+  async function loadCurrentUser() {
+    if (!authState.accessToken) {
+      setLoggedOutUI();
+      return;
+    }
+    try {
+      const r = await client.send(new GetUserCommand({ AccessToken: authState.accessToken }));
+      const emailAttr = r.UserAttributes?.find(a => a.Name === 'email');
+      setLoggedInUI(emailAttr?.Value || authState.email);
+    } catch (err) {
+      console.error(err);
+      setLoggedOutUI();
+      setMessage('La sesión expiró. Inicia sesión otra vez.', true);
+    }
+  }
+
+  // Event listeners
+  openLoginPage?.addEventListener('click', () => openPage('login'));
+  // openRegisterPage eliminado del header
+
+  closeAuthPage?.addEventListener('click', closePage);
+  authPage?.addEventListener('click', e => { if (e.target === authPage) closePage(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !authPage.hidden) closePage(); });
+
+  // Switcher y enlace "Crear cuenta"
+  document.querySelectorAll('[data-auth-view]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      authView = e.target.dataset.authView;
+      syncView();
+    });
+  });
+
+  authForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = authEmail.value.trim();
+    const password = authPassword.value;
+    const name = signupName.value.trim();
+    const code = confirmCode.value.trim();
+
+    try {
+      if (authView === 'register') {
+        await client.send(new SignUpCommand({
+          ClientId: cognitoConfig.clientId,
+          Username: email,
+          Password: password,
+          UserAttributes: [{ Name: 'email', Value: email }, ...(name ? [{ Name: 'name', Value: name }] : [])]
+        }));
+        setMessage('Cuenta creada. Revisa tu correo para confirmar el código.');
+        authView = 'login';
+        syncView();
+        confirmWrap.hidden = false;
+        return;
+      }
+
+      if (code) {
+        await client.send(new ConfirmSignUpCommand({
+          ClientId: cognitoConfig.clientId,
+          Username: email,
+          ConfirmationCode: code
+        }));
+        setMessage('Cuenta confirmada. Ahora puedes iniciar sesión.');
+        confirmWrap.hidden = true;
+        return;
+      }
+
+      const r = await client.send(new InitiateAuthCommand({
+        AuthFlow: 'USER_PASSWORD_AUTH',
+        ClientId: cognitoConfig.clientId,
+        AuthParameters: { USERNAME: email, PASSWORD: password }
+      }));
+
+      authState = {
+        accessToken: r.AuthenticationResult?.AccessToken || null,
+        idToken: r.AuthenticationResult?.IdToken || null,
+        refreshToken: r.AuthenticationResult?.RefreshToken || null,
+        email
+      };
+      setLoggedInUI(email);
+      setMessage('Sesión iniciada correctamente.');
+      closePage();
+    } catch (err) {
+      console.error(err);
+      setMessage(err.message || 'No se pudo completar la acción.', true);
     }
   });
-}
+
+  logoutButton?.addEventListener('click', () => {
+    authState = { accessToken: null, idToken: null, refreshToken: null, email: null };
+    setLoggedOutUI();
+    setMessage('Sesión cerrada.');
+  });
+
+  loadCurrentUser();  // Carga estado inicial
 </script>
-</body>
+</script>
 </html>
