@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    
     :root, [data-theme="light"] {
       --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
       --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
@@ -18,20 +17,10 @@
       --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
       --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
       --text-3xl: clamp(2.5rem, 1rem + 4vw, 5rem);
-
-      --space-1: 0.25rem;
-      --space-2: 0.5rem;
-      --space-3: 0.75rem;
-      --space-4: 1rem;
-      --space-5: 1.25rem;
-      --space-6: 1.5rem;
-      --space-8: 2rem;
-      --space-10: 2.5rem;
-      --space-12: 3rem;
-      --space-16: 4rem;
-      --space-20: 5rem;
-      --space-24: 6rem;
-
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+      --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem;
+      --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem;
+      --space-16: 4rem; --space-20: 5rem; --space-24: 6rem;
       --color-bg: #f7f2ee;
       --color-surface: #fcf8f4;
       --color-surface-2: #fffdfb;
@@ -44,809 +33,170 @@
       --color-primary-hover: #74493d;
       --color-highlight: #e9d8cf;
       --color-text-inverse: #fffaf6;
-      --shadow-sm: 0 8px 25px rgba(67, 42, 31, 0.07);
-      --shadow-lg: 0 20px 50px rgba(67, 42, 31, 0.12);
-      --radius-sm: 0.5rem;
-      --radius-md: 0.9rem;
-      --radius-lg: 1.4rem;
-      --radius-xl: 2rem;
+      --shadow-sm: 0 8px 25px rgba(67,42,31,0.07);
+      --shadow-lg: 0 20px 50px rgba(67,42,31,0.12);
+      --shadow-soft: 0 10px 30px rgba(67,42,31,0.08);
+      --shadow-hover: 0 14px 36px rgba(67,42,31,0.14);
+      --radius-sm: 0.5rem; --radius-md: 0.9rem;
+      --radius-lg: 1.4rem; --radius-xl: 2rem;
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-body: 'Manrope', Arial, sans-serif;
       --content: 1180px;
     }
-
     [data-theme="dark"] {
-      --color-bg: #191514;
-      --color-surface: #201b19;
-      --color-surface-2: #26211f;
-      --color-surface-offset: #2d2522;
-      --color-border: rgba(255, 240, 230, 0.12);
-      --color-text: #f3e7df;
-      --color-text-muted: #c4b2a8;
+      --color-bg: #191514; --color-surface: #201b19;
+      --color-surface-2: #26211f; --color-surface-offset: #2d2522;
+      --color-border: rgba(255,240,230,0.12);
+      --color-text: #f3e7df; --color-text-muted: #c4b2a8;
       --color-text-faint: #8b7a73;
-      --color-primary: #d3a796;
-      --color-primary-hover: #e4bbac;
-      --color-highlight: #342a26;
-      --color-text-inverse: #1d1614;
+      --color-primary: #d3a796; --color-primary-hover: #e4bbac;
+      --color-highlight: #342a26; --color-text-inverse: #1d1614;
       --shadow-sm: 0 8px 25px rgba(0,0,0,0.22);
       --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.25);
+      --shadow-hover: 0 14px 36px rgba(0,0,0,0.38);
     }
-
     *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: var(--font-body);
-      font-size: var(--text-base);
-      line-height: 1.65;
-      color: var(--color-text);
-      background: var(--color-bg);
-    }
-    img { max-width: 100%; display: block; }
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; cursor: pointer; }
-    .container {
-      width: min(calc(100% - 2rem), var(--content));
-      margin-inline: auto;
-    }
-    .eyebrow {
-      font-size: var(--text-xs);
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--color-text-muted);
-      margin-bottom: var(--space-3);
-    }
-    .section-title {
-      font-family: var(--font-display);
-      font-size: var(--text-xl);
-      font-weight: 600;
-      line-height: 1.05;
-      margin: 0 0 var(--space-4);
-    }
-    .section-copy {
-      color: var(--color-text-muted);
-      max-width: 62ch;
-    }
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(16px);
-      background: color-mix(in srgb, var(--color-bg) 84%, transparent);
-      border-bottom: 1px solid var(--color-border);
-    }
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--space-4);
-      min-height: 78px;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-    }
-    .brand-mark {
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--color-border);
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: var(--color-surface-2);
-    }
-    .brand-mark svg { width: 22px; height: 22px; }
-    .brand-name {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.05;
-    }
-    .brand-name strong {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight: 600;
-    }
-    .brand-name span {
-      font-size: var(--text-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.24em;
-      color: var(--color-text-muted);
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: var(--space-6);
-      font-size: var(--text-sm);
-    }
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-    }
-    .theme-toggle,
-    .btn {
-      border-radius: 999px;
-      border: 1px solid var(--color-border);
-      transition: 180ms ease;
-    }
-    .theme-toggle {
-      width: 44px;
-      height: 44px;
-      background: var(--color-surface);
-      color: var(--color-text);
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      padding: 0.9rem 1.35rem;
-      font-size: var(--text-sm);
-      font-weight: 600;
-      min-height: 44px;
-    }
-    .btn-primary {
-      background: var(--color-primary);
-      color: var(--color-text-inverse);
-      border-color: transparent;
-    }
-    .btn-primary:hover { background: var(--color-primary-hover); }
-    .btn-secondary {
-      background: transparent;
-      color: var(--color-text);
-    }
-    .btn-secondary:hover,
-    .theme-toggle:hover {
-      background: var(--color-surface-offset);
-    }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { margin:0; font-family:var(--font-body); font-size:var(--text-base); line-height:1.65; color:var(--color-text); background:var(--color-bg); }
+    img { max-width:100%; display:block; }
+    a { color:inherit; text-decoration:none; }
+    button { font:inherit; cursor:pointer; }
+    .container { width:min(calc(100% - 2rem), var(--content)); margin-inline:auto; }
+    .eyebrow { font-size:var(--text-xs); letter-spacing:0.22em; text-transform:uppercase; color:var(--color-text-muted); margin-bottom:var(--space-3); }
+    .section-title { font-family:var(--font-display); font-size:var(--text-xl); font-weight:600; line-height:1.05; margin:0 0 var(--space-4); letter-spacing:-0.02em; }
+    .section-copy { color:var(--color-text-muted); max-width:62ch; line-height:1.75; }
 
-    .hero {
-      padding: clamp(4rem, 8vw, 7rem) 0 clamp(3rem, 7vw, 6rem);
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: var(--space-10);
-      align-items: center;
-    }
-    .hero-copy h1 {
-      margin: 0 0 var(--space-4);
-      font-family: var(--font-display);
-      font-size: clamp(3.25rem, 5vw, 5.5rem);
-      line-height: 0.95;
-      font-weight: 600;
-    }
-    .hero-copy p {
-      color: var(--color-text-muted);
-      max-width: 58ch;
-      margin-bottom: var(--space-6);
-    }
-    .hero-actions {
-      display: flex;
-      gap: var(--space-3);
-      flex-wrap: wrap;
-      margin-bottom: var(--space-8);
-    }
-    .hero-notes {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--space-4);
-    }
-    .hero-note {
-      padding-top: var(--space-4);
-      border-top: 1px solid var(--color-border);
-    }
-    .hero-note strong {
-      display: block;
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      margin-bottom: 0.2rem;
-    }
-    .hero-visual {
-      position: relative;
-      min-height: 620px;
-    }
-    .frame-main,
-    .frame-accent {
-      position: absolute;
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-      background: var(--color-surface-offset);
-    }
-    .frame-main {
-      inset: 0 0 4rem 4rem;
-      background-image:
-        linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05)),
-        url('img/piscologo2.jpeg');
-      background-repeat: no-repeat, no-repeat;
-      background-position: center, top center;
-      background-size: auto, 100% 80%;
-    }
-    .frame-accent {
-      width: 240px;
-      height: 300px;
-      left: 3.5rem;
-      bottom: 0;
-      border: 10px solid var(--color-bg);
-      background-image:
-        linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.02)),
-        url('img/seco2.jpg');
-      background-repeat: no-repeat, no-repeat;
-      background-size: auto, cover;
-      background-position: center, center;
-      z-index: 2;
-    }
+    /* HEADER */
+    .site-header { position:sticky; top:0; z-index:10; backdrop-filter:blur(16px); background:color-mix(in srgb,var(--color-bg) 84%,transparent); border-bottom:1px solid var(--color-border); box-shadow:0 1px 0 rgba(0,0,0,0.04),0 10px 30px rgba(0,0,0,0.04); }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); min-height:78px; }
+    .brand { display:flex; align-items:center; gap:var(--space-3); font-weight:700; letter-spacing:0.04em; }
+    .brand-mark { width:40px; height:40px; border:1px solid var(--color-border); border-radius:50%; display:grid; place-items:center; background:var(--color-surface-2); flex-shrink:0; }
+    .brand-mark svg { width:22px; height:22px; }
+    .brand-name { display:flex; flex-direction:column; line-height:1.05; }
+    .brand-name strong { font-family:var(--font-display); font-size:1.35rem; font-weight:600; }
+    .brand-name span { font-size:var(--text-xs); text-transform:uppercase; letter-spacing:0.24em; color:var(--color-text-muted); }
+    .nav-links { display:flex; align-items:center; gap:var(--space-6); font-size:var(--text-sm); }
+    .nav-links a:hover { color:var(--color-primary); }
+    .nav-actions { display:flex; align-items:center; gap:var(--space-3); }
+    .theme-toggle, .btn { border-radius:999px; border:1px solid var(--color-border); transition:180ms ease; }
+    .theme-toggle { width:44px; height:44px; background:var(--color-surface); color:var(--color-text); display:grid; place-items:center; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:0.6rem; padding:0.9rem 1.35rem; font-size:var(--text-sm); font-weight:600; min-height:44px; }
+    .btn-primary { background:var(--color-primary); color:var(--color-text-inverse); border-color:transparent; box-shadow:0 10px 24px rgba(140,95,82,0.22); }
+    .btn-primary:hover { background:var(--color-primary-hover); transform:translateY(-1px); }
+    .btn-secondary { background:transparent; color:var(--color-text); border-color:color-mix(in srgb,var(--color-border) 70%,transparent); }
+    .btn-secondary:hover, .theme-toggle:hover { background:var(--color-surface-offset); }
 
-    section { padding: clamp(3.5rem, 7vw, 6rem) 0; }
-    .story,
-    .services,
-    .gallery,
-    .quote,
-    .contact {
-      border-top: 1px solid var(--color-border);
-    }
-    .story-grid,
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-10);
-      align-items: start;
-    }
-    .story-panel,
-    .contact-card,
-    .service-card,
-    .gallery-card,
-    .testimonial {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
-    }
-    .story-panel {
-      padding: var(--space-8);
-    }
-    .story-panel blockquote {
-      margin: 0 0 var(--space-4);
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      line-height: 1.05;
-    }
-    .story-list {
-      display: grid;
-      gap: var(--space-4);
-    }
-    .story-list div {
-      padding: var(--space-5);
-      border-radius: var(--radius-md);
-      background: var(--color-surface-2);
-      border: 1px solid var(--color-border);
-    }
+    /* HERO */
+    .hero { padding:clamp(4rem,8vw,7rem) 0 clamp(3rem,7vw,6rem); position:relative; }
+    .hero::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at top left,rgba(140,95,82,.10),transparent 35%),radial-gradient(circle at bottom right,rgba(233,216,207,.24),transparent 30%); pointer-events:none; }
+    .hero-grid { display:grid; grid-template-columns:1.05fr 0.95fr; gap:clamp(1rem,2vw,1.5rem); align-items:center; }
+    .hero-copy h1 { margin:0 0 var(--space-4); font-family:var(--font-display); font-size:clamp(3.25rem,5vw,5.5rem); line-height:0.95; font-weight:600; }
+    .hero-copy p { color:var(--color-text-muted); max-width:58ch; margin-bottom:var(--space-6); }
+    .hero-actions { display:flex; gap:var(--space-3); flex-wrap:wrap; margin-bottom:var(--space-8); }
+    .hero-notes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-4); }
+    .hero-note { padding-top:var(--space-4); border-top:1px solid var(--color-border); }
+    .hero-note strong { display:block; font-family:var(--font-display); font-size:1.4rem; margin-bottom:0.2rem; }
+    .hero-visual { position:relative; min-height:620px; }
+    .frame-main, .frame-accent { position:absolute; border-radius:var(--radius-xl); overflow:hidden; box-shadow:var(--shadow-lg); background:var(--color-surface-offset); }
+    .frame-main { inset:0 0 4rem 4rem; background-image:linear-gradient(180deg,rgba(255,255,255,0.25),rgba(255,255,255,0.05)),url('img/piscologo2.jpeg'); background-repeat:no-repeat,no-repeat; background-position:center,top center; background-size:auto,100% 80%; }
+    .frame-accent { width:240px; height:300px; left:3.5rem; bottom:0; border:10px solid var(--color-bg); background-image:linear-gradient(180deg,rgba(255,255,255,0.18),rgba(255,255,255,0.02)),url('img/seco2.jpg'); background-repeat:no-repeat,no-repeat; background-size:auto,cover; background-position:center,center; z-index:2; }
 
-    .services-header,
-    .gallery-header,
-    .testimonials-header,
-    .contact-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: var(--space-6);
-      margin-bottom: var(--space-8);
-    }
-    .services-grid,
-    .gallery-grid,
-    .testimonials-grid {
-      display: grid;
-      gap: var(--space-6);
-    }
-    .services-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    .service-card {
-      padding: var(--space-8);
-      min-height: 100%;
-    }
-    .service-card h3 {
-      margin: 0 0 var(--space-3);
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 600;
-    }
-    .service-card p {
-      color: var(--color-text-muted);
-      margin-bottom: var(--space-5);
-    }
-    .service-card ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: var(--space-3);
-      color: var(--color-text-muted);
-      font-size: var(--text-sm);
-    }
-    .service-card li::before {
-      content: '—';
-      margin-right: 0.5rem;
-      color: var(--color-primary);
-    }
+    /* SECTIONS */
+    section { padding:clamp(3.5rem,7vw,6rem) 0; }
+    .story, .services, .gallery, .contact { border-top:1px solid var(--color-border); }
 
-    .gallery-grid {
-      grid-template-columns: 1.15fr 0.85fr;
-    }
-    .gallery-card { overflow: hidden; }
-    .gallery-photo-large {
-      min-height: 540px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.1), rgba(0,0,0,0.08)),
-        url('img/mesa2.jpg') center/cover;
-    }
-    .gallery-stack {
-      display: grid;
-      gap: var(--space-6);
-    }
-    .gallery-photo-small,
-    .gallery-copy {
-      min-height: 257px;
-    }
-    .gallery-photo-small {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.1), rgba(0,0,0,0.08)),
-        url('img/mesa3.jpg') center/cover;
-    }
-    .gallery-copy {
-      padding: var(--space-8);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: var(--color-surface);
-    }
-    .gallery-copy h3 {
-      margin: 0 0 var(--space-3);
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 600;
-    }
-    .gallery-copy p { color: var(--color-text-muted); }
+    /* STORY */
+    .story-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(1rem,2vw,1.5rem); align-items:start; }
+    .story-panel { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); box-shadow:var(--shadow-soft); padding:var(--space-8); transition:transform 180ms ease,box-shadow 180ms ease; }
+    .story-panel:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
+    .story-panel blockquote { margin:0 0 var(--space-4); font-family:var(--font-display); font-size:clamp(1.8rem,3vw,2.6rem); line-height:1.05; }
+    .story-list { display:grid; gap:var(--space-4); }
+    .story-list div { padding:var(--space-5); border-radius:var(--radius-md); background:var(--color-surface-2); border:1px solid var(--color-border); }
 
-    .testimonials-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    .testimonial {
-      padding: var(--space-7);
-    }
-    .testimonial p {
-      margin: 0 0 var(--space-4);
-      color: var(--color-text-muted);
-    }
-    .testimonial strong {
-      display: block;
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      font-weight: 600;
-    }
+    /* SERVICES */
+    .services-header, .gallery-header, .contact-header { display:flex; justify-content:space-between; align-items:end; gap:var(--space-6); margin-bottom:var(--space-8); }
+    .services-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(1rem,2vw,1.5rem); }
+    .service-card { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); box-shadow:var(--shadow-soft); padding:var(--space-8); min-height:100%; transition:transform 180ms ease,box-shadow 180ms ease; }
+    .service-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
+    .service-card h3 { margin:0 0 var(--space-3); font-family:var(--font-display); font-size:2rem; font-weight:600; }
+    .service-card p { color:var(--color-text-muted); margin-bottom:var(--space-5); }
+    .service-card ul { list-style:none; padding:0; margin:0; display:grid; gap:var(--space-3); color:var(--color-text-muted); font-size:var(--text-sm); }
+    .service-card li::before { content:'—'; margin-right:0.5rem; color:var(--color-primary); }
 
-    .contact-card {
-      padding: var(--space-8);
-    }
-    .contact-info {
-      display: grid;
-      gap: var(--space-5);
-    }
-    .contact-item {
-      padding-bottom: var(--space-4);
-      border-bottom: 1px solid var(--color-border);
-    }
-    .contact-item:last-child { border-bottom: 0; padding-bottom: 0; }
-    .contact-item span {
-      display: block;
-      font-size: var(--text-xs);
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--color-text-muted);
-      margin-bottom: 0.35rem;
-    }
-    form {
-      display: grid;
-      gap: var(--space-4);
-    }
-    label {
-      display: grid;
-      gap: 0.45rem;
-      font-size: var(--text-sm);
-      font-weight: 600;
-    }
-    input, textarea, select {
-      width: 100%;
-      border: 1px solid var(--color-border);
-      border-radius: 1rem;
-      padding: 0.95rem 1rem;
-      background: var(--color-surface-2);
-      color: var(--color-text);
-      font: inherit;
-    }
-    textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-    input:focus, textarea:focus, select:focus {
-      outline: 2px solid color-mix(in srgb, var(--color-primary) 55%, white);
-      outline-offset: 2px;
-    }
+    /* GALLERY */
+    .gallery-grid { display:grid; grid-template-columns:1.15fr 0.85fr; gap:clamp(1rem,2vw,1.5rem); }
+    .gallery-card { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); box-shadow:var(--shadow-soft); overflow:hidden; transition:transform 180ms ease,box-shadow 180ms ease; }
+    .gallery-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
+    .gallery-photo-large { min-height:540px; background:linear-gradient(180deg,rgba(255,255,255,0.1),rgba(0,0,0,0.08)),url('img/mesa2.jpg') center/cover; }
+    .gallery-stack { display:grid; gap:clamp(1rem,2vw,1.5rem); }
+    .gallery-photo-small { min-height:257px; background:linear-gradient(180deg,rgba(255,255,255,0.1),rgba(0,0,0,0.08)),url('img/mesa3.jpg') center/cover; }
+    .gallery-copy { min-height:257px; padding:var(--space-8); display:flex; flex-direction:column; justify-content:center; background:var(--color-surface); }
+    .gallery-copy h3 { margin:0 0 var(--space-3); font-family:var(--font-display); font-size:2rem; font-weight:600; }
+    .gallery-copy p { color:var(--color-text-muted); margin-bottom:var(--space-5); }
 
-    .quote-options {
-      display: grid;
-      gap: var(--space-4);
-    }
+    /* CONTACT */
+    .contact-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(1rem,2vw,2rem); align-items:start; }
+    .contact-card { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); box-shadow:var(--shadow-soft); padding:var(--space-8); transition:transform 180ms ease,box-shadow 180ms ease; }
+    .contact-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
+    .contact-info { display:grid; gap:var(--space-5); }
+    .contact-item { padding-bottom:var(--space-4); border-bottom:1px solid var(--color-border); }
+    .contact-item:last-child { border-bottom:0; padding-bottom:0; }
+    .contact-item span { display:block; font-size:var(--text-xs); text-transform:uppercase; letter-spacing:0.2em; color:var(--color-text-muted); margin-bottom:0.35rem; }
+    .contact-item strong { display:block; font-size:var(--text-base); }
+    .contact-item a { color:var(--color-primary); }
+    .contact-item a:hover { color:var(--color-primary-hover); text-decoration:underline; }
+    form { display:grid; gap:var(--space-4); }
+    label { display:grid; gap:0.45rem; font-size:var(--text-sm); font-weight:600; }
+    input, textarea, select { width:100%; border:1px solid var(--color-border); border-radius:1rem; padding:0.95rem 1rem; background:var(--color-surface-2); color:var(--color-text); font:inherit; transition:border-color 160ms ease,box-shadow 160ms ease; }
+    textarea { min-height:150px; resize:vertical; }
+    input:focus, textarea:focus, select:focus { outline:2px solid color-mix(in srgb,var(--color-primary) 55%,white); outline-offset:2px; box-shadow:0 0 0 4px color-mix(in srgb,var(--color-primary) 16%,transparent); }
 
-    .quote-option-card {
-      display: grid;
-      grid-template-columns: 24px 1fr;
-      align-items: start;
-      gap: var(--space-4);
-      padding: var(--space-5);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      background: var(--color-surface-2);
-      cursor: pointer;
-      transition: 180ms ease;
-    }
+    /* FOOTER */
+    .footer { padding:var(--space-8) 0 var(--space-10); color:var(--color-text-muted); font-size:var(--text-sm); }
+    .footer-inner { display:flex; justify-content:space-between; gap:var(--space-4); border-top:1px solid var(--color-border); padding-top:var(--space-6); flex-wrap:wrap; }
 
-    .quote-option-card:hover {
-      background: var(--color-surface-offset);
-      transform: translateY(-1px);
-    }
+    /* SOCIAL FLOAT */
+    .social-float { position:fixed; right:20px; width:62px; height:62px; border-radius:50%; display:grid; place-items:center; color:#fff; box-shadow:0 12px 28px rgba(0,0,0,0.22); z-index:9999; transition:transform 180ms ease,box-shadow 180ms ease,background 180ms ease; }
+    .social-float:hover { transform:translateY(-2px); box-shadow:0 16px 32px rgba(0,0,0,0.26); }
+    .facebook-float { bottom:92px; background:#1877F2; }
+    .facebook-float:hover { background:#0f5ec9; }
+    .whatsapp-float { bottom:20px; background:#25D366; }
+    .whatsapp-float:hover { background:#1ebe5b; }
+    .social-float svg { width:30px; height:30px; }
 
-    .quote-option-card input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      margin-top: 0.2rem;
-      accent-color: var(--color-primary);
-      flex: 0 0 auto;
-    }
-
-    .quote-option-content {
-      display: grid;
-      gap: var(--space-2);
-    }
-
-    .quote-option-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      gap: var(--space-4);
-      flex-wrap: wrap;
-    }
-
-    .quote-option-top strong {
-      font-size: var(--text-base);
-      line-height: 1.3;
-      font-family: var(--font-display);
-      font-weight: 600;
-    }
-
-    .quote-option-content p {
-      margin: 0;
-      color: var(--color-text-muted);
-      font-size: var(--text-sm);
-      line-height: 1.5;
-      max-width: 60ch;
-    }
-
-    .quote-price {
-      font-size: var(--text-xs);
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--color-primary);
-      background: color-mix(in srgb, var(--color-primary) 10%, transparent);
-      padding: 0.35rem 0.65rem;
-      border-radius: 999px;
-      border: 1px solid color-mix(in srgb, var(--color-primary) 22%, transparent);
-    }
-
-    .quote-option-card:has(input:checked) {
-      border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
-      background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface-2));
-      box-shadow: 0 10px 24px rgba(67, 42, 31, 0.08);
-    }
-
-    .quote-option-card:has(input:checked) .quote-option-top strong {
-      color: var(--color-primary);
-    }
-
-    .quote-result-list {
-      display: grid;
-      gap: var(--space-3);
-      margin-top: var(--space-5);
-    }
-    .quote-result-item {
-      display: flex;
-      justify-content: space-between;
-      gap: var(--space-4);
-      padding: var(--space-4);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      background: var(--color-surface-2);
-    }
-    .quote-result-item span {
-      color: var(--color-text-muted);
-    }
-    .quote-result-item strong {
-      font-size: var(--text-sm);
-    }
-    .quote-total {
-      margin-top: var(--space-5);
-      padding: var(--space-5);
-      border-radius: var(--radius-md);
-      background: var(--color-highlight);
-      border: 1px solid var(--color-border);
-    }
-    .quote-total strong {
-      display: block;
-      font-family: var(--font-display);
-      font-size: 1.8rem;
-      margin-top: 0.35rem;
-    }
-
-    .footer {
-      padding: var(--space-8) 0 var(--space-10);
-      color: var(--color-text-muted);
-      font-size: var(--text-sm);
-    }
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: var(--space-4);
-      border-top: 1px solid var(--color-border);
-      padding-top: var(--space-6);
-      flex-wrap: wrap;
-    }
-
+    /* RESPONSIVE */
     @media (max-width: 980px) {
-      .hero-grid,
-      .story-grid,
-      .contact-grid,
-      .gallery-grid,
-      .services-grid,
-      .testimonials-grid {
-        grid-template-columns: 1fr;
-      }
-      .hero-visual {
-        min-height: 520px;
-      }
-      .frame-main {
-        inset: 0 0 3rem 2rem;
-      }
-      .frame-accent {
-        left: 2.5rem;
-      }
-      .nav-links {
-        display: none;
-      }
-      .services-header,
-      .gallery-header,
-      .testimonials-header,
-      .contact-header {
-        align-items: start;
-        flex-direction: column;
-      }
+      .hero-grid, .story-grid, .contact-grid, .gallery-grid, .services-grid { grid-template-columns:1fr; }
+      .hero-visual { min-height:520px; }
+      .frame-main { inset:0 0 3rem 2rem; }
+      .frame-accent { left:2.5rem; }
+      .nav-links { display:none; }
+      .services-header, .gallery-header, .contact-header { align-items:start; flex-direction:column; }
     }
-
     @media (max-width: 720px) {
-      .nav { min-height: 72px; }
-      .nav-actions .btn-secondary { display: none; }
-      .hero-copy h1 { font-size: clamp(2.7rem, 13vw, 4rem); }
-      .hero-notes { grid-template-columns: 1fr; }
-      .hero-visual { min-height: 440px; }
-      .frame-main {
-        inset: 0 0 4.5rem 0;
-      }
-      .frame-accent {
-        width: 180px;
-        height: 210px;
-        border-width: 6px;
-        left: 1.5rem;
-      }
-      .story-panel,
-      .contact-card,
-      .service-card,
-      .gallery-copy,
-      .testimonial { padding: var(--space-6); }
-
-      .quote-result-item {
-        flex-direction: column;
-      }
-
-      .quote-option-card {
-        grid-template-columns: 22px 1fr;
-        padding: var(--space-4);
-      }
-
-      .quote-option-top {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-2);
-      }
+      .nav { min-height:72px; }
+      .nav-actions .btn-secondary { display:none; }
+      .hero-copy h1 { font-size:clamp(2.7rem,13vw,4rem); }
+      .hero-notes { grid-template-columns:1fr; }
+      .hero-visual { min-height:440px; }
+      .frame-main { inset:0 0 4.5rem 0; }
+      .frame-accent { width:180px; height:210px; border-width:6px; left:1.5rem; }
+      .story-panel, .contact-card, .service-card, .gallery-copy { padding:var(--space-6); }
+      .social-float { right:14px; width:58px; height:58px; }
+      .facebook-float { bottom:82px; }
+      .whatsapp-float { bottom:14px; }
+      .social-float svg { width:28px; height:28px; }
     }
-
-    .social-float {
-      position: fixed;
-      right: 20px;
-      width: 62px;
-      height: 62px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: #fff;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
-      z-index: 9999;
-      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
-    }
-
-    .social-float:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.26);
-    }
-
-    .facebook-float {
-      bottom: 92px;
-      background: #1877F2;
-    }
-
-    .facebook-float:hover {
-      background: #0f5ec9;
-    }
-
-    .whatsapp-float {
-      bottom: 20px;
-      background: #25D366;
-    }
-
-    .whatsapp-float:hover {
-      background: #1ebe5b;
-    }
-
-    .social-float svg {
-      width: 30px;
-      height: 30px;
-    }
-
-    @media (max-width: 720px) {
-      .social-float {
-        right: 14px;
-        width: 58px;
-        height: 58px;
-      }
-
-      .facebook-float {
-        bottom: 82px;
-      }
-
-      .whatsapp-float {
-        bottom: 14px;
-      }
-
-      .social-float svg {
-        width: 28px;
-        height: 28px;
-      }
-    }
-    .link-like {
-  background: none;
-  border: none;
-  color: var(--color-primary);
-  font: inherit;
-  cursor: pointer;
-  text-decoration: underline;
-  padding: 0;
-}
-.link-like:hover { opacity: 0.8; }
-    :root {
-  --shadow-soft: 0 10px 30px rgba(67, 42, 31, 0.08);
-  --shadow-hover: 0 14px 36px rgba(67, 42, 31, 0.14);
-}
-
-.site-header {
-  box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 10px 30px rgba(0,0,0,0.04);
-}
-
-.hero {
-  position: relative;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at top left, rgba(140, 95, 82, 0.10), transparent 35%),
-    radial-gradient(circle at bottom right, rgba(233, 216, 207, 0.24), transparent 30%);
-  pointer-events: none;
-}
-
-.hero-grid,
-.story-grid,
-.contact-grid,
-.gallery-grid,
-.services-grid,
-.testimonials-grid {
-  gap: clamp(1rem, 2vw, 1.5rem);
-}
-
-.service-card,
-.testimonial,
-.gallery-card,
-.story-panel,
-.contact-card {
-  box-shadow: var(--shadow-soft);
-  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
-}
-
-.service-card:hover,
-.testimonial:hover,
-.gallery-card:hover,
-.story-panel:hover,
-.contact-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
-}
-
-.btn-primary {
-  box-shadow: 0 10px 24px rgba(140, 95, 82, 0.22);
-}
-
-.btn-primary:hover {
-  transform: translateY(-1px);
-}
-
-.btn-secondary {
-  border-color: color-mix(in srgb, var(--color-border) 70%, transparent);
-}
-
-.section-title {
-  letter-spacing: -0.02em;
-}
-
-.section-copy {
-  line-height: 1.75;
-}
-
-input, textarea, select {
-  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
-}
-
-input:focus, textarea:focus, select:focus {
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 16%, transparent);
-}
-
-.dialog-surface {
-  width: min(92vw, 460px);
-  border-radius: 1.6rem;
-  box-shadow: 0 24px 70px rgba(0,0,0,0.28);
-  padding: 2rem;
-}
-
-.auth-modal-head {
-  margin-bottom: 1.25rem;
-}
-
-.auth-session {
-  margin-top: 1.25rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--color-border);
-}
   </style>
 </head>
 <body>
+
   <header class="site-header">
     <div class="container nav">
       <a href="#inicio" class="brand" aria-label="Ir al inicio">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" aria-label="Bandera de Perú">
+          <svg viewBox="0 0 24 24" aria-label="Bandera de Peru">
             <rect x="3" y="5" width="6" height="14" rx="1" fill="#D91023"></rect>
             <rect x="9" y="5" width="6" height="14" fill="#FFFFFF"></rect>
             <rect x="15" y="5" width="6" height="14" rx="1" fill="#D91023"></rect>
@@ -854,39 +204,32 @@ input:focus, textarea:focus, select:focus {
         </span>
         <span class="brand-name">
           <strong>Entre Pisco y Nazca</strong>
-          <span>Banquetería Buffet</span>
+          <span>Banqueteria Buffet</span>
         </span>
       </a>
       <nav class="nav-links" aria-label="Principal">
         <a href="#historia">Nosotros</a>
         <a href="#servicios">Servicios</a>
         <a href="#galeria">Montajes</a>
-        <a href="catalogo.html">Catálogo</a>
-        <a href="#cotizacion">Cotización</a>
+        <a href="catalogo.html">Catalogo</a>
         <a href="#contacto">Contacto</a>
       </nav>
       <div class="nav-actions">
         <button class="theme-toggle" type="button" aria-label="Cambiar tema" data-theme-toggle></button>
-        <a class="btn btn-secondary" href="catalogo.html">Ver Catálogo</a>
-        <button class="btn btn-primary" type="button" id="openLoginPage">Iniciar sesión</button>
-         <div id="userMenu" hidden>
-    <button id="accountBtn" class="btn btn-secondary" type="button">Mi cuenta</button>
-    <button id="uploadBtn" class="btn btn-secondary" type="button">Subir fotos</button>
-    <button id="logoutBtn" class="btn btn-primary" type="button">Cerrar sesión</button>
-  
+        <a class="btn btn-secondary" href="catalogo.html">Ver Catalogo</a>
+        <a class="btn btn-primary" href="#contacto">Agenda tu fecha</a>
       </div>
     </div>
   </header>
 
   <main id="inicio">
+
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-copy">
           <div class="eyebrow">Matrimonios y celebraciones</div>
           <h1>Creamos mesas, sabores y momentos que se recuerdan.</h1>
-          <p>
-            Una propuesta de banquetería elegante, casual y amigable al bolsillo para matrimonios, aniversarios y eventos privados, inspirada en una estética criolla, con montaje cuidado, cocina delicada y atención al detalle.
-          </p>
+          <p>Una propuesta de banqueteria elegante, casual y amigable al bolsillo para matrimonios, aniversarios y eventos privados, inspirada en una estetica criolla, con montaje cuidado, cocina delicada y atencion al detalle.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#contacto">Agenda tu fecha</a>
             <a class="btn btn-secondary" href="#galeria">Ver montajes</a>
@@ -894,15 +237,15 @@ input:focus, textarea:focus, select:focus {
           <div class="hero-notes">
             <div class="hero-note">
               <strong>+120</strong>
-              <span>celebraciones íntimas y matrimonios diseñados con estilo propio</span>
+              <span>celebraciones intimas y matrimonios disenados con estilo propio</span>
             </div>
             <div class="hero-note">
-              <strong>Menús</strong>
-              <span>personalizados según estación, horario y tipo de evento</span>
+              <strong>Menus</strong>
+              <span>personalizados segun estacion, horario y tipo de evento</span>
             </div>
             <div class="hero-note">
-              <strong>Copiapó</strong>
-              <span>y alrededores, con coordinación previa y servicio a medida</span>
+              <strong>Copiapo</strong>
+              <span>y alrededores, con coordinacion previa y servicio a medida</span>
             </div>
           </div>
         </div>
@@ -917,18 +260,14 @@ input:focus, textarea:focus, select:focus {
       <div class="container story-grid">
         <div>
           <div class="eyebrow">Nuestra esencia</div>
-          <h2 class="section-title">Una banquetería con sensibilidad editorial y espíritu de celebración.</h2>
-          <p class="section-copy">
-            Una banquetería con alma peruana, donde la riqueza de la gastronomía tradicional se encuentra con el refinamiento de un servicio de celebración. Inspirada en la calidez de las mesas familiares y el sabor de compartir.
-          </p>
+          <h2 class="section-title">Una banqueteria con sensibilidad editorial y espiritu de celebracion.</h2>
+          <p class="section-copy">Una banqueteria con alma peruana, donde la riqueza de la gastronomia tradicional se encuentra con el refinamiento de un servicio de celebracion. Inspirada en la calidez de las mesas familiares y el sabor de compartir.</p>
         </div>
         <div class="story-panel">
-          <blockquote>
-            "Porque no es solo importante que se vea bien, sino que todos digan: Pucha qué rico he!."
-          </blockquote>
+          <blockquote>"Porque no es solo importante que se vea bien, sino que todos digan: Pucha que rico he!."</blockquote>
           <div class="story-list">
             <div><strong>Postres y tortas</strong><br>Muchas variedades a pedido del cliente, la especialidad, Torta Helada.</div>
-            <div><strong>Banquetería y Buffet</strong><br>Almuerzo, bebestible y postres para sus invitados, según lo que requiera.</div>
+            <div><strong>Banqueteria y Buffet</strong><br>Almuerzo, bebestible y postres para sus invitados, segun lo que requiera.</div>
             <div><strong>Servicio de Catering Completo</strong><br>Planificamos con usted para que solo llegue y disfrute.</div>
           </div>
         </div>
@@ -942,37 +281,36 @@ input:focus, textarea:focus, select:focus {
             <div class="eyebrow">Servicios</div>
             <h2 class="section-title">Formatos pensados para matrimonios y eventos memorables.</h2>
           </div>
-          <p class="section-copy"></p>
         </div>
         <div class="services-grid">
           <article class="service-card">
             <h3>Matrimonios</h3>
-            <p>Servicio completo para celebraciones románticas con identidad visual armónica y experiencia cuidada.</p>
+            <p>Servicio completo para celebraciones romanticas con identidad visual armonica y experiencia cuidada.</p>
             <ul>
-              <li>Cocktail de bienvenida y recepción</li>
+              <li>Cocktail de bienvenida y recepcion</li>
               <li>Cena servida o formato buffet elegante</li>
-              <li>Mesa de postres, torta y estación dulce</li>
-              <li>Montaje, vajilla y coordinación del servicio</li>
+              <li>Mesa de postres, torta y estacion dulce</li>
+              <li>Montaje, vajilla y coordinacion del servicio</li>
             </ul>
           </article>
           <article class="service-card">
             <h3>Eventos privados</h3>
-            <p>Ideal para aniversarios, cumpleaños, pedidas de mano, brunch y celebraciones familiares con sello boutique.</p>
+            <p>Ideal para aniversarios, cumpleanos, pedidas de mano, brunch y celebraciones familiares con sello boutique.</p>
             <ul>
-              <li>Menú flexible según horario del evento</li>
+              <li>Menu flexible segun horario del evento</li>
               <li>Opciones dulces y saladas</li>
-              <li>Ambientación de mesas y detalles decorativos</li>
-              <li>Versión íntima para espacios pequeños</li>
+              <li>Ambientacion de mesas y detalles decorativos</li>
+              <li>Version intima para espacios pequenos</li>
             </ul>
           </article>
           <article class="service-card">
             <h3>Estaciones especiales</h3>
-            <p>Complementos para elevar la experiencia visual y gastronómica durante la celebración.</p>
+            <p>Complementos para elevar la experiencia visual y gastronomica durante la celebracion.</p>
             <ul>
               <li>Barra de espumantes o mocktails</li>
               <li>Grazing table y mesa de quesos</li>
               <li>Buffet de postres finos</li>
-              <li>Café, petit fours y cierre del evento</li>
+              <li>Cafe, petit fours y cierre del evento</li>
             </ul>
           </article>
         </div>
@@ -984,219 +322,131 @@ input:focus, textarea:focus, select:focus {
         <div class="gallery-header">
           <div>
             <div class="eyebrow">Montajes</div>
-            <h2 class="section-title">Una presentación tan importante como el menú.</h2>
+            <h2 class="section-title">Una presentacion tan importante como el menu.</h2>
           </div>
-          <p class="section-copy"></p>
         </div>
         <div class="gallery-grid">
           <article class="gallery-card gallery-photo-large" role="img" aria-label="Mesa larga decorada para matrimonio"></article>
           <div class="gallery-stack">
             <article class="gallery-card gallery-photo-small" role="img" aria-label="Brindis de invitados en evento elegante"></article>
             <article class="gallery-card gallery-copy">
-              <h3>Detalles que sostienen la atmósfera.</h3>
-              <p>
-                Tonos suaves, vajilla texturada, cristalería delicada y una propuesta que se ve coherente desde la invitación hasta la mesa de postres.
-              </p>
-              <a class="btn btn-primary" href="#contacto">Quiero una propuesta así</a>
+              <h3>Detalles que sostienen la atmosfera.</h3>
+              <p>Tonos suaves, vajilla texturada, cristaleria delicada y una propuesta que se ve coherente desde la invitacion hasta la mesa de postres.</p>
+              <a class="btn btn-primary" href="#contacto">Quiero una propuesta asi</a>
             </article>
           </div>
         </div>
       </div>
     </section>
 
-   
-   
-
-  
-          <p class="section-copy"></p>
-          <div class="contact-card contact-info">
-            <div class="contact-item">
-              <span>WhatsApp</span>
-              <strong>+56949658897</strong>
-            </div>
-            <div class="contact-item">
-              <span>Correo</span>
-              <strong>claudiarios1357cs@gmail.com</strong>
-            </div>
-            <div class="contact-item">
-              <span>Facebook</span>
-              <strong><a href="https://www.facebook.com/profile.php?id=100057617192182" target="_blank" rel="noopener noreferrer">Entre Pisco y Nazca</a></strong>
-            </div>
-            <div class="contact-item">
-              <span>Cobertura</span>
-              <strong>Copiapó y alrededores</strong>
+    <section class="contact" id="contacto">
+      <div class="container">
+        <div class="contact-header">
+          <div>
+            <div class="eyebrow">Contacto</div>
+            <h2 class="section-title">Conversemos sobre tu evento.</h2>
+          </div>
+          <p class="section-copy">Cuentanos tu idea y te preparamos una propuesta a medida, sin compromiso.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div class="contact-info">
+              <div class="contact-item">
+                <span>WhatsApp</span>
+                <strong>+56 9 4965 8897</strong>
+              </div>
+              <div class="contact-item">
+                <span>Correo</span>
+                <strong>claudiarios1357cs@gmail.com</strong>
+              </div>
+              <div class="contact-item">
+                <span>Facebook</span>
+                <strong><a href="https://www.facebook.com/profile.php?id=100057617192182" target="_blank" rel="noopener noreferrer">Entre Pisco y Nazca</a></strong>
+              </div>
+              <div class="contact-item">
+                <span>Cobertura</span>
+                <strong>Copiapo y alrededores</strong>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="contact-card">
-          <form>
-            <label>
-              Nombre
-              <input type="text" placeholder="Tu nombre" />
-            </label>
-            <label>
-              Correo electrónico
-              <input type="email" placeholder="tucorreo@ejemplo.com" />
-            </label>
-            <label>
-              Tipo de evento
-              <select>
-                <option>Matrimonio</option>
-                <option>Aniversario</option>
-                <option>Cumpleaños</option>
-                <option>Evento privado</option>
-              </select>
-            </label>
-            <label>
-              Cuéntanos tu idea
-              <textarea placeholder="Fecha tentativa, cantidad de invitados, comuna y estilo que imaginas para tu evento"></textarea>
-            </label>
-            <button class="btn btn-primary" type="submit">Enviar solicitud</button>
-          </form>
+          <div class="contact-card">
+            <form id="contactForm">
+              <label>
+                Nombre
+                <input type="text" name="nombre" placeholder="Tu nombre" required />
+              </label>
+              <label>
+                Correo electronico
+                <input type="email" name="correo" placeholder="tucorreo@ejemplo.com" required />
+              </label>
+              <label>
+                Tipo de evento
+                <select name="tipo">
+                  <option>Matrimonio</option>
+                  <option>Aniversario</option>
+                  <option>Cumpleanos</option>
+                  <option>Evento privado</option>
+                </select>
+              </label>
+              <label>
+                Cuentanos tu idea
+                <textarea name="mensaje" placeholder="Fecha tentativa, cantidad de invitados, comuna y estilo que imaginas para tu evento"></textarea>
+              </label>
+              <button class="btn btn-primary" type="submit">Enviar solicitud</button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
+
   </main>
 
   <footer class="footer">
     <div class="container footer-inner">
       <p>&copy; 2025 Entre Pisco y Nazca. Todos los derechos reservados.</p>
-      <p>Hecho con ❤️ en Copiapó, Chile</p>
+      <p>Hecho con corazon en Copiapo, Chile</p>
     </div>
   </footer>
 
   <a href="https://www.facebook.com/profile.php?id=100057617192182" target="_blank" rel="noopener noreferrer" class="social-float facebook-float" aria-label="Facebook">
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-    </svg>
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
   </a>
   <a href="https://wa.me/56949658897" target="_blank" rel="noopener noreferrer" class="social-float whatsapp-float" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a6.963 6.963 0 00-6.953 6.954 6.968 6.968 0 001.025 3.678l-1.086 3.972 4.066-1.065a6.981 6.981 0 003.347.889h.004c3.837 0 6.953-3.114 6.953-6.952 0-1.856-.73-3.599-2.053-4.915-1.321-1.317-3.056-2.045-4.915-2.045"/>
-    </svg>
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a6.963 6.963 0 00-6.953 6.954 6.968 6.968 0 001.025 3.678l-1.086 3.972 4.066-1.065a6.981 6.981 0 003.347.889h.004c3.837 0 6.953-3.114 6.953-6.952 0-1.856-.73-3.599-2.053-4.915-1.321-1.317-3.056-2.045-4.915-2.045"/></svg>
   </a>
 
-  <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.js"></script>
   <script>
-    // AWS Amplify Cognito Configuration
-   <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.min.js"></script>
-  <script>
-  function updateAuthUI(user) {
-    const loginBtn = document.getElementById('loginBtn');
-    const userMenu = document.getElementById('userMenu');
-    const accountBtn = document.getElementById('accountBtn');
+    (function () {
+      var toggle = document.querySelector('[data-theme-toggle]');
+      var root = document.documentElement;
+      var SUN = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+      var MOON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      var theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+      if (toggle) toggle.innerHTML = theme === 'dark' ? SUN : MOON;
+      if (toggle) {
+        toggle.addEventListener('click', function () {
+          theme = theme === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', theme);
+          toggle.innerHTML = theme === 'dark' ? SUN : MOON;
+          toggle.setAttribute('aria-label', 'Cambiar a modo ' + (theme === 'dark' ? 'claro' : 'oscuro'));
+        });
+      }
+    })();
 
-    if (user) {
-      loginBtn.hidden = true;
-      userMenu.hidden = false;
-      accountBtn.textContent = user.name ? `Hola, ${user.name}` : 'Mi cuenta';
-    } else {
-      loginBtn.hidden = false;
-      userMenu.hidden = true;
-    }
-  }
-</script>
-<script>
-// Tu config Amplify (copia la tuya exacta de awsconfig)
-const awsconfig = {
-  Auth: {
-    region: 'us-east-1',
-    userPoolId: 'us-east-1_XXXXXXXXX',  // ← Tu UserPool ID
-    userPoolWebClientId: 'XXXXXXXXXXXXXXXXXXXXXXXXXX',  // ← Tu App Client ID
-    oauth: {
-      domain: 'tu-dominio.auth.us-east-1.amazoncognito.com',
-      scope: ['email', 'openid', 'profile'],
-      redirectSignIn: 'http://localhost:3000/',  // Tu dominio
-      redirectSignOut: 'http://localhost:3000/',
-      responseType: 'code'
-    }
-  }
-};
-AWSAmplify.configure(awsconfig);
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = this.querySelector('[type="submit"]');
+      var original = btn.textContent;
+      btn.textContent = 'Mensaje enviado! Te contactamos pronto';
+      btn.disabled = true;
+      setTimeout(function () {
+        btn.textContent = original;
+        btn.disabled = false;
+      }, 4000);
+      this.reset();
+    });
+  </script>
 
-// Listener global de auth (NUEVO - clave para historial dinámico)
-window.addEventListener('aws-amplify-auth', (event) => {
-  const { event: authEvent, data } = event.detail;
-  if (authEvent === 'signIn' || authEvent === 'signedIn') {
-    loadUserFeatures();
-    updateLoginButton('Cerrar sesión');
-  } else if (authEvent === 'signOut') {
-    hideUserFeatures();
-    updateLoginButton('Iniciar sesión');
-  }
-});
-
-// Carga features al loguear (historial, etc.)
-async function loadUserFeatures() {
-  try {
-    const user = await AWSAmplify.Auth.currentAuthenticatedUser();
-    const idToken = user.signInUserSession.idToken.jwtToken;
-    
-    // Carga historial (cambia URL por tu API)
-    const historial = await fetch('/api/historial', {
-      headers: { 'Authorization': `Bearer ${idToken}` }
-    }).then(r => r.json());
-    
-    // Muestra secciones
-    showElement('#user-menu');
-    showElement('#historial-section');
-    updateHistorial(historial);
-    
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
-
-function hideUserFeatures() {
-  hideElement('#user-menu');
-  hideElement('#historial-section');
-  document.getElementById('historial-lista').innerHTML = '';
-}
-
-// Helpers
-function showElement(selector) { 
-  const el = document.querySelector(selector); 
-  if (el) el.style.display = 'block'; 
-}
-function hideElement(selector) { 
-  const el = document.querySelector(selector); 
-  if (el) el.style.display = 'none'; 
-}
-function updateLoginButton(text) {
-  document.getElementById('openLoginPage').textContent = text;
-}
-function updateHistorial(data) {
-  const lista = document.getElementById('historial-lista');
-  lista.innerHTML = data.map(item => 
-    `<li>${item.fecha}: $${item.total}</li>`
-  ).join('') || '<li>No hay cotizaciones aún</li>';
-}
-
-// Botón login/logout (mejorado)
-document.getElementById('openLoginPage').addEventListener('click', async () => {
-  try {
-    await AWSAmplify.Auth.currentAuthenticatedUser();
-    await AWSAmplify.Auth.signOut();  // Si logueado → logout
-  } catch {
-    await AWSAmplify.Auth.federatedSignIn();  // Sino → login popup
-  }
-});
-
-// Chequeo inicial
-async function checkAuthStatus() {
-  try {
-    await AWSAmplify.Auth.currentAuthenticatedUser();
-    updateLoginButton('Cerrar sesión');
-    await loadUserFeatures();
-  } catch {
-    updateLoginButton('Iniciar sesión');
-  }
-}
-checkAuthStatus();
-  
-</script>
-
-  
 </body>
 </html>
