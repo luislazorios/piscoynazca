@@ -3,8 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Entre Pisco y Nazca | Banquetería para matrimonios y eventos</title>
-  <meta name="description" content="Banquetería-Buffet casual para matrimonios y eventos inspirada en gastronomía peruana, del Perú para el mundo." />
+
+  <!-- SEO primario -->
+  <title>Entre Pisco y Nazca | Banquetería y Buffet para Matrimonios en Copiapó</title>
+  <meta name="description" content="Banquetería y buffet para matrimonios, aniversarios y eventos en Copiapó. Gastronomía peruana, montaje elegante y servicio personalizado. Cotiza sin compromiso." />
+  <meta name="keywords" content="banqueteria copiapo, buffet matrimonio copiapo, catering eventos copiapo, banqueteria peruana, matrimonios copiapo, entre pisco y nazca" />
+  <meta name="author" content="Entre Pisco y Nazca" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.entrepiscoinazca.cl/" />
+
+  <!-- Open Graph (Facebook, WhatsApp) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.entrepiscoinazca.cl/" />
+  <meta property="og:title" content="Entre Pisco y Nazca | Banquetería para Matrimonios en Copiapó" />
+  <meta property="og:description" content="Banquetería y buffet para matrimonios y eventos en Copiapó. Gastronomía peruana, montaje elegante y servicio personalizado." />
+  <meta property="og:image" content="https://www.entrepiscoinazca.cl/img/og-cover.jpg" />
+  <meta property="og:locale" content="es_CL" />
+  <meta property="og:site_name" content="Entre Pisco y Nazca" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Entre Pisco y Nazca | Banquetería para Matrimonios en Copiapó" />
+  <meta name="twitter:description" content="Banquetería y buffet para matrimonios y eventos en Copiapó. Gastronomía peruana, montaje elegante." />
+  <meta name="twitter:image" content="https://www.entrepiscoinazca.cl/img/og-cover.jpg" />
+
+  <!-- Schema.org LocalBusiness (SEO estructurado) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FoodEstablishment",
+    "name": "Entre Pisco y Nazca",
+    "description": "Banquetería y buffet para matrimonios, aniversarios y eventos privados en Copiapó. Especialidad en gastronomía peruana.",
+    "url": "https://www.entrepiscoinazca.cl",
+    "telephone": "+56949658897",
+    "email": "claudiarios1357cs@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Copiapó",
+      "addressRegion": "Atacama",
+      "addressCountry": "CL"
+    },
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=100057617192182"
+    ],
+    "servesCuisine": "Peruana",
+    "priceRange": "$$",
+    "openingHours": "Mo-Su 09:00-20:00",
+    "areaServed": {
+      "@type": "City",
+      "name": "Copiapó"
+    }
+  }
+  </script>
+
+  <!-- Preconnect fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root, [data-theme="light"] {
       --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
@@ -63,8 +119,6 @@
     .eyebrow { font-size:var(--text-xs); letter-spacing:0.22em; text-transform:uppercase; color:var(--color-text-muted); margin-bottom:var(--space-3); }
     .section-title { font-family:var(--font-display); font-size:var(--text-xl); font-weight:600; line-height:1.05; margin:0 0 var(--space-4); letter-spacing:-0.02em; }
     .section-copy { color:var(--color-text-muted); max-width:62ch; line-height:1.75; }
-
-    /* HEADER */
     .site-header { position:sticky; top:0; z-index:10; backdrop-filter:blur(16px); background:color-mix(in srgb,var(--color-bg) 84%,transparent); border-bottom:1px solid var(--color-border); box-shadow:0 1px 0 rgba(0,0,0,0.04),0 10px 30px rgba(0,0,0,0.04); }
     .nav { display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); min-height:78px; }
     .brand { display:flex; align-items:center; gap:var(--space-3); font-weight:700; letter-spacing:0.04em; }
@@ -83,8 +137,6 @@
     .btn-primary:hover { background:var(--color-primary-hover); transform:translateY(-1px); }
     .btn-secondary { background:transparent; color:var(--color-text); border-color:color-mix(in srgb,var(--color-border) 70%,transparent); }
     .btn-secondary:hover, .theme-toggle:hover { background:var(--color-surface-offset); }
-
-    /* HERO */
     .hero { padding:clamp(4rem,8vw,7rem) 0 clamp(3rem,7vw,6rem); position:relative; }
     .hero::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at top left,rgba(140,95,82,.10),transparent 35%),radial-gradient(circle at bottom right,rgba(233,216,207,.24),transparent 30%); pointer-events:none; }
     .hero-grid { display:grid; grid-template-columns:1.05fr 0.95fr; gap:clamp(1rem,2vw,1.5rem); align-items:center; }
@@ -94,66 +146,18 @@
     .hero-notes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-4); }
     .hero-note { padding-top:var(--space-4); border-top:1px solid var(--color-border); }
     .hero-note strong { display:block; font-family:var(--font-display); font-size:1.4rem; margin-bottom:0.2rem; }
-
-    /* HERO VISUAL — layout del par de frames */
     .hero-visual { position:relative; min-height:620px; }
-
-    .frame-main {
-      position: absolute;
-      inset: 0 0 4rem 4rem;           /* top right bottom left */
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-      background-color: var(--color-surface-offset);
-      background-image:
-        linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05)),
-        url('img/logo.png');
-      background-repeat: no-repeat, no-repeat;
-      background-position: center, center;
-      background-size: cover, cover;
-    }
-
-    /*
-      frame-accent: imagen secundaria superpuesta en la esquina inferior izquierda.
-      — usa <img> interno en vez de background para control total del encuadre.
-      — el borde blanco del marco se logra con outline + padding o con el borde real.
-    */
-    .frame-accent {
-      position: absolute;
-      width: 240px;
-      height: 300px;
-      left: 5rem;
-      bottom: 1.5rem;                 /* flota un poco sobre el borde inferior */
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-      border: 10px solid var(--color-bg);
-      z-index: 2;
-    }
-
-    /* La imagen dentro del frame-accent ocupa todo el contenedor,
-       object-position controla qué parte se muestra */
-    .frame-accent img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 30%;   /* 30% = muestra más la parte superior */
-      display: block;
-    }
-
-    /* SECTIONS */
+    .frame-main { position:absolute; inset:0 0 4rem 4rem; border-radius:var(--radius-xl); overflow:hidden; box-shadow:var(--shadow-lg); background-color:var(--color-surface-offset); background-image:linear-gradient(180deg,rgba(255,255,255,0.25),rgba(255,255,255,0.05)),url('img/logo.png'); background-repeat:no-repeat,no-repeat; background-position:center,center; background-size:cover,cover; }
+    .frame-accent { position:absolute; width:240px; height:300px; left:5rem; bottom:1.5rem; border-radius:var(--radius-xl); overflow:hidden; box-shadow:var(--shadow-lg); border:10px solid var(--color-bg); z-index:2; }
+    .frame-accent img { width:100%; height:100%; object-fit:cover; object-position:center 30%; display:block; }
     section { padding:clamp(3.5rem,7vw,6rem) 0; }
     .story, .services, .gallery, .contact { border-top:1px solid var(--color-border); }
-
-    /* STORY */
     .story-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(1rem,2vw,1.5rem); align-items:start; }
     .story-panel { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); box-shadow:var(--shadow-soft); padding:var(--space-8); transition:transform 180ms ease,box-shadow 180ms ease; }
     .story-panel:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
     .story-panel blockquote { margin:0 0 var(--space-4); font-family:var(--font-display); font-size:clamp(1.8rem,3vw,2.6rem); line-height:1.05; }
     .story-list { display:grid; gap:var(--space-4); }
     .story-list div { padding:var(--space-5); border-radius:var(--radius-md); background:var(--color-surface-2); border:1px solid var(--color-border); }
-
-    /* SERVICES */
     .services-header, .gallery-header, .contact-header { display:flex; justify-content:space-between; align-items:end; gap:var(--space-6); margin-bottom:var(--space-8); }
     .services-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(1rem,2vw,1.5rem); }
     .service-card { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); box-shadow:var(--shadow-soft); padding:var(--space-8); min-height:100%; transition:transform 180ms ease,box-shadow 180ms ease; }
@@ -162,8 +166,6 @@
     .service-card p { color:var(--color-text-muted); margin-bottom:var(--space-5); }
     .service-card ul { list-style:none; padding:0; margin:0; display:grid; gap:var(--space-3); color:var(--color-text-muted); font-size:var(--text-sm); }
     .service-card li::before { content:'—'; margin-right:0.5rem; color:var(--color-primary); }
-
-    /* GALLERY */
     .gallery-grid { display:grid; grid-template-columns:1.15fr 0.85fr; gap:clamp(1rem,2vw,1.5rem); }
     .gallery-card { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); box-shadow:var(--shadow-soft); overflow:hidden; transition:transform 180ms ease,box-shadow 180ms ease; }
     .gallery-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
@@ -173,8 +175,6 @@
     .gallery-copy { min-height:257px; padding:var(--space-8); display:flex; flex-direction:column; justify-content:center; background:var(--color-surface); }
     .gallery-copy h3 { margin:0 0 var(--space-3); font-family:var(--font-display); font-size:2rem; font-weight:600; }
     .gallery-copy p { color:var(--color-text-muted); margin-bottom:var(--space-5); }
-
-    /* CONTACT */
     .contact-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(1rem,2vw,2rem); align-items:start; }
     .contact-card { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); box-shadow:var(--shadow-soft); padding:var(--space-8); transition:transform 180ms ease,box-shadow 180ms ease; }
     .contact-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
@@ -190,12 +190,8 @@
     input, textarea, select { width:100%; border:1px solid var(--color-border); border-radius:1rem; padding:0.95rem 1rem; background:var(--color-surface-2); color:var(--color-text); font:inherit; transition:border-color 160ms ease,box-shadow 160ms ease; }
     textarea { min-height:150px; resize:vertical; }
     input:focus, textarea:focus, select:focus { outline:2px solid color-mix(in srgb,var(--color-primary) 55%,white); outline-offset:2px; box-shadow:0 0 0 4px color-mix(in srgb,var(--color-primary) 16%,transparent); }
-
-    /* FOOTER */
     .footer { padding:var(--space-8) 0 var(--space-10); color:var(--color-text-muted); font-size:var(--text-sm); }
     .footer-inner { display:flex; justify-content:space-between; gap:var(--space-4); border-top:1px solid var(--color-border); padding-top:var(--space-6); flex-wrap:wrap; }
-
-    /* SOCIAL FLOAT */
     .social-float { position:fixed; right:20px; width:62px; height:62px; border-radius:50%; display:grid; place-items:center; color:#fff; box-shadow:0 12px 28px rgba(0,0,0,0.22); z-index:9999; transition:transform 180ms ease,box-shadow 180ms ease,background 180ms ease; }
     .social-float:hover { transform:translateY(-2px); box-shadow:0 16px 32px rgba(0,0,0,0.26); }
     .facebook-float { bottom:92px; background:#1877F2; }
@@ -203,8 +199,6 @@
     .whatsapp-float { bottom:20px; background:#25D366; }
     .whatsapp-float:hover { background:#1ebe5b; }
     .social-float svg { width:30px; height:30px; }
-
-    /* RESPONSIVE */
     @media (max-width: 980px) {
       .hero-grid, .story-grid, .contact-grid, .gallery-grid, .services-grid { grid-template-columns:1fr; }
       .hero-visual { min-height:520px; }
@@ -221,7 +215,6 @@
       .hero-visual { min-height:440px; }
       .frame-main { inset:0 0 4.5rem 0; }
       .frame-accent { width:160px; height:200px; border-width:6px; left:1rem; bottom:0.5rem; }
-      .frame-accent img { object-position: center 30%; }
       .story-panel, .contact-card, .service-card, .gallery-copy { padding:var(--space-6); }
       .social-float { right:14px; width:58px; height:58px; }
       .facebook-float { bottom:82px; }
@@ -232,11 +225,14 @@
 </head>
 <body>
 
-  <header class="site-header">
+  <!-- Skip link accesibilidad / SEO -->
+  <a href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:999;" onfocus="this.style.cssText='position:fixed;top:0;left:0;width:auto;height:auto;padding:1rem 1.5rem;background:var(--color-primary);color:#fff;font-weight:700;z-index:9999;'">Saltar al contenido</a>
+
+  <header class="site-header" role="banner">
     <div class="container nav">
-      <a href="#inicio" class="brand" aria-label="Ir al inicio">
+      <a href="#inicio" class="brand" aria-label="Entre Pisco y Nazca — ir al inicio">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" aria-label="Bandera de Peru">
+          <svg viewBox="0 0 24 24" focusable="false">
             <rect x="3" y="5" width="6" height="14" rx="1" fill="#D91023"></rect>
             <rect x="9" y="5" width="6" height="14" fill="#FFFFFF"></rect>
             <rect x="15" y="5" width="6" height="14" rx="1" fill="#D91023"></rect>
@@ -244,32 +240,32 @@
         </span>
         <span class="brand-name">
           <strong>Entre Pisco y Nazca</strong>
-          <span>Banqueteria Buffet</span>
+          <span>Banquetería Buffet</span>
         </span>
       </a>
-      <nav class="nav-links" aria-label="Principal">
+      <nav class="nav-links" aria-label="Navegación principal">
         <a href="#historia">Nosotros</a>
         <a href="#servicios">Servicios</a>
         <a href="#galeria">Montajes</a>
-        <a href="catalogo.html">Catalogo</a>
+        <a href="catalogo.html">Catálogo</a>
         <a href="#contacto">Contacto</a>
       </nav>
       <div class="nav-actions">
-        <button class="theme-toggle" type="button" aria-label="Cambiar tema" data-theme-toggle></button>
-        <a class="btn btn-secondary" href="catalogo.html">Ver Catalogo</a>
+        <button class="theme-toggle" type="button" aria-label="Cambiar tema de color" data-theme-toggle></button>
+        <a class="btn btn-secondary" href="catalogo.html">Ver Catálogo</a>
         <a class="btn btn-primary" href="#contacto">Agenda tu fecha</a>
       </div>
     </div>
   </header>
 
-  <main id="inicio">
+  <main id="main-content" role="main">
 
-    <section class="hero">
+    <section class="hero" id="inicio" aria-labelledby="hero-heading">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <div class="eyebrow">Matrimonios y celebraciones</div>
-          <h1>Creamos mesas, sabores y momentos que se recuerdan.</h1>
-          <p>Una propuesta de banqueteria elegante, casual y amigable al bolsillo para matrimonios, aniversarios y eventos privados, inspirada en una estetica criolla, con montaje cuidado, cocina delicada y atencion al detalle.</p>
+          <p class="eyebrow">Banquetería para matrimonios en Copiapó</p>
+          <h1 id="hero-heading">Creamos mesas, sabores y momentos que se recuerdan.</h1>
+          <p>Banquetería elegante, casual y amigable al bolsillo para matrimonios, aniversarios y eventos privados en Copiapó. Gastronomía peruana, montaje cuidado y atención personalizada desde el primer contacto.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#contacto">Agenda tu fecha</a>
             <a class="btn btn-secondary" href="#galeria">Ver montajes</a>
@@ -277,136 +273,137 @@
           <div class="hero-notes">
             <div class="hero-note">
               <strong>+120</strong>
-              <span>celebraciones intimas y matrimonios disenados con estilo propio</span>
+              <span>celebraciones íntimas y matrimonios realizados</span>
             </div>
             <div class="hero-note">
-              <strong>Menus</strong>
-              <span>personalizados segun estacion, horario y tipo de evento</span>
+              <strong>Menús</strong>
+              <span>personalizados según estación, horario y tipo de evento</span>
             </div>
             <div class="hero-note">
-              <strong>Copiapo</strong>
-              <span>y alrededores, con coordinacion previa y servicio a medida</span>
+              <strong>Copiapó</strong>
+              <span>y alrededores, con coordinación previa y servicio a medida</span>
             </div>
           </div>
         </div>
-
-        <div class="hero-visual" aria-label="Montaje elegante de matrimonio">
-          <div class="frame-main"></div>
-
-          <!-- frame-accent ahora usa <img> para control preciso del encuadre -->
+        <div class="hero-visual">
+          <div class="frame-main" role="img" aria-label="Logo Entre Pisco y Nazca"></div>
           <div class="frame-accent">
             <img
               src="img/secofin.png"
-              alt="Seco de res, plato emblematico del menu"
-              loading="lazy"
+              alt="Seco de res peruano, plato emblematico del servicio de banqueteria"
+              width="240"
+              height="300"
+              loading="eager"
             />
           </div>
         </div>
       </div>
     </section>
 
-    <section class="story" id="historia">
+    <section class="story" id="historia" aria-labelledby="historia-heading">
       <div class="container story-grid">
         <div>
-          <div class="eyebrow">Nuestra esencia</div>
-          <h2 class="section-title">Una banqueteria con sensibilidad editorial y espiritu de celebracion.</h2>
-          <p class="section-copy">Una banqueteria con alma peruana, donde la riqueza de la gastronomia tradicional se encuentra con el refinamiento de un servicio de celebracion. Inspirada en la calidez de las mesas familiares y el sabor de compartir.</p>
+          <p class="eyebrow">Nuestra esencia</p>
+          <h2 class="section-title" id="historia-heading">Banquetería con alma peruana y espíritu de celebración.</h2>
+          <p class="section-copy">Donde la riqueza de la gastronomía peruana tradicional se encuentra con el refinamiento de un servicio de celebración en Copiapó. Inspirada en la calidez de las mesas familiares y el sabor de compartir.</p>
         </div>
         <div class="story-panel">
-          <blockquote>"Porque no es solo importante que se vea bien, sino que todos digan: Pucha que rico he!."</blockquote>
+          <blockquote cite="#">
+            "Porque no es solo importante que se vea bien, sino que todos digan: ¡Pucha qué rico!"
+          </blockquote>
           <div class="story-list">
-            <div><strong>Postres y tortas</strong><br>Muchas variedades a pedido del cliente, la especialidad, Torta Helada.</div>
-            <div><strong>Banqueteria y Buffet</strong><br>Almuerzo, bebestible y postres para sus invitados, segun lo que requiera.</div>
-            <div><strong>Servicio de Catering Completo</strong><br>Planificamos con usted para que solo llegue y disfrute.</div>
+            <div><strong>Postres y tortas</strong><br>Muchas variedades a pedido del cliente. Especialidad: Torta Helada.</div>
+            <div><strong>Banquetería y Buffet</strong><br>Almuerzo, bebestible y postres para sus invitados, según lo que requiera.</div>
+            <div><strong>Catering Completo</strong><br>Planificamos con usted para que solo llegue y disfrute.</div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="services" id="servicios">
+    <section class="services" id="servicios" aria-labelledby="servicios-heading">
       <div class="container">
         <div class="services-header">
           <div>
-            <div class="eyebrow">Servicios</div>
-            <h2 class="section-title">Formatos pensados para matrimonios y eventos memorables.</h2>
+            <p class="eyebrow">Servicios de banquetería en Copiapó</p>
+            <h2 class="section-title" id="servicios-heading">Formatos para matrimonios y eventos memorables.</h2>
           </div>
         </div>
         <div class="services-grid">
           <article class="service-card">
             <h3>Matrimonios</h3>
-            <p>Servicio completo para celebraciones romanticas con identidad visual armonica y experiencia cuidada.</p>
+            <p>Servicio completo para celebraciones románticas con identidad visual armónica y experiencia cuidada en Copiapó.</p>
             <ul>
-              <li>Cocktail de bienvenida y recepcion</li>
+              <li>Cocktail de bienvenida y recepción</li>
               <li>Cena servida o formato buffet elegante</li>
-              <li>Mesa de postres, torta y estacion dulce</li>
-              <li>Montaje, vajilla y coordinacion del servicio</li>
+              <li>Mesa de postres, torta y estación dulce</li>
+              <li>Montaje, vajilla y coordinación del servicio</li>
             </ul>
           </article>
           <article class="service-card">
             <h3>Eventos privados</h3>
-            <p>Ideal para aniversarios, cumpleanos, pedidas de mano, brunch y celebraciones familiares con sello boutique.</p>
+            <p>Ideal para aniversarios, cumpleaños, pedidas de mano, brunch y celebraciones familiares con sello boutique.</p>
             <ul>
-              <li>Menu flexible segun horario del evento</li>
+              <li>Menú flexible según horario del evento</li>
               <li>Opciones dulces y saladas</li>
-              <li>Ambientacion de mesas y detalles decorativos</li>
-              <li>Version intima para espacios pequenos</li>
+              <li>Ambientación de mesas y detalles decorativos</li>
+              <li>Versión íntima para espacios pequeños</li>
             </ul>
           </article>
           <article class="service-card">
             <h3>Estaciones especiales</h3>
-            <p>Complementos para elevar la experiencia visual y gastronomica durante la celebracion.</p>
+            <p>Complementos gastronómicos para elevar la experiencia visual y culinaria durante la celebración.</p>
             <ul>
               <li>Barra de espumantes o mocktails</li>
               <li>Grazing table y mesa de quesos</li>
               <li>Buffet de postres finos</li>
-              <li>Cafe, petit fours y cierre del evento</li>
+              <li>Café, petit fours y cierre del evento</li>
             </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="gallery" id="galeria">
+    <section class="gallery" id="galeria" aria-labelledby="galeria-heading">
       <div class="container">
         <div class="gallery-header">
           <div>
-            <div class="eyebrow">Montajes</div>
-            <h2 class="section-title">Una presentacion tan importante como el menu.</h2>
+            <p class="eyebrow">Montajes y presentaciones</p>
+            <h2 class="section-title" id="galeria-heading">Una presentación tan importante como el menú.</h2>
           </div>
         </div>
         <div class="gallery-grid">
-          <article class="gallery-card gallery-photo-large" role="img" aria-label="Mesa larga decorada para matrimonio"></article>
+          <article class="gallery-card gallery-photo-large" role="img" aria-label="Mesa larga decorada para matrimonio en Copiapó"></article>
           <div class="gallery-stack">
-            <article class="gallery-card gallery-photo-small" role="img" aria-label="Brindis de invitados en evento elegante"></article>
+            <article class="gallery-card gallery-photo-small" role="img" aria-label="Montaje de buffet para evento privado"></article>
             <article class="gallery-card gallery-copy">
-              <h3>Detalles que sostienen la atmosfera.</h3>
-              <p>Tonos suaves, vajilla texturada, cristaleria delicada y una propuesta que se ve coherente desde la invitacion hasta la mesa de postres.</p>
-              <a class="btn btn-primary" href="#contacto">Quiero una propuesta asi</a>
+              <h3>Detalles que sostienen la atmósfera.</h3>
+              <p>Tonos suaves, vajilla texturada, cristalería delicada y una propuesta coherente desde la invitación hasta la mesa de postres.</p>
+              <a class="btn btn-primary" href="#contacto">Quiero una propuesta así</a>
             </article>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="contact" id="contacto">
+    <section class="contact" id="contacto" aria-labelledby="contacto-heading">
       <div class="container">
         <div class="contact-header">
           <div>
-            <div class="eyebrow">Contacto</div>
-            <h2 class="section-title">Conversemos sobre tu evento.</h2>
+            <p class="eyebrow">Cotiza tu evento en Copiapó</p>
+            <h2 class="section-title" id="contacto-heading">Conversemos sobre tu matrimonio o evento.</h2>
           </div>
-          <p class="section-copy">Cuentanos tu idea y te preparamos una propuesta a medida, sin compromiso.</p>
+          <p class="section-copy">Cuéntanos tu idea y te preparamos una propuesta a medida, sin compromiso.</p>
         </div>
         <div class="contact-grid">
-          <div class="contact-card">
+          <address class="contact-card" style="font-style:normal;">
             <div class="contact-info">
               <div class="contact-item">
                 <span>WhatsApp</span>
-                <strong>+56 9 4965 8897</strong>
+                <strong><a href="https://wa.me/56949658897" aria-label="Contactar por WhatsApp">+56 9 4965 8897</a></strong>
               </div>
               <div class="contact-item">
-                <span>Correo</span>
-                <strong>claudiarios1357cs@gmail.com</strong>
+                <span>Correo electrónico</span>
+                <strong><a href="mailto:claudiarios1357cs@gmail.com">claudiarios1357cs@gmail.com</a></strong>
               </div>
               <div class="contact-item">
                 <span>Facebook</span>
@@ -414,33 +411,25 @@
               </div>
               <div class="contact-item">
                 <span>Cobertura</span>
-                <strong>Copiapo y alrededores</strong>
+                <strong>Copiapó y alrededores, Región de Atacama</strong>
               </div>
             </div>
-          </div>
+          </address>
           <div class="contact-card">
-            <form id="contactForm">
-              <label>
-                Nombre
-                <input type="text" name="nombre" placeholder="Tu nombre" required />
-              </label>
-              <label>
-                Correo electronico
-                <input type="email" name="correo" placeholder="tucorreo@ejemplo.com" required />
-              </label>
-              <label>
-                Tipo de evento
-                <select name="tipo">
-                  <option>Matrimonio</option>
-                  <option>Aniversario</option>
-                  <option>Cumpleanos</option>
-                  <option>Evento privado</option>
-                </select>
-              </label>
-              <label>
-                Cuentanos tu idea
-                <textarea name="mensaje" placeholder="Fecha tentativa, cantidad de invitados, comuna y estilo que imaginas para tu evento"></textarea>
-              </label>
+            <form id="contactForm" novalidate>
+              <label for="nombre">Nombre</label>
+              <input id="nombre" type="text" name="nombre" placeholder="Tu nombre completo" required autocomplete="name" />
+              <label for="correo">Correo electrónico</label>
+              <input id="correo" type="email" name="correo" placeholder="tucorreo@ejemplo.com" required autocomplete="email" />
+              <label for="tipo">Tipo de evento</label>
+              <select id="tipo" name="tipo">
+                <option value="matrimonio">Matrimonio</option>
+                <option value="aniversario">Aniversario</option>
+                <option value="cumpleanos">Cumpleaños</option>
+                <option value="privado">Evento privado</option>
+              </select>
+              <label for="mensaje">Cuéntanos tu idea</label>
+              <textarea id="mensaje" name="mensaje" placeholder="Fecha tentativa, cantidad de invitados, comuna y estilo que imaginas para tu evento"></textarea>
               <button class="btn btn-primary" type="submit">Enviar solicitud</button>
             </form>
           </div>
@@ -450,26 +439,26 @@
 
   </main>
 
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="container footer-inner">
-      <p>&copy; 2025 Entre Pisco y Nazca. Todos los derechos reservados.</p>
-      <p>Hecho con corazon en Copiapo, Chile</p>
+      <p>&copy; 2025 Entre Pisco y Nazca — Banquetería y Buffet en Copiapó. Todos los derechos reservados.</p>
+      <p>Hecho con ❤️ en Copiapó, Chile</p>
     </div>
   </footer>
 
-  <a href="https://www.facebook.com/profile.php?id=100057617192182" target="_blank" rel="noopener noreferrer" class="social-float facebook-float" aria-label="Facebook">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+  <a href="https://www.facebook.com/profile.php?id=100057617192182" target="_blank" rel="noopener noreferrer" class="social-float facebook-float" aria-label="Visitar página de Facebook de Entre Pisco y Nazca">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
   </a>
-  <a href="https://wa.me/56949658897" target="_blank" rel="noopener noreferrer" class="social-float whatsapp-float" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a6.963 6.963 0 00-6.953 6.954 6.968 6.968 0 001.025 3.678l-1.086 3.972 4.066-1.065a6.981 6.981 0 003.347.889h.004c3.837 0 6.953-3.114 6.953-6.952 0-1.856-.73-3.599-2.053-4.915-1.321-1.317-3.056-2.045-4.915-2.045"/></svg>
+  <a href="https://wa.me/56949658897" target="_blank" rel="noopener noreferrer" class="social-float whatsapp-float" aria-label="Contactar por WhatsApp a Entre Pisco y Nazca">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a6.963 6.963 0 00-6.953 6.954 6.968 6.968 0 001.025 3.678l-1.086 3.972 4.066-1.065a6.981 6.981 0 003.347.889h.004c3.837 0 6.953-3.114 6.953-6.952 0-1.856-.73-3.599-2.053-4.915-1.321-1.317-3.056-2.045-4.915-2.045"/></svg>
   </a>
 
   <script>
     (function () {
       var toggle = document.querySelector('[data-theme-toggle]');
       var root = document.documentElement;
-      var SUN = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
-      var MOON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      var SUN = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+      var MOON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
       var theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       root.setAttribute('data-theme', theme);
       if (toggle) toggle.innerHTML = theme === 'dark' ? SUN : MOON;
@@ -487,12 +476,9 @@
       e.preventDefault();
       var btn = this.querySelector('[type="submit"]');
       var original = btn.textContent;
-      btn.textContent = 'Mensaje enviado! Te contactamos pronto';
+      btn.textContent = '¡Mensaje enviado! Te contactamos pronto';
       btn.disabled = true;
-      setTimeout(function () {
-        btn.textContent = original;
-        btn.disabled = false;
-      }, 4000);
+      setTimeout(function () { btn.textContent = original; btn.disabled = false; }, 4000);
       this.reset();
     });
   </script>
