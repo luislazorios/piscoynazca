@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Entre Pisco y Nazca | Banquetería para matrimonios y eventos</title>
   <meta name="description" content="Banquetería-Buffet casual para matrimonios y eventos inspirada en gastronomía peruana, del Perú para el mundo." />
-
   <style>
     :root, [data-theme="light"] {
       --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
@@ -95,10 +94,52 @@
     .hero-notes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-4); }
     .hero-note { padding-top:var(--space-4); border-top:1px solid var(--color-border); }
     .hero-note strong { display:block; font-family:var(--font-display); font-size:1.4rem; margin-bottom:0.2rem; }
+
+    /* HERO VISUAL — layout del par de frames */
     .hero-visual { position:relative; min-height:620px; }
-    .frame-main, .frame-accent { position:absolute; border-radius:var(--radius-xl); overflow:hidden; box-shadow:var(--shadow-lg); background:var(--color-surface-offset); }
-    .frame-main { inset:0 0 4rem 4rem; background-image:linear-gradient(180deg,rgba(255,255,255,0.25),rgba(255,255,255,0.05)),url('img/logo.png'); background-repeat:no-repeat,no-repeat; background-position:center,top center; background-size:auto,100% 80%; }
-    .frame-accent { width:240px; height:300px; left:5rem; bottom:0.05; border:10px solid var(--color-bg); background-image:linear-gradient(180deg,rgba(255,255,255,0.18),rgba(255,255,255,0.02)),url('img/secofin.png'); background-repeat:no-repeat,no-repeat; background-size:auto,cover; background-position:center,center 60%; z-index:2; }
+
+    .frame-main {
+      position: absolute;
+      inset: 0 0 4rem 4rem;           /* top right bottom left */
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      background-color: var(--color-surface-offset);
+      background-image:
+        linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05)),
+        url('img/logo.png');
+      background-repeat: no-repeat, no-repeat;
+      background-position: center, center;
+      background-size: cover, cover;
+    }
+
+    /*
+      frame-accent: imagen secundaria superpuesta en la esquina inferior izquierda.
+      — usa <img> interno en vez de background para control total del encuadre.
+      — el borde blanco del marco se logra con outline + padding o con el borde real.
+    */
+    .frame-accent {
+      position: absolute;
+      width: 240px;
+      height: 300px;
+      left: 5rem;
+      bottom: 1.5rem;                 /* flota un poco sobre el borde inferior */
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 10px solid var(--color-bg);
+      z-index: 2;
+    }
+
+    /* La imagen dentro del frame-accent ocupa todo el contenedor,
+       object-position controla qué parte se muestra */
+    .frame-accent img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;   /* 30% = muestra más la parte superior */
+      display: block;
+    }
 
     /* SECTIONS */
     section { padding:clamp(3.5rem,7vw,6rem) 0; }
@@ -168,7 +209,7 @@
       .hero-grid, .story-grid, .contact-grid, .gallery-grid, .services-grid { grid-template-columns:1fr; }
       .hero-visual { min-height:520px; }
       .frame-main { inset:0 0 3rem 2rem; }
-      .frame-accent { left:2.5rem; }
+      .frame-accent { left:2.5rem; bottom:1rem; }
       .nav-links { display:none; }
       .services-header, .gallery-header, .contact-header { align-items:start; flex-direction:column; }
     }
@@ -179,7 +220,8 @@
       .hero-notes { grid-template-columns:1fr; }
       .hero-visual { min-height:440px; }
       .frame-main { inset:0 0 4.5rem 0; }
-      .frame-accent { width:180px; height:210px; border-width:6px; left:1.5rem; }
+      .frame-accent { width:160px; height:200px; border-width:6px; left:1rem; bottom:0.5rem; }
+      .frame-accent img { object-position: center 30%; }
       .story-panel, .contact-card, .service-card, .gallery-copy { padding:var(--space-6); }
       .social-float { right:14px; width:58px; height:58px; }
       .facebook-float { bottom:82px; }
@@ -247,9 +289,18 @@
             </div>
           </div>
         </div>
+
         <div class="hero-visual" aria-label="Montaje elegante de matrimonio">
           <div class="frame-main"></div>
-          <div class="frame-accent"></div>
+
+          <!-- frame-accent ahora usa <img> para control preciso del encuadre -->
+          <div class="frame-accent">
+            <img
+              src="img/secofin.png"
+              alt="Seco de res, plato emblematico del menu"
+              loading="lazy"
+            />
+          </div>
         </div>
       </div>
     </section>
