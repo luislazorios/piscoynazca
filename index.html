@@ -1246,6 +1246,22 @@ input:focus, textarea:focus, select:focus {
   <script>
     // AWS Amplify Cognito Configuration
    <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.min.js"></script>
+  <script>
+  function updateAuthUI(user) {
+    const loginBtn = document.getElementById('loginBtn');
+    const userMenu = document.getElementById('userMenu');
+    const accountBtn = document.getElementById('accountBtn');
+
+    if (user) {
+      loginBtn.hidden = true;
+      userMenu.hidden = false;
+      accountBtn.textContent = user.name ? `Hola, ${user.name}` : 'Mi cuenta';
+    } else {
+      loginBtn.hidden = false;
+      userMenu.hidden = true;
+    }
+  }
+</script>
 <script>
 // Tu config Amplify (copia la tuya exacta de awsconfig)
 const awsconfig = {
@@ -1343,6 +1359,7 @@ async function checkAuthStatus() {
   }
 }
 checkAuthStatus();
+  
 </script>
 
   
