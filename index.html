@@ -421,14 +421,15 @@
 
   <script>
     (function () {
-      var toggle = document.querySelector('[data-theme-toggle]');
-      var root = document.documentElement;
-      var SUN = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
-      var MOON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-      var theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      const toggle = document.querySelector('[data-theme-toggle]');
+      const root = document.documentElement;
+      const SUN = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+      const MOON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       root.setAttribute('data-theme', theme);
-      if (toggle) toggle.innerHTML = theme === 'dark' ? SUN : MOON;
       if (toggle) {
+        toggle.innerHTML = theme === 'dark' ? SUN : MOON;
+        toggle.setAttribute('aria-label', 'Cambiar a modo ' + (theme === 'dark' ? 'claro' : 'oscuro'));
         toggle.addEventListener('click', function () {
           theme = theme === 'dark' ? 'light' : 'dark';
           root.setAttribute('data-theme', theme);
@@ -438,50 +439,63 @@
       }
     })();
 
-    document.getElementById('contactForm').addEventListener('submit', async function (e) {
+    const form = document.getElementById('contactForm');
+
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
+
       const btn = this.querySelector('[type="submit"]');
+      const nombre = this.nombre.value.trim();
+      const correo = this.correo.value.trim();
+      const tipo = this.tipo.value;
+      const mensaje = this.mensaje.value.trim();
+
+      if (!nombre || !correo) {
+        btn.textContent = 'Completa nombre y correo';
+        setTimeout(() => {
+          btn.textContent = 'Enviar solicitud';
+        }, 3000);
+        return;
+      }
+
+      const data = { nombre, correo, tipo, mensaje };
+
       btn.textContent = 'Enviando...';
       btn.disabled = true;
 
-      const data = {
-        nombre: this.nombre.value,
-        correo: this.correo.value,
-        tipo: this.tipo.value,
-        mensaje: this.mensaje.value,
-      };
-
       try {
-  const res = await fetch('https://p10yuwy285.execute-api.sa-east-1.amazonaws.com/default/Formulario', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  });
+        const res = await fetch('https://p10yuwy285.execute-api.sa-east-1.amazonaws.com/default/Formulario', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
 
-  const result = await res.json();
+        const rawText = await res.text();
+        let result = {};
 
-  if (!res.ok || !result.ok) {
-    throw new Error(result.error || 'Error al enviar el formulario');
-  }
+        try {
+          result = rawText ? JSON.parse(rawText) : {};
+        } catch {
+          result = { ok: false, error: rawText || 'Respuesta no válida del servidor' };
+        }
 
-  btn.textContent = '¡Enviado! Te contactamos pronto 🎉';
-  this.reset();
-} catch (error) {
-  console.error('Error al enviar formulario:', error);
-  btn.textContent = 'Error al enviar. Escríbenos por WhatsApp';
-} finally {
-  btn.disabled = true;
-  setTimeout(() => {
-    btn.textContent = 'Enviar solicitud';
-    btn.disabled = false;
-  }, 5000);
-}
+        if (!res.ok || !result.ok) {
+          throw new Error(result.error || 'Error al enviar el formulario');
+        }
+
+        btn.textContent = '¡Enviado! Te contactamos pronto 🎉';
+        this.reset();
+      } catch (error) {
+        console.error('Error al enviar formulario:', error);
+        btn.textContent = 'Error al enviar. Escríbenos por WhatsApp';
+      } finally {
+        setTimeout(() => {
+          btn.textContent = 'Enviar solicitud';
+          btn.disabled = false;
+        }, 5000);
+      }
     });
   </script>
-
-</body>
-</html>
-  
 
 </body>
 </html>
