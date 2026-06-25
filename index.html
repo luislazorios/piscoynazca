@@ -486,7 +486,7 @@
   };
 
   try {
-    const res = await fetch('arn:aws:apigateway:sa-east-1::/apis/p10yuwy285/routes/ds9pcfn', {
+    const res = await fetch('https://p10yuwy285.execute-api.sa-east-1.amazonaws.com/default/Formulario', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
