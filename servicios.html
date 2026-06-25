@@ -1,3 +1,540 @@
-<Body>
-  
-</Body>
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicios | Entre Pisco y Nazca</title>
+  <meta name="description" content="Servicios de Entre Pisco y Nazca: decoraciones, tortas, banquetería y almuerzos para matrimonios y eventos en Copiapó." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem; --space-5: 1.25rem;
+      --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem;
+      --space-16: 4rem; --space-20: 5rem;
+      --color-bg: #f7f2ee;
+      --color-surface: #fcf8f4;
+      --color-surface-2: #fffdfb;
+      --color-surface-offset: #efe4dc;
+      --color-border: rgba(58, 42, 35, 0.12);
+      --color-text: #2f241f;
+      --color-text-muted: #7f6d65;
+      --color-primary: #8c5f52;
+      --color-primary-hover: #74493d;
+      --color-text-inverse: #fffaf6;
+      --shadow-sm: 0 8px 25px rgba(67,42,31,0.07);
+      --shadow-lg: 0 20px 50px rgba(67,42,31,0.12);
+      --radius-md: 0.9rem;
+      --radius-lg: 1.4rem;
+      --radius-xl: 2rem;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Manrope', Arial, sans-serif;
+      --content: 1180px;
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #191514;
+      --color-surface: #201b19;
+      --color-surface-2: #26211f;
+      --color-surface-offset: #2d2522;
+      --color-border: rgba(255,240,230,0.12);
+      --color-text: #f3e7df;
+      --color-text-muted: #c4b2a8;
+      --color-primary: #d3a796;
+      --color-primary-hover: #e4bbac;
+      --color-text-inverse: #1d1614;
+      --shadow-sm: 0 8px 25px rgba(0,0,0,0.22);
+      --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.65;
+      color: var(--color-text);
+      background: var(--color-bg);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+    .container { width: min(calc(100% - 2rem), var(--content)); margin-inline: auto; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: color-mix(in srgb, var(--color-bg) 84%, transparent);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      min-height: 78px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--color-border);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--color-surface-2);
+      flex-shrink: 0;
+    }
+
+    .brand-mark svg { width: 22px; height: 22px; }
+
+    .brand-name {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
+
+    .brand-name strong {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+    }
+
+    .brand-name span {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: var(--color-text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      font-size: var(--text-sm);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .theme-toggle, .btn, .slider-btn {
+      border-radius: 999px;
+      border: 1px solid var(--color-border);
+      transition: 180ms ease;
+    }
+
+    .theme-toggle {
+      width: 44px;
+      height: 44px;
+      background: var(--color-surface);
+      color: var(--color-text);
+      display: grid;
+      place-items: center;
+    }
+
+    .btn, .slider-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+    }
+
+    .btn {
+      padding: 0.9rem 1.35rem;
+      font-size: var(--text-sm);
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      border-color: transparent;
+    }
+
+    .btn-primary:hover,
+    .slider-btn:hover {
+      background: var(--color-primary-hover);
+      color: var(--color-text-inverse);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--color-text);
+    }
+
+    .btn-secondary:hover,
+    .theme-toggle:hover {
+      background: var(--color-surface-offset);
+    }
+
+    .hero {
+      padding: clamp(4rem, 8vw, 6rem) 0 clamp(2.5rem, 6vw, 4rem);
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 0.95;
+      font-weight: 600;
+      margin: 0 0 var(--space-4);
+    }
+
+    .hero p {
+      max-width: 62ch;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    .eyebrow {
+      font-size: var(--text-xs);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-3);
+    }
+
+    .service-section {
+      padding: clamp(3rem, 7vw, 5rem) 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .service-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+
+    .service-head h2 {
+      margin: 0 0 var(--space-3);
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      line-height: 1.05;
+    }
+
+    .service-head p {
+      margin: 0;
+      color: var(--color-text-muted);
+      max-width: 62ch;
+    }
+
+    .slider-shell {
+      position: relative;
+    }
+
+    .slider-controls {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .slider-btn {
+      width: 44px;
+      height: 44px;
+      background: var(--color-surface);
+      color: var(--color-text);
+    }
+
+    .slider-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(240px, 28%);
+      gap: var(--space-4);
+      overflow-x: auto;
+      padding-bottom: var(--space-3);
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-primary) transparent;
+    }
+
+    .slider-track::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    .slider-track::-webkit-scrollbar-thumb {
+      background: var(--color-primary);
+      border-radius: 999px;
+    }
+
+    .service-slide {
+      scroll-snap-align: start;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .service-slide img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    .service-slide figcaption {
+      padding: var(--space-4);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .footer {
+      padding: var(--space-8) 0 var(--space-10);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      border-top: 1px solid var(--color-border);
+      margin-top: var(--space-10);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .nav-links { display: none; }
+      .service-head { flex-direction: column; align-items: start; }
+      .slider-track { grid-auto-columns: minmax(240px, 42%); }
+    }
+
+    @media (max-width: 720px) {
+      .nav-actions .btn-secondary { display: none; }
+      .slider-track { grid-auto-columns: 82%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="brand" aria-label="Ir al inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="5" width="6" height="14" rx="1" fill="#D91023"></rect>
+            <rect x="9" y="5" width="6" height="14" fill="#FFFFFF"></rect>
+            <rect x="15" y="5" width="6" height="14" rx="1" fill="#D91023"></rect>
+          </svg>
+        </span>
+        <span class="brand-name">
+          <strong>Entre Pisco y Nazca</strong>
+          <span>Banquetería Buffet</span>
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Principal">
+        <a href="index.html#historia">Nosotros</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="index.html#galeria">Montajes</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="index.html#contacto">Contacto</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" aria-label="Cambiar tema" data-theme-toggle></button>
+        <a class="btn btn-secondary" href="catalogo.html">Ver Catálogo</a>
+        <a class="btn btn-primary" href="index.html#contacto">Agenda tu fecha</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">Servicios</div>
+        <h1>Todo lo que necesitas para tu celebración, en un solo lugar.</h1>
+        <p>Explora nuestras áreas de decoraciones, tortas, banquetería y almuerzos. Cada sección permite mostrar galerías amplias, ordenadas y fáciles de ampliar con nuevas fotos.</p>
+      </div>
+    </section>
+
+    <section class="service-section" id="decoraciones">
+      <div class="container">
+        <div class="service-head">
+          <div>
+            <div class="eyebrow">Decoraciones</div>
+            <h2>Montajes con identidad visual y detalle.</h2>
+          </div>
+          <p>Ideal para mesas principales, rincones temáticos, fondos de fotos y ambientaciones para matrimonios y celebraciones familiares.</p>
+        </div>
+
+        <div class="slider-shell">
+          <div class="slider-controls">
+            <button class="slider-btn" type="button" data-prev="decoraciones" aria-label="Ver fotos anteriores">←</button>
+            <button class="slider-btn" type="button" data-next="decoraciones" aria-label="Ver fotos siguientes">→</button>
+          </div>
+          <div class="slider-track" id="decoraciones-slider">
+            <figure class="service-slide"><img src="img/decoracion1.jpg" alt="Decoración 1"><figcaption>Decoración 1</figcaption></figure>
+            <figure class="service-slide"><img src="img/decoracion2.jpg" alt="Decoración 2"><figcaption>Decoración 2</figcaption></figure>
+            <figure class="service-slide"><img src="img/decoracion3.jpg" alt="Decoración 3"><figcaption>Decoración 3</figcaption></figure>
+            <figure class="service-slide"><img src="img/decoracion4.jpg" alt="Decoración 4"><figcaption>Decoración 4</figcaption></figure>
+            <figure class="service-slide"><img src="img/decoracion5.jpg" alt="Decoración 5"><figcaption>Decoración 5</figcaption></figure>
+            <figure class="service-slide"><img src="img/decoracion6.jpg" alt="Decoración 6"><figcaption>Decoración 6</figcaption></figure>
+            <figure class="service-slide"><img src="img/decoracion7.jpg" alt="Decoración 7"><figcaption>Decoración 7</figcaption></figure>
+            <figure class="service-slide"><img src="img/decoracion8.jpg" alt="Decoración 8"><figcaption>Decoración 8</figcaption></figure>
+            <figure class="service-slide"><img src="img/decoracion9.jpg" alt="Decoración 9"><figcaption>Decoración 9</figcaption></figure>
+            <figure class="service-slide"><img src="img/decoracion10.jpg" alt="Decoración 10"><figcaption>Decoración 10</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="service-section" id="tortas">
+      <div class="container">
+        <div class="service-head">
+          <div>
+            <div class="eyebrow">Tortas</div>
+            <h2>Tortas personalizadas para momentos especiales.</h2>
+          </div>
+          <p>Modelos para matrimonios, aniversarios, cumpleaños y celebraciones con estilos clásicos, modernos o temáticos.</p>
+        </div>
+
+        <div class="slider-shell">
+          <div class="slider-controls">
+            <button class="slider-btn" type="button" data-prev="tortas" aria-label="Ver fotos anteriores">←</button>
+            <button class="slider-btn" type="button" data-next="tortas" aria-label="Ver fotos siguientes">→</button>
+          </div>
+          <div class="slider-track" id="tortas-slider">
+            <figure class="service-slide"><img src="img/torta1.jpg" alt="Torta 1"><figcaption>Torta 1</figcaption></figure>
+            <figure class="service-slide"><img src="img/torta2.jpg" alt="Torta 2"><figcaption>Torta 2</figcaption></figure>
+            <figure class="service-slide"><img src="img/torta3.jpg" alt="Torta 3"><figcaption>Torta 3</figcaption></figure>
+            <figure class="service-slide"><img src="img/torta4.jpg" alt="Torta 4"><figcaption>Torta 4</figcaption></figure>
+            <figure class="service-slide"><img src="img/torta5.jpg" alt="Torta 5"><figcaption>Torta 5</figcaption></figure>
+            <figure class="service-slide"><img src="img/torta6.jpg" alt="Torta 6"><figcaption>Torta 6</figcaption></figure>
+            <figure class="service-slide"><img src="img/torta7.jpg" alt="Torta 7"><figcaption>Torta 7</figcaption></figure>
+            <figure class="service-slide"><img src="img/torta8.jpg" alt="Torta 8"><figcaption>Torta 8</figcaption></figure>
+            <figure class="service-slide"><img src="img/torta9.jpg" alt="Torta 9"><figcaption>Torta 9</figcaption></figure>
+            <figure class="service-slide"><img src="img/torta10.jpg" alt="Torta 10"><figcaption>Torta 10</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="service-section" id="banqueteria">
+      <div class="container">
+        <div class="service-head">
+          <div>
+            <div class="eyebrow">Banquetería</div>
+            <h2>Buffet y servicio pensado para celebrar.</h2>
+          </div>
+          <p>Opciones para matrimonios, aniversarios y eventos privados con presentación cuidada, sabor casero y montaje elegante.</p>
+        </div>
+
+        <div class="slider-shell">
+          <div class="slider-controls">
+            <button class="slider-btn" type="button" data-prev="banqueteria" aria-label="Ver fotos anteriores">←</button>
+            <button class="slider-btn" type="button" data-next="banqueteria" aria-label="Ver fotos siguientes">→</button>
+          </div>
+          <div class="slider-track" id="banqueteria-slider">
+            <figure class="service-slide"><img src="img/banqueteria1.jpg" alt="Banquetería 1"><figcaption>Banquetería 1</figcaption></figure>
+            <figure class="service-slide"><img src="img/banqueteria2.jpg" alt="Banquetería 2"><figcaption>Banquetería 2</figcaption></figure>
+            <figure class="service-slide"><img src="img/banqueteria3.jpg" alt="Banquetería 3"><figcaption>Banquetería 3</figcaption></figure>
+            <figure class="service-slide"><img src="img/banqueteria4.jpg" alt="Banquetería 4"><figcaption>Banquetería 4</figcaption></figure>
+            <figure class="service-slide"><img src="img/banqueteria5.jpg" alt="Banquetería 5"><figcaption>Banquetería 5</figcaption></figure>
+            <figure class="service-slide"><img src="img/banqueteria6.jpg" alt="Banquetería 6"><figcaption>Banquetería 6</figcaption></figure>
+            <figure class="service-slide"><img src="img/banqueteria7.jpg" alt="Banquetería 7"><figcaption>Banquetería 7</figcaption></figure>
+            <figure class="service-slide"><img src="img/banqueteria8.jpg" alt="Banquetería 8"><figcaption>Banquetería 8</figcaption></figure>
+            <figure class="service-slide"><img src="img/banqueteria9.jpg" alt="Banquetería 9"><figcaption>Banquetería 9</figcaption></figure>
+            <figure class="service-slide"><img src="img/banqueteria10.jpg" alt="Banquetería 10"><figcaption>Banquetería 10</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="service-section" id="almuerzos">
+      <div class="container">
+        <div class="service-head">
+          <div>
+            <div class="eyebrow">Almuerzos</div>
+            <h2>Preparaciones para compartir en grande o en pequeño.</h2>
+          </div>
+          <p>Propuestas para reuniones familiares, eventos privados, equipos de trabajo y celebraciones con menú completo.</p>
+        </div>
+
+        <div class="slider-shell">
+          <div class="slider-controls">
+            <button class="slider-btn" type="button" data-prev="almuerzos" aria-label="Ver fotos anteriores">←</button>
+            <button class="slider-btn" type="button" data-next="almuerzos" aria-label="Ver fotos siguientes">→</button>
+          </div>
+          <div class="slider-track" id="almuerzos-slider">
+            <figure class="service-slide"><img src="img/almuerzo1.jpg" alt="Almuerzo 1"><figcaption>Almuerzo 1</figcaption></figure>
+            <figure class="service-slide"><img src="img/almuerzo2.jpg" alt="Almuerzo 2"><figcaption>Almuerzo 2</figcaption></figure>
+            <figure class="service-slide"><img src="img/almuerzo3.jpg" alt="Almuerzo 3"><figcaption>Almuerzo 3</figcaption></figure>
+            <figure class="service-slide"><img src="img/almuerzo4.jpg" alt="Almuerzo 4"><figcaption>Almuerzo 4</figcaption></figure>
+            <figure class="service-slide"><img src="img/almuerzo5.jpg" alt="Almuerzo 5"><figcaption>Almuerzo 5</figcaption></figure>
+            <figure class="service-slide"><img src="img/almuerzo6.jpg" alt="Almuerzo 6"><figcaption>Almuerzo 6</figcaption></figure>
+            <figure class="service-slide"><img src="img/almuerzo7.jpg" alt="Almuerzo 7"><figcaption>Almuerzo 7</figcaption></figure>
+            <figure class="service-slide"><img src="img/almuerzo8.jpg" alt="Almuerzo 8"><figcaption>Almuerzo 8</figcaption></figure>
+            <figure class="service-slide"><img src="img/almuerzo9.jpg" alt="Almuerzo 9"><figcaption>Almuerzo 9</figcaption></figure>
+            <figure class="service-slide"><img src="img/almuerzo10.jpg" alt="Almuerzo 10"><figcaption>Almuerzo 10</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>&copy; 2025 Entre Pisco y Nazca. Todos los derechos reservados.</p>
+      <p>Hecho con ❤️ en Copiapó, Chile</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      const root = document.documentElement;
+      const SUN = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+      const MOON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+
+      if (toggle) {
+        toggle.innerHTML = theme === 'dark' ? SUN : MOON;
+        toggle.addEventListener('click', function () {
+          theme = theme === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', theme);
+          toggle.innerHTML = theme === 'dark' ? SUN : MOON;
+        });
+      }
+    })();
+
+    document.querySelectorAll('[data-prev], [data-next]').forEach(button => {
+      button.addEventListener('click', () => {
+        const key = button.dataset.prev || button.dataset.next;
+        const slider = document.getElementById(`${key}-slider`);
+        const amount = slider.clientWidth * 0.85;
+        const direction = button.dataset.next ? 1 : -1;
+
+        slider.scrollBy({
+          left: amount * direction,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
