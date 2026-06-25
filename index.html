@@ -452,23 +452,30 @@
       };
 
       try {
-        const res = await fetch('https://p10yuwy285.execute-api.sa-east-1.amazonaws.com/default/Formulario', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
+  const res = await fetch('https://p10yuwy285.execute-api.sa-east-1.amazonaws.com/default/Formulario', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
 
-        if (res.ok) {
-          btn.textContent = '¡Enviado! Te contactamos pronto 🎉';
-          this.reset();
-        } else {
-          btn.textContent = 'Error al enviar. Intenta por WhatsApp';
-        }
-      } catch {
-        btn.textContent = 'Sin conexión. Escríbenos por WhatsApp';
-      } finally {
-        setTimeout(() => { btn.textContent = 'Enviar solicitud'; btn.disabled = false; }, 5000);
-      }
+  const result = await res.json();
+
+  if (!res.ok || !result.ok) {
+    throw new Error(result.error || 'Error al enviar el formulario');
+  }
+
+  btn.textContent = '¡Enviado! Te contactamos pronto 🎉';
+  this.reset();
+} catch (error) {
+  console.error('Error al enviar formulario:', error);
+  btn.textContent = 'Error al enviar. Escríbenos por WhatsApp';
+} finally {
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Enviar solicitud';
+    btn.disabled = false;
+  }, 5000);
+}
     });
   </script>
 
