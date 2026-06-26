@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Servicios | Entre Pisco y Nazca</title>
-  <meta name="description" content="Servicios de Entre Pisco y Nazca: decoraciones, tortas, banquetería y almuerzos para matrimonios y eventos en Copiapó." />
+  <title>Entre Pisco y Nazca | Banquetería para matrimonios y eventos</title>
+  <meta name="description" content="Banquetería-Buffet casual para matrimonios y eventos inspirada en gastronomía peruana, del Perú para el mundo." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,9 +16,21 @@
       --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
       --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
       --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
-      --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem; --space-5: 1.25rem;
-      --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem;
-      --space-16: 4rem; --space-20: 5rem;
+      --text-3xl: clamp(2.5rem, 1rem + 4vw, 5rem);
+
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+
       --color-bg: #f7f2ee;
       --color-surface: #fcf8f4;
       --color-surface-2: #fffdfb;
@@ -26,17 +38,22 @@
       --color-border: rgba(58, 42, 35, 0.12);
       --color-text: #2f241f;
       --color-text-muted: #7f6d65;
+      --color-text-faint: #b7a7a0;
       --color-primary: #8c5f52;
       --color-primary-hover: #74493d;
+      --color-highlight: #e9d8cf;
       --color-text-inverse: #fffaf6;
-      --shadow-sm: 0 8px 25px rgba(67,42,31,0.07);
-      --shadow-lg: 0 20px 50px rgba(67,42,31,0.12);
+      --shadow-sm: 0 8px 25px rgba(67, 42, 31, 0.07);
+      --shadow-lg: 0 20px 50px rgba(67, 42, 31, 0.12);
+      --radius-sm: 0.5rem;
       --radius-md: 0.9rem;
       --radius-lg: 1.4rem;
       --radius-xl: 2rem;
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-body: 'Manrope', Arial, sans-serif;
       --content: 1180px;
+      --shadow-soft: 0 10px 30px rgba(67, 42, 31, 0.08);
+      --shadow-hover: 0 14px 36px rgba(67, 42, 31, 0.14);
     }
 
     [data-theme="dark"] {
@@ -44,17 +61,19 @@
       --color-surface: #201b19;
       --color-surface-2: #26211f;
       --color-surface-offset: #2d2522;
-      --color-border: rgba(255,240,230,0.12);
+      --color-border: rgba(255, 240, 230, 0.12);
       --color-text: #f3e7df;
       --color-text-muted: #c4b2a8;
+      --color-text-faint: #8b7a73;
       --color-primary: #d3a796;
       --color-primary-hover: #e4bbac;
+      --color-highlight: #342a26;
       --color-text-inverse: #1d1614;
       --shadow-sm: 0 8px 25px rgba(0,0,0,0.22);
       --shadow-lg: 0 20px 50px rgba(0,0,0,0.35);
     }
 
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
@@ -64,21 +83,42 @@
       color: var(--color-text);
       background: var(--color-bg);
     }
-
     img { max-width: 100%; display: block; }
     a { color: inherit; text-decoration: none; }
     button { font: inherit; cursor: pointer; }
-    .container { width: min(calc(100% - 2rem), var(--content)); margin-inline: auto; }
-
+    .container {
+      width: min(calc(100% - 2rem), var(--content));
+      margin-inline: auto;
+    }
+    .eyebrow {
+      font-size: var(--text-xs);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-3);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin: 0 0 var(--space-4);
+    }
+    .section-copy {
+      color: var(--color-text-muted);
+      max-width: 62ch;
+      line-height: 1.75;
+    }
     .site-header {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 10;
       backdrop-filter: blur(16px);
       background: color-mix(in srgb, var(--color-bg) 84%, transparent);
       border-bottom: 1px solid var(--color-border);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 10px 30px rgba(0,0,0,0.04);
     }
-
     .nav {
       display: flex;
       align-items: center;
@@ -86,13 +126,13 @@
       gap: var(--space-4);
       min-height: 78px;
     }
-
     .brand {
       display: flex;
       align-items: center;
       gap: var(--space-3);
+      font-weight: 700;
+      letter-spacing: 0.04em;
     }
-
     .brand-mark {
       width: 40px;
       height: 40px;
@@ -101,49 +141,41 @@
       display: grid;
       place-items: center;
       background: var(--color-surface-2);
-      flex-shrink: 0;
     }
-
     .brand-mark svg { width: 22px; height: 22px; }
-
     .brand-name {
       display: flex;
       flex-direction: column;
       line-height: 1.05;
     }
-
     .brand-name strong {
       font-family: var(--font-display);
       font-size: 1.35rem;
       font-weight: 600;
     }
-
     .brand-name span {
       font-size: var(--text-xs);
       text-transform: uppercase;
       letter-spacing: 0.24em;
       color: var(--color-text-muted);
     }
-
     .nav-links {
       display: flex;
       align-items: center;
       gap: var(--space-6);
       font-size: var(--text-sm);
     }
-
     .nav-actions {
       display: flex;
       align-items: center;
       gap: var(--space-3);
     }
-
-    .theme-toggle, .btn, .slider-btn {
+    .theme-toggle,
+    .btn {
       border-radius: 999px;
       border: 1px solid var(--color-border);
       transition: 180ms ease;
     }
-
     .theme-toggle {
       width: 44px;
       height: 44px;
@@ -152,189 +184,426 @@
       display: grid;
       place-items: center;
     }
-
-    .btn, .slider-btn {
+    .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 44px;
-    }
-
-    .btn {
+      gap: 0.6rem;
       padding: 0.9rem 1.35rem;
       font-size: var(--text-sm);
       font-weight: 600;
+      min-height: 44px;
     }
-
     .btn-primary {
       background: var(--color-primary);
       color: var(--color-text-inverse);
       border-color: transparent;
+      box-shadow: 0 10px 24px rgba(140, 95, 82, 0.22);
     }
-
-    .btn-primary:hover,
-    .slider-btn:hover {
+    .btn-primary:hover {
       background: var(--color-primary-hover);
-      color: var(--color-text-inverse);
+      transform: translateY(-1px);
     }
-
     .btn-secondary {
       background: transparent;
       color: var(--color-text);
+      border-color: color-mix(in srgb, var(--color-border) 70%, transparent);
     }
-
     .btn-secondary:hover,
     .theme-toggle:hover {
       background: var(--color-surface-offset);
     }
 
     .hero {
-      padding: clamp(4rem, 8vw, 6rem) 0 clamp(2.5rem, 6vw, 4rem);
+      position: relative;
+      padding: clamp(4rem, 8vw, 7rem) 0 clamp(3rem, 7vw, 6rem);
     }
-
-    .hero h1 {
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(140, 95, 82, 0.10), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(233, 216, 207, 0.24), transparent 30%);
+      pointer-events: none;
+    }
+    .hero-grid,
+    .story-grid,
+    .contact-grid,
+    .gallery-grid {
+      display: grid;
+      gap: clamp(1rem, 2vw, 1.5rem);
+    }
+    .hero-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+    }
+    .hero-copy h1 {
+      margin: 0 0 var(--space-4);
       font-family: var(--font-display);
-      font-size: clamp(3rem, 5vw, 5rem);
+      font-size: clamp(3.25rem, 5vw, 5.5rem);
       line-height: 0.95;
       font-weight: 600;
-      margin: 0 0 var(--space-4);
     }
-
-    .hero p {
-      max-width: 62ch;
+    .hero-copy p {
       color: var(--color-text-muted);
-      margin: 0;
+      max-width: 58ch;
+      margin-bottom: var(--space-6);
     }
-
-    .eyebrow {
-      font-size: var(--text-xs);
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--color-text-muted);
-      margin-bottom: var(--space-3);
+    .hero-actions {
+      display: flex;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-8);
     }
-
-    .service-section {
-      padding: clamp(3rem, 7vw, 5rem) 0;
+    .hero-notes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-4);
+    }
+    .hero-note {
+      padding-top: var(--space-4);
       border-top: 1px solid var(--color-border);
     }
+    .hero-note strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      margin-bottom: 0.2rem;
+    }
+    .hero-visual {
+      position: relative;
+      min-height: 620px;
+    }
+    .frame-main,
+    .frame-accent {
+      position: absolute;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      background: var(--color-surface-offset);
+    }
+    .frame-main {
+      inset: 0 0 4rem 4rem;
+      background-image:
+        linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05)),
+        url('img/piscologo2.jpeg');
+      background-repeat: no-repeat, no-repeat;
+      background-position: center, top center;
+      background-size: auto, 100% 80%;
+    }
+    .frame-accent {
+      width: 240px;
+      height: 300px;
+      left: 3.5rem;
+      bottom: 0;
+      border: 10px solid var(--color-bg);
+      background-image:
+        linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.02)),
+        url('img/seco2.jpg');
+      background-repeat: no-repeat, no-repeat;
+      background-size: auto, cover;
+      background-position: center, center;
+      z-index: 2;
+    }
 
-    .service-head {
+    section { padding: clamp(3.5rem, 7vw, 6rem) 0; }
+    .story,
+    .gallery,
+    .contact {
+      border-top: 1px solid var(--color-border);
+    }
+    .story-grid,
+    .contact-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+    }
+    .story-panel,
+    .contact-card,
+    .gallery-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+    .story-panel:hover,
+    .contact-card:hover,
+    .gallery-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+    .story-panel {
+      padding: var(--space-8);
+    }
+    .story-panel blockquote {
+      margin: 0 0 var(--space-4);
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.05;
+    }
+    .story-list {
+      display: grid;
+      gap: var(--space-4);
+    }
+    .story-list div {
+      padding: var(--space-5);
+      border-radius: var(--radius-md);
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+    }
+
+    .gallery-header,
+    .contact-header {
       display: flex;
       justify-content: space-between;
       align-items: end;
       gap: var(--space-6);
-      margin-bottom: var(--space-6);
+      margin-bottom: var(--space-8);
     }
 
-    .service-head h2 {
-      margin: 0 0 var(--space-3);
-      font-family: var(--font-display);
-      font-size: var(--text-xl);
-      font-weight: 600;
-      line-height: 1.05;
+    .gallery-grid {
+      grid-template-columns: 1.15fr 0.85fr;
     }
-
-    .service-head p {
-      margin: 0;
-      color: var(--color-text-muted);
-      max-width: 62ch;
-    }
-
-    .slider-shell {
+    .gallery-card { overflow: hidden; }
+    .photo-slider {
       position: relative;
-    }
-
-    .slider-controls {
-      display: flex;
-      justify-content: flex-end;
-      gap: var(--space-3);
-      margin-bottom: var(--space-4);
-    }
-
-    .slider-btn {
-      width: 44px;
-      height: 44px;
-      background: var(--color-surface);
-      color: var(--color-text);
-    }
-
-    .slider-track {
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(240px, 28%);
-      gap: var(--space-4);
-      overflow-x: auto;
-      padding-bottom: var(--space-3);
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      scrollbar-width: thin;
-      scrollbar-color: var(--color-primary) transparent;
-    }
-
-    .slider-track::-webkit-scrollbar {
-      height: 10px;
-    }
-
-    .slider-track::-webkit-scrollbar-thumb {
-      background: var(--color-primary);
-      border-radius: 999px;
-    }
-
-    .service-slide {
-      scroll-snap-align: start;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
+      min-height: 540px;
       overflow: hidden;
     }
-
-    .service-slide img {
+    .slide-image {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      aspect-ratio: 4 / 5;
+      height: 100%;
       object-fit: cover;
+      opacity: 0;
+      transition: opacity 320ms ease;
     }
+    .slide-image.active {
+      opacity: 1;
+    }
+    .slider-arrow {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(20, 20, 20, 0.28);
+      color: white;
+      font-size: 2rem;
+      display: grid;
+      place-items: center;
+      z-index: 3;
+      backdrop-filter: blur(8px);
+    }
+    .slider-arrow:hover {
+      background: rgba(20, 20, 20, 0.45);
+    }
+    .gallery-stack {
+      display: grid;
+      gap: var(--space-6);
+    }
+    .gallery-photo-small,
+    .gallery-copy {
+      min-height: 257px;
+    }
+    .gallery-photo-small {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.1), rgba(0,0,0,0.08)),
+        url('img/mesa3.jpg') center/cover;
+    }
+    .gallery-copy {
+      padding: var(--space-8);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--color-surface);
+    }
+    .gallery-copy h3 {
+      margin: 0 0 var(--space-3);
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    .gallery-copy p { color: var(--color-text-muted); }
 
-    .service-slide figcaption {
-      padding: var(--space-4);
+    .contact-card {
+      padding: var(--space-8);
+    }
+    .contact-info {
+      display: grid;
+      gap: var(--space-5);
+    }
+    .contact-item {
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .contact-item:last-child { border-bottom: 0; padding-bottom: 0; }
+    .contact-item span {
+      display: block;
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
       color: var(--color-text-muted);
+      margin-bottom: 0.35rem;
+    }
+    form {
+      display: grid;
+      gap: var(--space-4);
+    }
+    label {
+      display: grid;
+      gap: 0.45rem;
       font-size: var(--text-sm);
+      font-weight: 600;
+    }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--color-border);
+      border-radius: 1rem;
+      padding: 0.95rem 1rem;
+      background: var(--color-surface-2);
+      color: var(--color-text);
+      font: inherit;
+      transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+    }
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: 2px solid color-mix(in srgb, var(--color-primary) 55%, white);
+      outline-offset: 2px;
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 16%, transparent);
     }
 
     .footer {
       padding: var(--space-8) 0 var(--space-10);
       color: var(--color-text-muted);
       font-size: var(--text-sm);
-      border-top: 1px solid var(--color-border);
-      margin-top: var(--space-10);
     }
-
     .footer-inner {
       display: flex;
       justify-content: space-between;
       gap: var(--space-4);
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--space-6);
       flex-wrap: wrap;
     }
 
+    .social-float {
+      position: fixed;
+      right: 20px;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+      z-index: 9999;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+    .social-float:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.26);
+    }
+    .facebook-float {
+      bottom: 92px;
+      background: #1877F2;
+    }
+    .facebook-float:hover {
+      background: #0f5ec9;
+    }
+    .whatsapp-float {
+      bottom: 20px;
+      background: #25D366;
+    }
+    .whatsapp-float:hover {
+      background: #1ebe5b;
+    }
+    .social-float svg {
+      width: 30px;
+      height: 30px;
+    }
+
     @media (max-width: 980px) {
-      .nav-links { display: none; }
-      .service-head { flex-direction: column; align-items: start; }
-      .slider-track { grid-auto-columns: minmax(240px, 42%); }
+      .hero-grid,
+      .story-grid,
+      .contact-grid,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-visual {
+        min-height: 520px;
+      }
+      .frame-main {
+        inset: 0 0 3rem 2rem;
+      }
+      .frame-accent {
+        left: 2.5rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .gallery-header,
+      .contact-header {
+        align-items: start;
+        flex-direction: column;
+      }
     }
 
     @media (max-width: 720px) {
+      .nav { min-height: 72px; }
       .nav-actions .btn-secondary { display: none; }
-      .slider-track { grid-auto-columns: 82%; }
+      .hero-copy h1 { font-size: clamp(2.7rem, 13vw, 4rem); }
+      .hero-notes { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 440px; }
+      .frame-main {
+        inset: 0 0 4.5rem 0;
+      }
+      .frame-accent {
+        width: 180px;
+        height: 210px;
+        border-width: 6px;
+        left: 1.5rem;
+      }
+      .story-panel,
+      .contact-card,
+      .gallery-copy { padding: var(--space-6); }
+      .social-float {
+        right: 14px;
+        width: 58px;
+        height: 58px;
+      }
+      .facebook-float {
+        bottom: 82px;
+      }
+      .whatsapp-float {
+        bottom: 14px;
+      }
+      .social-float svg {
+        width: 28px;
+        height: 28px;
+      }
+      .slider-arrow {
+        right: 12px;
+        width: 46px;
+        height: 46px;
+      }
     }
   </style>
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
-      <a href="index.html" class="brand" aria-label="Ir al inicio">
+      <a href="#inicio" class="brand" aria-label="Ir al inicio">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
+          <svg viewBox="0 0 24 24" aria-label="Bandera de Perú">
             <rect x="3" y="5" width="6" height="14" rx="1" fill="#D91023"></rect>
             <rect x="9" y="5" width="6" height="14" fill="#FFFFFF"></rect>
             <rect x="15" y="5" width="6" height="14" rx="1" fill="#D91023"></rect>
@@ -345,151 +614,160 @@
           <span>Banquetería Buffet</span>
         </span>
       </a>
-
       <nav class="nav-links" aria-label="Principal">
-        <a href="index.html#historia">Nosotros</a>
-        <a href="servicios.html">Servicios</a>
-        <a href="index.html#galeria">Montajes</a>
+        <a href="#historia">Nosotros</a>
+        <a href="#galeria">Montajes</a>
         <a href="catalogo.html">Catálogo</a>
-        <a href="index.html#contacto">Contacto</a>
       </nav>
-
       <div class="nav-actions">
         <button class="theme-toggle" type="button" aria-label="Cambiar tema" data-theme-toggle></button>
         <a class="btn btn-secondary" href="catalogo.html">Ver Catálogo</a>
-        <a class="btn btn-primary" href="index.html#contacto">Agenda tu fecha</a>
+        <a class="btn btn-primary" href="#contacto">Agenda tu fecha</a>
       </div>
     </div>
   </header>
 
-  <main>
+  <main id="inicio">
     <section class="hero">
-      <div class="container">
-        <div class="eyebrow">Servicios</div>
-        <h1>Todo lo que necesitas para tu celebración, en un solo lugar.</h1>
-        <p>Explora nuestras áreas de decoraciones, tortas, banquetería y almuerzos. Cada sección permite mostrar galerías amplias, ordenadas y fáciles de ampliar con nuevas fotos.</p>
-      </div>
-    </section>
-
-    <section class="service-section" id="decoraciones">
-      <div class="container">
-        <div class="service-head">
-          <div>
-            <div class="eyebrow">Decoraciones</div>
-            <h2>Montajes con identidad visual y detalle.</h2>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Matrimonios y celebraciones</div>
+          <h1>Creamos mesas, sabores y momentos que se recuerdan.</h1>
+          <p>
+            Una propuesta de banquetería elegante, casual y amigable al bolsillo para matrimonios, aniversarios y eventos privados, inspirada en una estética criolla, con montaje cuidado, cocina delicada y atención al detalle.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contacto">Agenda tu fecha</a>
+            <a class="btn btn-secondary" href="#galeria">Ver montajes</a>
           </div>
-          <p>Ideal para mesas principales, rincones temáticos, fondos de fotos y ambientaciones para matrimonios y celebraciones familiares.</p>
+          <div class="hero-notes">
+            <div class="hero-note">
+              <strong>+120</strong>
+              <span>celebraciones íntimas y matrimonios diseñados con estilo propio</span>
+            </div>
+            <div class="hero-note">
+              <strong>Menús</strong>
+              <span>personalizados según estación, horario y tipo de evento</span>
+            </div>
+            <div class="hero-note">
+              <strong>Copiapó</strong>
+              <span>y alrededores, con coordinación previa y servicio a medida</span>
+            </div>
+          </div>
         </div>
-
-        <div class="slider-shell">
-          <div class="slider-controls">
-            <button class="slider-btn" type="button" data-prev="decoraciones" aria-label="Ver fotos anteriores">←</button>
-            <button class="slider-btn" type="button" data-next="decoraciones" aria-label="Ver fotos siguientes">→</button>
-          </div>
-          <div class="slider-track" id="decoraciones-slider">
-            <figure class="service-slide"><img src="img/decoracion1.jpg" alt="Decoración 1"><figcaption>Decoración 1</figcaption></figure>
-            <figure class="service-slide"><img src="img/decoracion2.jpg" alt="Decoración 2"><figcaption>Decoración 2</figcaption></figure>
-            <figure class="service-slide"><img src="img/decoracion3.jpg" alt="Decoración 3"><figcaption>Decoración 3</figcaption></figure>
-            <figure class="service-slide"><img src="img/decoracion4.jpg" alt="Decoración 4"><figcaption>Decoración 4</figcaption></figure>
-            <figure class="service-slide"><img src="img/decoracion5.jpg" alt="Decoración 5"><figcaption>Decoración 5</figcaption></figure>
-            <figure class="service-slide"><img src="img/decoracion6.jpg" alt="Decoración 6"><figcaption>Decoración 6</figcaption></figure>
-            <figure class="service-slide"><img src="img/decoracion7.jpg" alt="Decoración 7"><figcaption>Decoración 7</figcaption></figure>
-            <figure class="service-slide"><img src="img/decoracion8.jpg" alt="Decoración 8"><figcaption>Decoración 8</figcaption></figure>
-            <figure class="service-slide"><img src="img/decoracion9.jpg" alt="Decoración 9"><figcaption>Decoración 9</figcaption></figure>
-            <figure class="service-slide"><img src="img/decoracion10.jpg" alt="Decoración 10"><figcaption>Decoración 10</figcaption></figure>
-          </div>
+        <div class="hero-visual" aria-label="Montaje elegante de matrimonio">
+          <div class="frame-main"></div>
+          <div class="frame-accent"></div>
         </div>
       </div>
     </section>
 
-    <section class="service-section" id="tortas">
-      <div class="container">
-        <div class="service-head">
-          <div>
-            <div class="eyebrow">Tortas</div>
-            <h2>Tortas personalizadas para momentos especiales.</h2>
-          </div>
-          <p>Modelos para matrimonios, aniversarios, cumpleaños y celebraciones con estilos clásicos, modernos o temáticos.</p>
+    <section class="story" id="historia">
+      <div class="container story-grid">
+        <div>
+          <div class="eyebrow">Nuestra esencia</div>
+          <h2 class="section-title">Una banquetería con sensibilidad editorial y espíritu de celebración.</h2>
+          <p class="section-copy">
+            Una banquetería con alma peruana, donde la riqueza de la gastronomía tradicional se encuentra con el refinamiento de un servicio de celebración. Inspirada en la calidez de las mesas familiares y el sabor de compartir.
+          </p>
         </div>
-
-        <div class="slider-shell">
-          <div class="slider-controls">
-            <button class="slider-btn" type="button" data-prev="tortas" aria-label="Ver fotos anteriores">←</button>
-            <button class="slider-btn" type="button" data-next="tortas" aria-label="Ver fotos siguientes">→</button>
-          </div>
-          <div class="slider-track" id="tortas-slider">
-            <figure class="service-slide"><img src="img/torta1.jpg" alt="Torta 1"><figcaption>Torta 1</figcaption></figure>
-            <figure class="service-slide"><img src="img/torta2.jpg" alt="Torta 2"><figcaption>Torta 2</figcaption></figure>
-            <figure class="service-slide"><img src="img/torta3.jpg" alt="Torta 3"><figcaption>Torta 3</figcaption></figure>
-            <figure class="service-slide"><img src="img/torta4.jpg" alt="Torta 4"><figcaption>Torta 4</figcaption></figure>
-            <figure class="service-slide"><img src="img/torta5.jpg" alt="Torta 5"><figcaption>Torta 5</figcaption></figure>
-            <figure class="service-slide"><img src="img/torta6.jpg" alt="Torta 6"><figcaption>Torta 6</figcaption></figure>
-            <figure class="service-slide"><img src="img/torta7.jpg" alt="Torta 7"><figcaption>Torta 7</figcaption></figure>
-            <figure class="service-slide"><img src="img/torta8.jpg" alt="Torta 8"><figcaption>Torta 8</figcaption></figure>
-            <figure class="service-slide"><img src="img/torta9.jpg" alt="Torta 9"><figcaption>Torta 9</figcaption></figure>
-            <figure class="service-slide"><img src="img/torta10.jpg" alt="Torta 10"><figcaption>Torta 10</figcaption></figure>
+        <div class="story-panel">
+          <blockquote>
+            "Porque no es solo importante que se vea bien, sino que todos digan: Pucha qué rico he!."
+          </blockquote>
+          <div class="story-list">
+            <div><strong>Postres y tortas</strong><br>Muchas variedades a pedido del cliente, la especialidad, Torta Helada.</div>
+            <div><strong>Banquetería y Buffet</strong><br>Almuerzo, bebestible y postres para sus invitados, según lo que requiera.</div>
+            <div><strong>Servicio de Catering Completo</strong><br>Planificamos con usted para que solo llegue y disfrute.</div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="service-section" id="banqueteria">
+    <section class="gallery" id="galeria">
       <div class="container">
-        <div class="service-head">
+        <div class="gallery-header">
           <div>
-            <div class="eyebrow">Banquetería</div>
-            <h2>Buffet y servicio pensado para celebrar.</h2>
+            <div class="eyebrow">Montajes</div>
+            <h2 class="section-title">Una presentación tan importante como el menú.</h2>
           </div>
-          <p>Opciones para matrimonios, aniversarios y eventos privados con presentación cuidada, sabor casero y montaje elegante.</p>
+          <p class="section-copy"></p>
         </div>
-
-        <div class="slider-shell">
-          <div class="slider-controls">
-            <button class="slider-btn" type="button" data-prev="banqueteria" aria-label="Ver fotos anteriores">←</button>
-            <button class="slider-btn" type="button" data-next="banqueteria" aria-label="Ver fotos siguientes">→</button>
-          </div>
-          <div class="slider-track" id="banqueteria-slider">
-            <figure class="service-slide"><img src="img/banqueteria1.jpg" alt="Banquetería 1"><figcaption>Banquetería 1</figcaption></figure>
-            <figure class="service-slide"><img src="img/banqueteria2.jpg" alt="Banquetería 2"><figcaption>Banquetería 2</figcaption></figure>
-            <figure class="service-slide"><img src="img/banqueteria3.jpg" alt="Banquetería 3"><figcaption>Banquetería 3</figcaption></figure>
-            <figure class="service-slide"><img src="img/banqueteria4.jpg" alt="Banquetería 4"><figcaption>Banquetería 4</figcaption></figure>
-            <figure class="service-slide"><img src="img/banqueteria5.jpg" alt="Banquetería 5"><figcaption>Banquetería 5</figcaption></figure>
-            <figure class="service-slide"><img src="img/banqueteria6.jpg" alt="Banquetería 6"><figcaption>Banquetería 6</figcaption></figure>
-            <figure class="service-slide"><img src="img/banqueteria7.jpg" alt="Banquetería 7"><figcaption>Banquetería 7</figcaption></figure>
-            <figure class="service-slide"><img src="img/banqueteria8.jpg" alt="Banquetería 8"><figcaption>Banquetería 8</figcaption></figure>
-            <figure class="service-slide"><img src="img/banqueteria9.jpg" alt="Banquetería 9"><figcaption>Banquetería 9</figcaption></figure>
-            <figure class="service-slide"><img src="img/banqueteria10.jpg" alt="Banquetería 10"><figcaption>Banquetería 10</figcaption></figure>
+        <div class="gallery-grid">
+          <article class="gallery-card photo-slider" aria-label="Galería de montajes">
+            <img class="slide-image active" src="img/mesa2.jpg" alt="Mesa larga decorada para matrimonio" />
+            <img class="slide-image" src="img/mesa3.jpg" alt="Montaje decorado para evento" />
+            <img class="slide-image" src="img/seco2.jpg" alt="Presentación gastronómica del buffet" />
+            <button class="slider-arrow" type="button" aria-label="Siguiente foto">&#8250;</button>
+          </article>
+          <div class="gallery-stack">
+            <article class="gallery-card gallery-photo-small" role="img" aria-label="Brindis de invitados en evento elegante"></article>
+            <article class="gallery-card gallery-copy">
+              <h3>Detalles que sostienen la atmósfera.</h3>
+              <p>
+                Tonos suaves, vajilla texturada, cristalería delicada y una propuesta que se ve coherente desde la invitación hasta la mesa de postres.
+              </p>
+              <a class="btn btn-primary" href="#contacto">Quiero una propuesta así</a>
+            </article>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="service-section" id="almuerzos">
+    <section class="contact" id="contacto">
       <div class="container">
-        <div class="service-head">
+        <div class="contact-header">
           <div>
-            <div class="eyebrow">Almuerzos</div>
-            <h2>Preparaciones para compartir en grande o en pequeño.</h2>
+            <div class="eyebrow">Contacto</div>
+            <h2 class="section-title">Conversemos sobre tu evento.</h2>
+            <p class="section-copy">Cuéntanos la fecha, la cantidad de invitados y la idea general. Te responderemos con una propuesta ajustada a tu celebración.</p>
           </div>
-          <p>Propuestas para reuniones familiares, eventos privados, equipos de trabajo y celebraciones con menú completo.</p>
         </div>
-
-        <div class="slider-shell">
-          <div class="slider-controls">
-            <button class="slider-btn" type="button" data-prev="almuerzos" aria-label="Ver fotos anteriores">←</button>
-            <button class="slider-btn" type="button" data-next="almuerzos" aria-label="Ver fotos siguientes">→</button>
+        <div class="contact-grid">
+          <div class="contact-card contact-info">
+            <div class="contact-item">
+              <span>WhatsApp</span>
+              <strong>+56949658897</strong>
+            </div>
+            <div class="contact-item">
+              <span>Correo</span>
+              <strong>claudiarios1357cs@gmail.com</strong>
+            </div>
+            <div class="contact-item">
+              <span>Facebook</span>
+              <strong><a href="https://www.facebook.com/profile.php?id=100057617192182" target="_blank" rel="noopener noreferrer">Entre Pisco y Nazca</a></strong>
+            </div>
+            <div class="contact-item">
+              <span>Cobertura</span>
+              <strong>Copiapó y alrededores</strong>
+            </div>
           </div>
-          <div class="slider-track" id="almuerzos-slider">
-            <figure class="service-slide"><img src="img/almuerzo1.jpg" alt="Almuerzo 1"><figcaption>Almuerzo 1</figcaption></figure>
-            <figure class="service-slide"><img src="img/almuerzo2.jpg" alt="Almuerzo 2"><figcaption>Almuerzo 2</figcaption></figure>
-            <figure class="service-slide"><img src="img/almuerzo3.jpg" alt="Almuerzo 3"><figcaption>Almuerzo 3</figcaption></figure>
-            <figure class="service-slide"><img src="img/almuerzo4.jpg" alt="Almuerzo 4"><figcaption>Almuerzo 4</figcaption></figure>
-            <figure class="service-slide"><img src="img/almuerzo5.jpg" alt="Almuerzo 5"><figcaption>Almuerzo 5</figcaption></figure>
-            <figure class="service-slide"><img src="img/almuerzo6.jpg" alt="Almuerzo 6"><figcaption>Almuerzo 6</figcaption></figure>
-            <figure class="service-slide"><img src="img/almuerzo7.jpg" alt="Almuerzo 7"><figcaption>Almuerzo 7</figcaption></figure>
-            <figure class="service-slide"><img src="img/almuerzo8.jpg" alt="Almuerzo 8"><figcaption>Almuerzo 8</figcaption></figure>
-            <figure class="service-slide"><img src="img/almuerzo9.jpg" alt="Almuerzo 9"><figcaption>Almuerzo 9</figcaption></figure>
-            <figure class="service-slide"><img src="img/almuerzo10.jpg" alt="Almuerzo 10"><figcaption>Almuerzo 10</figcaption></figure>
+
+          <div class="contact-card">
+            <form>
+              <label>
+                Nombre
+                <input type="text" placeholder="Tu nombre" />
+              </label>
+              <label>
+                Correo electrónico
+                <input type="email" placeholder="tucorreo@ejemplo.com" />
+              </label>
+              <label>
+                Tipo de evento
+                <select>
+                  <option>Matrimonio</option>
+                  <option>Aniversario</option>
+                  <option>Cumpleaños</option>
+                  <option>Evento privado</option>
+                </select>
+              </label>
+              <label>
+                Cuéntanos tu idea
+                <textarea placeholder="Fecha tentativa, cantidad de invitados, comuna y estilo que imaginas para tu evento"></textarea>
+              </label>
+              <button class="btn btn-primary" type="submit">Enviar solicitud</button>
+            </form>
           </div>
         </div>
       </div>
@@ -503,38 +781,55 @@
     </div>
   </footer>
 
+  <a href="https://www.facebook.com/profile.php?id=100057617192182" target="_blank" rel="noopener noreferrer" class="social-float facebook-float" aria-label="Facebook">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+  </a>
+  <a href="https://wa.me/56949658897" target="_blank" rel="noopener noreferrer" class="social-float whatsapp-float" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a6.963 6.963 0 00-6.953 6.954 6.968 6.968 0 001.025 3.678l-1.086 3.972 4.066-1.065a6.981 6.981 0 003.347.889h.004c3.837 0 6.953-3.114 6.953-6.952 0-1.856-.73-3.599-2.053-4.915-1.321-1.317-3.056-2.045-4.915-2.045"/>
+    </svg>
+  </a>
+
   <script>
-    (function () {
+    (() => {
       const toggle = document.querySelector('[data-theme-toggle]');
       const root = document.documentElement;
-      const SUN = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
-      const MOON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
       let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      root.setAttribute('data-theme', theme);
 
-      if (toggle) {
-        toggle.innerHTML = theme === 'dark' ? SUN : MOON;
-        toggle.addEventListener('click', function () {
-          theme = theme === 'dark' ? 'light' : 'dark';
-          root.setAttribute('data-theme', theme);
-          toggle.innerHTML = theme === 'dark' ? SUN : MOON;
+      function renderThemeIcon() {
+        toggle.innerHTML = theme === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2"></path><path d="M12 21v2"></path><path d="M4.22 4.22l1.42 1.42"></path><path d="M18.36 18.36l1.42 1.42"></path><path d="M1 12h2"></path><path d="M21 12h2"></path><path d="M4.22 19.78l1.42-1.42"></path><path d="M18.36 5.64l1.42-1.42"></path></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+      }
+
+      function applyTheme() {
+        root.setAttribute('data-theme', theme);
+        toggle.setAttribute('aria-label', theme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
+        renderThemeIcon();
+      }
+
+      toggle.addEventListener('click', () => {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        applyTheme();
+      });
+
+      applyTheme();
+
+      const slider = document.querySelector('.photo-slider');
+      if (slider) {
+        const slides = slider.querySelectorAll('.slide-image');
+        const nextBtn = slider.querySelector('.slider-arrow');
+        let currentSlide = 0;
+
+        nextBtn.addEventListener('click', () => {
+          slides[currentSlide].classList.remove('active');
+          currentSlide = (currentSlide + 1) % slides.length;
+          slides[currentSlide].classList.add('active');
         });
       }
     })();
-
-    document.querySelectorAll('[data-prev], [data-next]').forEach(button => {
-      button.addEventListener('click', () => {
-        const key = button.dataset.prev || button.dataset.next;
-        const slider = document.getElementById(`${key}-slider`);
-        const amount = slider.clientWidth * 0.85;
-        const direction = button.dataset.next ? 1 : -1;
-
-        slider.scrollBy({
-          left: amount * direction,
-          behavior: 'smooth'
-        });
-      });
-    });
   </script>
 </body>
 </html>
